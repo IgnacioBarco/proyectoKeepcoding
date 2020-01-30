@@ -16,6 +16,7 @@ app.set('view engine', 'ejs');
  */
 require('./lib/connectMongoose');
 require('./models/Anuncio');
+require('./models/Usuario');
 
 
 app.use(logger('dev'));
@@ -24,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.locals.title = 'WebAPI';
+app.locals.title = 'wallaApi';
 
 var indexRouter = require('./routes/index');
 /**
@@ -37,6 +38,7 @@ app.use('/users', require('./routes/users'));
  * Rutas de mi API
  */
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
+app.use('/apiv1/users', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

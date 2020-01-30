@@ -6,10 +6,16 @@ const mongoose = require("mongoose");
 const anunciosSchema = mongoose.Schema(
   {
     nombre: String,
+    foto: String,
+    descripcion: String,
     venta: Boolean,
     precio: Number,
-    foto: String,
-    tags: [String]
+    autor: String,
+    fecha: String,
+    tags: [String],
+    reservado: Boolean,
+    vendido: Boolean,
+    chat: [String]
   }
   //, { collection: 'agentes'} // para saltarse la pluralización
 );
