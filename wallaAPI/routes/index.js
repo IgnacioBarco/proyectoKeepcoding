@@ -1,52 +1,108 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const Anuncio = require("../models/Anuncio");
 
-// object destructuring
-const { query, body, param, validationResult } = require('express-validator');
+/**
+ * devuelve los anuncios
+ * si no lleva params devuelve todos
+ * si lleva, los devuelve filtrados
+ */
+router.get("/", async function(req, res, next) {
+  try {
+    const nombre = req.query.nombre;
+    const venta = req.query.venta;
+    const tag = req.query.tag;
+    const precio = req.query.precio;
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+    const start = parseInt(req.query.start);
+    const limit = parseInt(req.query.limit);
+    const fields = req.query.fields;
+    const sort = req.query.sort;
 
-  const segundo = (new Date()).getSeconds();
+    const filter = {};
 
-  res.locals.valor = '<script>alert("inyeccion de codigo")</script>';
-  res.locals.condicion = {
-    segundo: segundo,
-    estado: segundo % 2 === 0 // es par
-  };
+    if (nombre) {
+      filter.nombre = new RegExp(req.query.nombre, "i");
+    }
 
-  res.locals.users = [
-    { name: 'Smith', age: 23 },
-    { name: 'Jones', age: 35 },
-    { name: 'Thomas', age: 21 },
-  ];
+    if (venta) {
+      filter.venta = venta;
+    }
 
-  res.render('index');
+    if (typeof tag !== "undefined") {
+      filter.tags = tag;
+    }
+
+    /**
+     * -x menos de x
+     * x- mas de x
+     * x-y entre x e y
+     * x ese valor 
+     */
+    if (typeof precio !== "undefined") {
+      filter.precio = {};
+      let importes = precio.split("-");
+
+      if (precio.startsWith("-")) {
+        filter.precio.$lt = importes[1];
+
+      } else if (precio.endsWith("-")) {
+        filter.precio.$gt = importes[0];
+
+      } else if (precio.includes("-")) {
+        filter.precio.$gt = importes[0];
+        filter.precio.$lt = importes[1];
+
+      } else {
+        filter.precio = precio;
+
+      }
+    }
+
+    const anuncios = await Anuncio.list({
+      filter: filter,
+      start,
+      limit,
+      fields,
+      sort
+    });
+
+    let mensaje = "";
+    if (Object.keys(anuncios).length === 0) {
+      mensaje = "No hay resultados";
+    }
+
+    res.render("index.ejs", {
+      title: "webAPI",
+      mensaje: mensaje,
+      result: anuncios
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.get('/paramenruta/:numero?', (req, res, next) => {
-  console.log('req.params', req.params);
-  res.send('ok');
-});
+/**
+ * muestra una página con los detalles del anuncio
+ */
+router.get("/:id", async function(req, res, next) {
+  try {
+    const _id = req.params.id;
+    let result = {};
+    result = await Anuncio.findById(_id);
 
-router.get('/params/:id([0-9]+)/piso/:piso/puerta/:puerta', (req, res, next) => {
-  console.log('req.params', req.params);
-  res.send('ok');
-});
+    if (Object.keys(result).length === 0) {
+      next({ status: 404, error: "No existe ningun anuncio con ese id" });
+    }
 
-router.get('/enquerystring',
-  query('color').isLowercase().withMessage('must be lower case'),
-  query('talla').isNumeric().withMessage('must be numeric')
-, (req, res, next) => {
-  validationResult(req).throw(); // lanza excepcion si no valida
-  // si llego aqui es que los parametros de entrada son válidos
-  console.log('req.query', req.query);
-  res.send('ok');
-});
+    res.render("detail.ejs", {
+      success: true,
+      result: result
+    });
 
-router.post('/rutapost', (req, res, next) => {
-  console.log('req.body', req.body);
-  res.send('ok');
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

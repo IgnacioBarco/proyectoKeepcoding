@@ -17,7 +17,7 @@ conn.once("open", () => {
 });
 
 // conectar
-mongoose.connect("mongodb://localhost/cursonode", {
+mongoose.connect("mongodb://localhost/wallaapi", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
