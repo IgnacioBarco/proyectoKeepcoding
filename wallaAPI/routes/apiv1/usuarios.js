@@ -66,11 +66,26 @@ router.get("/", async (req, res, next) => {
     });
 
     res.json({ success: true, usuarios: usuarios });
+
   } catch (err) {
     next(err);
   }
 });
 
+/**
+ * devuelve los ususarios online
+ */
+router.get("/onLine", async (req, res, next) => {
+  try {
+    const usuarios = await Usuario.usersOnLine();
+    // res.json({ success: true, anuncios: anuncios });
+    res.json(usuarios);
+    
+
+  } catch (err) {
+    next(err);
+  }
+});
 /**
  * devuelve los tags
  */

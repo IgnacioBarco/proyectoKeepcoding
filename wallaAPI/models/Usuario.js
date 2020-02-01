@@ -11,7 +11,6 @@ const usuariosSchema = mongoose.Schema(
     logado: Boolean,
     anunciosFavoritos: [String]
   }
-  //, { collection: 'agentes'} // para saltarse la pluralización
 );
 
 usuariosSchema.statics.list = function({ filter, start, limit, fields, sort }) {
@@ -23,8 +22,10 @@ usuariosSchema.statics.list = function({ filter, start, limit, fields, sort }) {
   return query.exec();
 };
 
-usuariosSchema.statics.tags = function() {
-  return ["work", "lifestyle", "motor", "mobile"];
+usuariosSchema.statics.usersOnLine = function() {
+  const query = Usuario.find({logado:true});
+  return query.exec();
+
 };
 
 // creamos el modelo de agente

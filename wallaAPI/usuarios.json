@@ -8,39 +8,39 @@
       "anunciosFavoritos": ["moto", "coche"]
     },
     {
-      "nombre": "pepe2",
-      "email": "pep2e@pepe.es",
+      "nombre": "antonio",
+      "email": "antonio@pepe.es",
       "pass": "xxxxx",
-      "logado": true,
-      "anunciosFavoritos": ["moto", "coche"]
+      "logado": false,
+      "anunciosFavoritos": ["moto"]
     },
     {
-      "nombre": "pepe3",
-      "email": "pepe3@pepe.es",
+      "nombre": "maria",
+      "email": "maria@pepe.es",
       "pass": "xxxxx",
-      "logado": true,
-      "anunciosFavoritos": ["moto", "coche"]
+      "logado": false,
+      "anunciosFavoritos": ["ordenador"]
     },
     {
-      "nombre": "pepe4",
-      "email": "pep4e@pepe.es",
+      "nombre": "jose",
+      "email": "jose@pepe.es",
       "pass": "xxxxx",
       "logado": true,
-      "anunciosFavoritos": ["moto", "coche"]
+      "anunciosFavoritos": []
     },
     {
-      "nombre": "pepe5",
-      "email": "pepe5@pepe.es",
+      "nombre": "andres",
+      "email": "andres@pepe.es",
       "pass": "xxxxx",
-      "logado": true,
-      "anunciosFavoritos": ["moto", "coche"]
+      "logado": false,
+      "anunciosFavoritos": ["portatil"]
     },
     {
-      "nombre": "pepe6",
-      "email": "pepe6@pepe.es",
+      "nombre": "sonia",
+      "email": "sonia@pepe.es",
       "pass": "xxxxx",
       "logado": true,
-      "anunciosFavoritos": ["moto", "coche"]
+      "anunciosFavoritos": ["balon"]
     }
   ]
 }
