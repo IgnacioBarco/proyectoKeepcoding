@@ -1,0 +1,46 @@
+{
+  "usuarios": [
+    {
+      "nombre": "pepe",
+      "email": "pepe@pepe.es",
+      "pass": "xxxxx",
+      "logado": true,
+      "anunciosFavoritos": ["moto", "coche"]
+    },
+    {
+      "nombre": "pepe2",
+      "email": "pep2e@pepe.es",
+      "pass": "xxxxx",
+      "logado": true,
+      "anunciosFavoritos": ["moto", "coche"]
+    },
+    {
+      "nombre": "pepe3",
+      "email": "pepe3@pepe.es",
+      "pass": "xxxxx",
+      "logado": true,
+      "anunciosFavoritos": ["moto", "coche"]
+    },
+    {
+      "nombre": "pepe4",
+      "email": "pep4e@pepe.es",
+      "pass": "xxxxx",
+      "logado": true,
+      "anunciosFavoritos": ["moto", "coche"]
+    },
+    {
+      "nombre": "pepe5",
+      "email": "pepe5@pepe.es",
+      "pass": "xxxxx",
+      "logado": true,
+      "anunciosFavoritos": ["moto", "coche"]
+    },
+    {
+      "nombre": "pepe6",
+      "email": "pepe6@pepe.es",
+      "pass": "xxxxx",
+      "logado": true,
+      "anunciosFavoritos": ["moto", "coche"]
+    }
+  ]
+}

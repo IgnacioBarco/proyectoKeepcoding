@@ -3,6 +3,7 @@
 const db = require('./lib/connectMongoose');
 const mongoose = require('mongoose');
 const Anuncio = require('./models/Anuncio')
+const Usuario = require('./models/Usuario')
 const fs = require('fs');
 
 initDB();
@@ -14,7 +15,6 @@ async function initDB() {
             //borramos todos los anuncios anteriores
             await Anuncio.deleteMany({});
             
-
             //cargamos los anuncios del archivo en items
             err = 'Error al cargar los anuncios desde el fichero ';
             let dump = JSON.parse(fs.readFileSync('./anuncios.json', 'utf8'));
@@ -27,6 +27,22 @@ async function initDB() {
             err = 'Error al insertar los anuncios a la base de datos ';
             await Anuncio.insertMany(items);
             console.log('Se han cargado ' + items.length + ' anuncios');
+
+            //borramos todos los anuncios anteriores
+            await Usuario.deleteMany({});
+            
+            //cargamos los usuarios del archivo en items
+            err = 'Error al cargar los usuarios desde el fichero ';
+            dump = JSON.parse(fs.readFileSync('./usuarios.json', 'utf8'));
+            items = [];
+            for (let i = 0; i < dump.usuarios.length; i++) {
+                items.push(new Usuario({ ...dump.usuarios[i] }));
+            }
+            
+            //insertamos los anuncios
+            err = 'Error al insertar los usuarios a la base de datos ';
+            await Usuario.insertMany(items);
+            console.log('Se han cargado ' + items.length + ' usuarios');
 
             return process.exit(0);
 

@@ -13,30 +13,74 @@ const Anuncio = require("../../models/Anuncio");
 router.get("/", async (req, res, next) => {
   try {
     const nombre = req.query.nombre;
-    const venta = req.query.venta;
-    const tag = req.query.tag;
-    const precio = req.query.precio;
+    const descripcion = req.query.descripcion;
+    const autor = req.query.autor;
+    const fecha = req.query.fecha;
 
+    const tag = req.query.tag;
+    const chat = req.query.chat;
+    
+    const venta = req.query.venta;
+    const reservado = req.query.reservado
+    const vendido = req.query.vendido
+    
+    const precio = req.query.precio;
     const start = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
     const sort = req.query.sort;
 
+
     const filter = {};
 
+    /**
+     * filtro de exp regulares
+     */
     if (nombre) {
       filter.nombre = new RegExp(req.query.nombre, "i");
     }
 
-    if (venta) {
-      filter.venta = venta;
+    if (descripcion) {
+      filter.descripcion = new RegExp(req.query.descripcion, "i");
     }
 
+    if (autor) {
+      filter.autor = new RegExp(req.query.autor, "i");
+    }
+
+    if (fecha) {
+      filter.fecha = new RegExp(req.query.fecha, "i");
+    }
+    
+
+    /**
+     * filtro de arrays
+     */
     if (typeof tag !== "undefined") {
       filter.tags = tag;
     }
+    
+    if (typeof chat !== "undefined") {
+      filter.chat = chat;
+    }
 
     /**
+     * filtro de booleanos
+     */
+    if (venta) {
+      filter.venta = venta;
+    }
+    if (reservado) {
+      filter.reservado = reservado;
+    }
+    if (vendido) {
+      filter.vendido = vendido;
+    }
+    
+       
+    /**
+     * Filtramos el precio
+     * 
      * -x menos de x
      * x- mas de x
      * x-y entre x e y
