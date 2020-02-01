@@ -28,6 +28,12 @@ usuariosSchema.statics.usersOnLine = function() {
 
 };
 
+usuariosSchema.statics.userDetails = function(name) {
+  const query = Usuario.find({nombre:name});
+  return query.exec();
+
+};
+
 // creamos el modelo de agente
 const Usuario = mongoose.model("Usuario", usuariosSchema);
 

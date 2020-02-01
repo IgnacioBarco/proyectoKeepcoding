@@ -86,6 +86,18 @@ router.get("/onLine", async (req, res, next) => {
     next(err);
   }
 });
+
+router.get("/user/:name", async (req, res, next) => {
+  try {
+    const _name=  req.params.name;
+    const usuario = await Usuario.userDetails(_name);
+    res.json(usuario);
+    
+
+  } catch (err) {
+    next(err);
+  }
+});
 /**
  * devuelve los tags
  */
