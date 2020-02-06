@@ -1,6 +1,7 @@
 "use strict";
 
 const mongoose = require("mongoose");
+let hash = require('hash.js')
 
 // definimos un esquema
 const usuariosSchema = mongoose.Schema(
@@ -33,6 +34,11 @@ usuariosSchema.statics.userDetails = function(name) {
   return query.exec();
 
 };
+
+usuarioSchema.statics.hashPassword = function (text) {
+  return hash.sha256().update(text).digest('hex')
+}
+
 
 // creamos el modelo de agente
 const Usuario = mongoose.model("Usuario", usuariosSchema);

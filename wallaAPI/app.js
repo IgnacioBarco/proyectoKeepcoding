@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const jwtAuth = require('./lib/jwtAuth')
+
+require('dotenv').config()
 
 
 var app = express();
@@ -19,7 +22,9 @@ require('./models/Anuncio');
 require('./models/Usuario');
 
 
-app.use(logger('dev'));
+if (process.env.LOG_FORMAT !== 'nolog') {
+  app.use(logger(process.env.LOG_FORMAT || 'dev'))
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
