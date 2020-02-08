@@ -33,8 +33,15 @@ anunciosSchema.statics.tags = function () {
   return ["work", "lifestyle", "motor", "mobile"];
 };
 
-anunciosSchema.statics.adsByUser = function (_autor) {
-  const query = Anuncio.find({ autor: _autor });
+anunciosSchema.statics.adsById = function (id) {
+  const query = Anuncio.find({ _id: id });
+  return query.exec();
+
+
+};
+
+anunciosSchema.statics.adsByUser = function (autor) {
+  const query = Anuncio.find({ autor: autor });
   return query.exec();
 
 };

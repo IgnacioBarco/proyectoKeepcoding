@@ -20,11 +20,11 @@ router.get("/", jwtAuth(), async (req, res, next) => {
 
     const tag = req.query.tag;
     const chat = req.query.chat;
-    
+
     const venta = req.query.venta;
     const reservado = req.query.reservado
     const vendido = req.query.vendido
-    
+
     const precio = req.query.precio;
     const start = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
@@ -52,7 +52,7 @@ router.get("/", jwtAuth(), async (req, res, next) => {
     if (fecha) {
       filter.fecha = new RegExp(req.query.fecha, "i");
     }
-    
+
 
     /**
      * filtro de arrays
@@ -60,7 +60,7 @@ router.get("/", jwtAuth(), async (req, res, next) => {
     if (typeof tag !== "undefined") {
       filter.tags = tag;
     }
-    
+
     if (typeof chat !== "undefined") {
       filter.chat = chat;
     }
@@ -77,8 +77,8 @@ router.get("/", jwtAuth(), async (req, res, next) => {
     if (vendido) {
       filter.vendido = vendido;
     }
-    
-       
+
+
     /**
      * Filtramos el precio
      * 
@@ -135,50 +135,5 @@ router.get("/tags", jwtAuth(), async (req, res, next) => {
     next(err);
   }
 });
-
-/**
- * crea un nuevo anuncio
- */
-router.post("/nuevo", jwtAuth(), async (req, res, next) => {
-  try {
-    const data = req.body;
-    const anuncio = new Anuncio(data);
-    const anuncioGuardado = await anuncio.save();
-
-    res.json({ success: true, result: anuncioGuardado });
-  } catch (err) {
-    next(err);
-  }
-});
-
-/**
- * para modificar un anuncio
- */
-// router.put('/modificar/:id', jwtAuth(), async (req, res, next) => {
-//   try {
-//     const _id = req.params.id;
-//     const data = req.body;
-//     const anuncioGuardado = await Anuncio.findOneAndUpdate({_id: _id}, data, { new: true }).exec();
-//     // new: true --> hace que retorne la versión del agente guardada en la base de datos
-
-//     res.json({ success: true, result: anuncioGuardado });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
-/**
- * Para borrar un anuncio
- */
-// router.delete('/borrar/:id', jwtAuth(), async (req, res, next) => {
-//   try {
-//     const _id = req.params.id;
-//     await Anuncio.deleteOne({ _id: _id}).exec();
-//     res.json({ success: true });
-
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 module.exports = router;
