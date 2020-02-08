@@ -20,8 +20,8 @@ router.post('/', async (req, res, next) => {
 
     if (!user) {
       // Respondemos que no son validas las credenciales
-      res.json({ok: false, error: 'invalid credentials'})
-      return
+      res.json({ ok: false, error: 'invalid credentials' })
+      return;
     }
 
     // el usuario está y coincide la password
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
         return next(err)
       }
       // respondemos con un JWT
-      res.json({ok: true, token: token})
+      res.json({ ok: true, token: token })
     })
   } catch (err) {
     next(err)
@@ -54,9 +54,9 @@ router.get("/", async (req, res, next) => {
     const pass = req.query.pass;
 
     const anunciosFavoritos = req.query.anunciosFavoritos;
-    
+
     const logado = req.query.logado;
-    
+
     const start = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
@@ -86,14 +86,14 @@ router.get("/", async (req, res, next) => {
     if (typeof anunciosFavoritos !== "undefined") {
       filter.anunciosFavoritos = anunciosFavoritos;
     }
-   
+
     /**
      * filtro de booleanos
      */
     if (logado) {
       filter.logado = logado;
     }
-      
+
     const usuarios = await Usuario.list({
       filter: filter,
       start,
@@ -117,19 +117,19 @@ router.get("/onLine", jwtAuth(), async (req, res, next) => {
     const usuarios = await Usuario.usersOnLine();
     // res.json({ success: true, anuncios: anuncios });
     res.json(usuarios);
-    
+
 
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/user/:name", async (req, res, next) => {
+router.get("/:name", async (req, res, next) => {
   try {
-    const _name=  req.params.name;
+    const _name = req.params.name;
     const usuario = await Usuario.userDetails(_name);
     res.json(usuario);
-    
+
 
   } catch (err) {
     next(err);

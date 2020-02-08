@@ -3,42 +3,42 @@
     {
       "nombre": "pepe",
       "email": "pepe@pepe.es",
-      "pass": "xxxxx",
+      "pass": "pepexxxxx",
       "logado": true,
       "anunciosFavoritos": ["moto", "coche"]
     },
     {
       "nombre": "antonio",
       "email": "antonio@pepe.es",
-      "pass": "xxxxx",
+      "pass": "antonioxxxxx",
       "logado": false,
       "anunciosFavoritos": ["moto"]
     },
     {
       "nombre": "maria",
       "email": "maria@pepe.es",
-      "pass": "xxxxx",
+      "pass": "mariaxxxxx",
       "logado": false,
       "anunciosFavoritos": ["ordenador"]
     },
     {
       "nombre": "jose",
       "email": "jose@pepe.es",
-      "pass": "xxxxx",
+      "pass": "josexxxxx",
       "logado": true,
       "anunciosFavoritos": []
     },
     {
       "nombre": "andres",
       "email": "andres@pepe.es",
-      "pass": "xxxxx",
+      "pass": "andresxxxxx",
       "logado": false,
       "anunciosFavoritos": ["portatil"]
     },
     {
       "nombre": "sonia",
       "email": "sonia@pepe.es",
-      "pass": "xxxxx",
+      "pass": "soniaxxxxx",
       "logado": true,
       "anunciosFavoritos": ["balon"]
     }

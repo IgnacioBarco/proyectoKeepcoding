@@ -36,6 +36,8 @@ async function initDB() {
             dump = JSON.parse(fs.readFileSync('./usuarios.json', 'utf8'));
             items = [];
             for (let i = 0; i < dump.usuarios.length; i++) {
+                // encriptamos las passwordes para introducirlas en la base de datos
+                dump.usuarios[i].pass = await Usuario.hashPassword(dump.usuarios[i].pass);
                 items.push(new Usuario({ ...dump.usuarios[i] }));
             }
             

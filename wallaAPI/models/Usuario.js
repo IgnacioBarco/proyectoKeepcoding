@@ -35,7 +35,7 @@ usuariosSchema.statics.userDetails = function(name) {
 
 };
 
-usuarioSchema.statics.hashPassword = function (text) {
+usuariosSchema.statics.hashPassword = function (text) {
   return hash.sha256().update(text).digest('hex')
 }
 
