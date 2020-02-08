@@ -1,0 +1,60 @@
+"use strict";
+
+const express = require("express");
+const jwt = require('jsonwebtoken')
+const router = express.Router();
+const jwtAuth = require('../../lib/jwtAuth')
+
+const Usuario = require("../../models/Usuario");
+
+// autenticamos por email y pass y devolvemos token si es correcto
+router.post('/', async (req, res, next) => {
+  try {
+    const email = req.body.email
+    const pass = req.body.pass
+
+    // hacemos un hash de la password
+    const hashedPassword = Usuario.hashPassword(pass)
+
+    const user = await Usuario.findOne({ email: email, pass: hashedPassword })
+
+    if (!user) {
+      // Respondemos que no son validas las credenciales
+      res.json({ ok: false, error: 'invalid credentials' })
+      return;
+    }
+
+    // el usuario está y coincide la password
+
+    // creamos el token
+    jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1d'
+    }, (err, token) => {
+      if (err) {
+        return next(err)
+      }
+      // respondemos con un JWT
+      res.json({ ok: true, token: token })
+    })
+  } catch (err) {
+    next(err)
+  }
+})
+
+/**
+ * crea un nuevo anuncio
+ */
+// router.post("/nuevo", async (req, res, next) => {
+//   try {
+//     const data = req.body;
+//     const anuncio = new Anuncio(data);
+//     const anuncioGuardado = await anuncio.save();
+
+//     res.json({ success: true, result: anuncioGuardado });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+
+module.exports = router;

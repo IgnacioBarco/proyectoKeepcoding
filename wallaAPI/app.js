@@ -40,10 +40,20 @@ app.use('/', indexRouter);
 app.use('/users', require('./routes/users'));
 
 /**
- * Rutas de mi API
+ * Rutas API
  */
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
 app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
+
+app.use('/auth/login', require('./routes/auth/login'));
+app.use('/auth/register', require('./routes/auth/register'));
+
+app.use('/public/ads', require('./routes/public/ads'));
+
+app.use('/private/ads', require('./routes/private/ads'));
+app.use('/private/user', require('./routes/private/user'));
+app.use('/private/users', require('./routes/private/users'));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
