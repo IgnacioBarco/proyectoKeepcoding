@@ -20,7 +20,7 @@ const anunciosSchema = mongoose.Schema(
   //, { collection: 'agentes'} // para saltarse la pluralización
 );
 
-anunciosSchema.statics.list = function({ filter, start, limit, fields, sort }) {
+anunciosSchema.statics.list = function ({ filter, start, limit, fields, sort }) {
   const query = Anuncio.find(filter);
   query.skip(start);
   query.limit(limit);
@@ -29,8 +29,14 @@ anunciosSchema.statics.list = function({ filter, start, limit, fields, sort }) {
   return query.exec();
 };
 
-anunciosSchema.statics.tags = function() {
+anunciosSchema.statics.tags = function () {
   return ["work", "lifestyle", "motor", "mobile"];
+};
+
+anunciosSchema.statics.adsByUser = function (_autor) {
+  const query = Anuncio.find({ autor: _autor });
+  return query.exec();
+
 };
 
 // creamos el modelo de agente

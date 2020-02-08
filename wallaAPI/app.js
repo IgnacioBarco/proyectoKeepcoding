@@ -49,6 +49,7 @@ app.use('/auth/login', require('./routes/auth/login'));
 app.use('/auth/register', require('./routes/auth/register'));
 
 app.use('/public/ads', require('./routes/public/ads'));
+app.use('/public/user', require('./routes/public/user'));
 
 app.use('/private/ads', require('./routes/private/ads'));
 app.use('/private/user', require('./routes/private/user'));
