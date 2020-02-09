@@ -66,7 +66,7 @@ router.put('/:id/modify', jwtAuth(), async (req, res, next) => {
 router.delete('/:id/delete', jwtAuth(), async (req, res, next) => {
   try {
     const _id = req.params.id;
-    await Anuncio.deleteOne({ _id: _id }).exec();
+    await Anuncio.deleteById(id).exec();
     res.json({ success: true });
 
   } catch (err) {

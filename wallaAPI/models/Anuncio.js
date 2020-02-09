@@ -5,17 +5,18 @@ const mongoose = require("mongoose");
 // definimos un esquema
 const anunciosSchema = mongoose.Schema(
   {
-    nombre: String,
-    foto: String,
-    descripcion: String,
-    venta: Boolean,
-    precio: Number,
-    autor: String,
-    fecha: String,
-    tags: [String],
-    reservado: Boolean,
-    vendido: Boolean,
-    chat: [String]
+    nombre: { type: String, unique: true, required: true, index: true },
+    foto: { type: String, unique: true, required: true },
+    descripcion: { type: String, unique: true, required: true },
+    venta: { type: Boolean, required: true },
+    precio: { type: Number, min: 1, required: true, index: true },
+    autor: { type: String, required: true },
+    fecha: { type: String, required: true },
+    // createdDate: { type: Date, default: Date.now },
+    tags: [{ type: String, index: true }],
+    reservado: { type: Boolean, required: true },
+    vendido: { type: Boolean, required: true },
+    chat: [{ type: String }]
   }
   //, { collection: 'agentes'} // para saltarse la pluralización
 );
@@ -33,10 +34,15 @@ anunciosSchema.statics.tags = function () {
   return ["work", "lifestyle", "motor", "mobile"];
 };
 
+anunciosSchema.statics.deleteById = function (id) {
+  const query = Anuncio.deleteOne({ _id: _id });
+  return query.exec();
+
+};
+
 anunciosSchema.statics.adsById = function (id) {
   const query = Anuncio.find({ _id: id });
   return query.exec();
-
 
 };
 

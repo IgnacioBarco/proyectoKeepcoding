@@ -6,15 +6,15 @@ let hash = require('hash.js')
 // definimos un esquema
 const usuariosSchema = mongoose.Schema(
   {
-    nombre: String,
-    email: String,
-    pass: String,
-    logado: Boolean,
-    anunciosFavoritos: [String]
+    nombre: { type: String, unique: true, required: true, index: true },
+    email: { type: String, unique: true, required: true, index: true },
+    pass: { type: String, unique: true, required: true },
+    logado: { type: Boolean, required: true },
+    anunciosFavoritos: [{ type: String }]
   }
 );
 
-usuariosSchema.statics.list = function({ filter, start, limit, fields, sort }) {
+usuariosSchema.statics.list = function ({ filter, start, limit, fields, sort }) {
   const query = Usuario.find(filter);
   query.skip(start);
   query.limit(limit);
@@ -23,14 +23,14 @@ usuariosSchema.statics.list = function({ filter, start, limit, fields, sort }) {
   return query.exec();
 };
 
-usuariosSchema.statics.usersOnLine = function() {
-  const query = Usuario.find({logado:true});
+usuariosSchema.statics.usersOnLine = function () {
+  const query = Usuario.find({ logado: true });
   return query.exec();
 
 };
 
-usuariosSchema.statics.userDetails = function(name) {
-  const query = Usuario.find({nombre:name});
+usuariosSchema.statics.userDetails = function (name) {
+  const query = Usuario.find({ nombre: name });
   return query.exec();
 
 };
