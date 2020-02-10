@@ -5,6 +5,7 @@ import AdvertDetail from './components/AdvertDetail'
 import AdvertsList from './components/AdvertsList'
 import CreateAndUpdate from './components/CreateAndUpdate'
 import Register from './components/Register'
+import Register2 from './components/Register2'
 import ErrorBoundary from './components/ErrorBoundary'
 
 import MainContext from './services/MainContext'
@@ -52,6 +53,7 @@ class App extends Component {
                   <Route path='/advert/:id' component={AdvertDetail} />
                   <Route path='/new' component={CreateAndUpdate} />
                   <Route path='/modify/:id' component={CreateAndUpdate} />
+                  <Route path='/register'component={Register2} />
                   <Route component={Register} />
 
                 </Switch>

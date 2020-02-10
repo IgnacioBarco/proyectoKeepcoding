@@ -113,7 +113,7 @@ export default class Register extends Component {
           name="surname"
         />
 
-        {this.buildTags()}
+        {/* {this.buildTags()} */}
 
         <button onClick={this.handleSubmit}>submit</button>
       </form>
