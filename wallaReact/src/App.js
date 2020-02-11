@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import AdvertDetail from './components/AdvertDetail'
 import AdvertsList from './components/AdvertsList'
+import AdvertsList2 from './components/AdvertsList2'
 import CreateAndUpdate from './components/CreateAndUpdate'
 import Register from './components/Register'
 import Register2 from './components/Register2'
@@ -50,6 +51,7 @@ class App extends Component {
 
                 <Switch>
                   <Route path='/adverts' component={AdvertsList} />
+                  <Route path='/adverts2' component={AdvertsList2} />
                   <Route path='/advert/:id' component={AdvertDetail} />
                   <Route path='/new' component={CreateAndUpdate} />
                   <Route path='/modify/:id' component={CreateAndUpdate} />
