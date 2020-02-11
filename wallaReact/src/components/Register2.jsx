@@ -3,11 +3,12 @@ import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
 import api from "../services/wallaApi";
 
-const { searchAll } = api();
+const { login } = api();
 
 const Register2 = () => {
   const [hasError, setErrors] = useState(false);
-  const [planets, setPlanets] = useState({});
+  const [datos, setDatos] = useState({});
+  const [num, setNum] = useState(1);
 
   // async function fetchData() {
   //   const res = await fetch("https://swapi.co/api/planets/4/");
@@ -17,19 +18,27 @@ const Register2 = () => {
   //     .catch(err => setErrors(err));
   // }
   async function fetchData() {
-    const res = await searchAll();
-    setPlanets(res);
+    const res = await login();
+    setDatos(res);
   }
 
   useEffect(() => {
     fetchData();
-  });
+  },[num]);
+
+  function handleSubmitNew(event) {
+    event.preventDefault();
+    fetchData();
+    setNum(num+1);
+  };
 
   return (
     <div>
-      <span>{JSON.stringify(planets)}</span>
+      <span>{JSON.stringify(datos)}</span>
       <hr />
       <span>Has error: {JSON.stringify(hasError)}</span>
+      <hr />
+      <button onClick={handleSubmitNew}>Crear anuncio nuevo{num}</button>
     </div>
   );
 };

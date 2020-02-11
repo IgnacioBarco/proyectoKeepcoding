@@ -4,7 +4,8 @@ const MainContext = React.createContext({
   name: '',
   surname: '',
   tag: '',
-  tags: []
+  tags: [],
+  token:'',
 
 });
 

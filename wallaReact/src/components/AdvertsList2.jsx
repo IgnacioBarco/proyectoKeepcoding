@@ -1,15 +1,16 @@
 import React, { Component, useState, useEffect } from "react";
 import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
-import api from "../services/NodePopDBService";
+import api from "../services/wallaApi";
 import Advert from "../models/Advert";
 import AdvertLine from "./AdvertLine";
 
 const { searchAll } = api();
 
-const Register2 = () => {
+const AdvertList2 = () => {
   const [hasError, setErrors] = useState(false);
-  const [planets, setPlanets] = useState({});
+  const [datos, setDatos] = useState({});
+  const [num, setNum] = useState(1);
 
   // async function fetchData() {
   //   const res = await fetch("https://swapi.co/api/planets/4/");
@@ -20,21 +21,30 @@ const Register2 = () => {
   // }
   async function fetchData() {
     const res = await searchAll();
-    setPlanets(res);
+    setDatos(res);
   }
-
+  
   useEffect(() => {
     fetchData();
-  });
+  },[num]);
+  
+  function handleSubmitNew(event) {
+    event.preventDefault();
+    fetchData();
+    console.log('rsdfes');
+    setNum(num+1);
+  };
 
   return (
     <div>
-      <span>{JSON.stringify(planets)}</span>
+      <span>{JSON.stringify(datos)}</span>
       <hr />
       <span>Has error: {JSON.stringify(hasError)}</span>
+      <hr />
+      <button onClick={handleSubmitNew}>Crear anuncio nuevo{num}</button>
     </div>
   );
 };
-export default Register2;
+export default AdvertList2;
 
-Register2.contextType = MainContext;
+AdvertList2.contextType = MainContext;

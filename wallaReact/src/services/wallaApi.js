@@ -4,6 +4,7 @@ const ADVERT = API_URL + '/anuncios'
 const TAGS = API_URL + '/tags'
 
 const todo = 'http://localhost:8080/public/ads';
+const log = 'http://localhost:8080/auth/login?email=pepe@pepe.es&pass=pepexxxxx';
 const ALL_ADVERTS2 = API_URL + '/anuncios'
 const ADVERT2 = API_URL + '/anuncios'
 const TAGS2 = API_URL + '/tags'
@@ -24,6 +25,24 @@ const api = () => {
         searchAll: async () => {
             try {
                 const response = await fetch(todo, data)
+
+                if (!response.ok) {
+                    throw new Error('Error fetching searchAll')
+                }
+
+                const dataDetails = response.json();
+
+                return dataDetails;
+
+            } catch (err) {
+                console.log('error searchAll: ' + err);
+                throw err;
+            }
+        },
+
+        login: async (email, pass) => {
+            try {
+                const response = await fetch(log, data)
 
                 if (!response.ok) {
                     throw new Error('Error fetching searchAll')
