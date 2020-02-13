@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
 import api from "../services/NodePopDBService";
-import Advert from "../models/Advert";
+import Advert from "../models/Anuncio";
 import AdvertLine from "../components/AdvertLine";
 
 const { searchAll, searchFiltered } = api();
