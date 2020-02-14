@@ -13,6 +13,9 @@ import Anuncio from "../models/Anuncio";
 import useFetch from "./useFetch";
 import AdvertLine from "./AdvertLine";
 
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
 const { getAllAds, getAdsFiltered } = api();
 
 const AdvertList2 = () => {
@@ -54,7 +57,7 @@ const AdvertList2 = () => {
     setFilterPrice(event.target.value);
   }
 
-    const buildAdvertsList = ({
+  const buildAdvertsList = ({
     _id,
     nombre,
     foto,
@@ -67,21 +70,25 @@ const AdvertList2 = () => {
     reservado,
     vendido,
     chat
-  }) => 
-    <li key={_id}>
-      {nombre} -
-      {foto} -
-      {descripcion} -
-      {venta} -
-      {precio} -
-      {autor} -
-      {fecha} -
-      {tags} -
-      {reservado} -
-      {vendido} -
-      {chat}
-    </li>;
-  
+  }) => (
+    <div>
+      <li key={_id}>
+        {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
+        {tags} -{reservado} -{vendido} -{chat}
+      </li>
+
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={foto} />
+        <Card.Body>
+          <Card.Title>{nombre}</Card.Title>
+          <Card.Text>
+            {descripcion}
+          </Card.Text>
+          <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      </Card>
+    </div>
+  );
 
   return (
     <div>

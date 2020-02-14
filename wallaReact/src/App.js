@@ -1,30 +1,32 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import AdvertDetail from './components/AdvertDetail'
-import AdvertsList from './components/AdvertsList'
-import AdvertsList2 from './components/AdvertsList2'
-import CreateAndUpdate from './components/CreateAndUpdate'
-import Register from './components/Register'
-import Register2 from './components/Register2'
-import ErrorBoundary from './components/ErrorBoundary'
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import MainContext from './services/MainContext'
+import AdvertDetail from "./components/AdvertDetail";
+import AdvertsList from "./components/AdvertsList";
+import AdvertsList2 from "./components/AdvertsList2";
+import CreateAndUpdate from "./components/CreateAndUpdate";
+import Register from "./components/Register";
+import Register2 from "./components/Register2";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-import logo from './img/logo.svg';
-import './css/App.css';
+import MainContext from "./services/MainContext";
+
+import logo from "./img/logo.svg";
+import "./css/App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      surname: '',
-      tag: '',
+      name: "",
+      surname: "",
+      tag: "",
       tags: []
-    }
-  };
+    };
+  }
 
   render() {
     const value = {
@@ -32,42 +34,38 @@ class App extends Component {
       surname: this.state.surname,
       tag: this.state.tag,
       tags: this.state.tags
-    }
+    };
 
     return (
       <ErrorBoundary>
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"
+        />
 
         <div className="App">
-
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
           </header>
 
           <main>
-
-            <MainContext.Provider value={value} >
-
+            <MainContext.Provider value={value}>
               <Router>
-
                 <Switch>
-                  <Route path='/adverts' component={AdvertsList} />
-                  <Route path='/adverts2' component={AdvertsList2} />
-                  <Route path='/advert/:id' component={AdvertDetail} />
-                  <Route path='/new' component={CreateAndUpdate} />
-                  <Route path='/modify/:id' component={CreateAndUpdate} />
-                  <Route path='/register'component={Register2} />
+                  <Route path="/adverts" component={AdvertsList} />
+                  <Route path="/adverts2" component={AdvertsList2} />
+                  <Route path="/advert/:id" component={AdvertDetail} />
+                  <Route path="/new" component={CreateAndUpdate} />
+                  <Route path="/modify/:id" component={CreateAndUpdate} />
+                  <Route path="/register" component={Register2} />
                   <Route component={Register} />
-
                 </Switch>
-
               </Router>
-
             </MainContext.Provider>
-
           </main>
-
-        </div >
-
+        </div>
       </ErrorBoundary>
     );
   }
