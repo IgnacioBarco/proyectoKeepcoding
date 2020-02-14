@@ -1,153 +1,128 @@
-import React, { Component } from "react";
+import React, {
+  Component,
+  useState,
+  useEffect,
+  useContext,
+  useReducer
+} from "react";
+import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
-import api from "../services/NodePopDBService";
-import Advert from "../models/Anuncio";
-import AdvertLine from "../components/AdvertLine";
+import api from "../services/wallaApi";
+import Anuncio from "../models/Anuncio";
+import useFetch from "./useFetch";
+import AdvertDetail from "./AdvertDetail";
 
-const { searchAll, searchFiltered } = api();
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
-export default class AdvertsList extends Component {
-  constructor(props) {
-    super(props);
+const { getAllAds, getAdsFiltered } = api();
 
-    this.state = {
-      adverts: [],
-      filterText: "",
-      filterPrice: ""
-    };
+const AdvertList = () => {
+  const [url, setUrl] = useState("http://localhost:8080/public/ads");
+  // const [data, setData] = useState({});
+  const [num, setNum] = useState(1);
+
+  const [filterText, setFilterText] = useState("");
+  const [filterPrice, setFilterPrice] = useState("");
+
+  const context = useContext(MainContext);
+
+  const anuncios = useFetch(url);
+  // const data = useFetch(url);
+  // console.log('data '+success)
+  // console.log('data '+anuncios)
+  // console.log(anuncios)
+  // console.log(error)
+  // const state = useFetch(url);
+
+  function handleFilterData(event) {
+    event.preventDefault();
+    setUrl("http://localhost:8080/public/ads?autor=pepe");
   }
 
-  //cargamos la lista de todos los anuncios
-  UNSAFE_componentWillMount = () => {
-    this.loadInitList();
-  };
-
-  loadInitList = async event => {
-    const data = await searchAll();
-    // const { success, count, results } = data;
-    const { results } = data;
-
-    let adverts = [];
-
-    results.map(elem => {
-      adverts.push(new Advert(elem));
-      return true;
-    });
-
-    this.setState({
-      adverts
-    });
-  };
-
-  handleSubmitNew = event => {
+  function handleSubmitNew(event) {
     event.preventDefault();
-    this.props.history.push("/new");
-  };
+    setUrl("http://localhost:8080/public/ads");
 
-  onInputChangeFilterText = event => {
-    this.setState({
-      filterText: event.target.value
-    });
-  };
+    setNum(num + 1);
+    context.token = "new";
+  }
 
-  onInputChangeFilterPrice = event => {
-    this.setState({
-      filterPrice: event.target.value
-    });
-  };
+  function onInputChangeFilterText(event) {
+    setFilterText(event.target.value);
+  }
 
-  //manejamos los filtros al presionar el boton de enviar
-  handleSubmit = async event => {
-    //cambiamos el filtro que viene dado por el registro
-    const filtersTags = document.getElementById("filtroTags");
-    this.context.tag = filtersTags.value;
-    locStorage.setItem("tag", this.context.tag);
+  function onInputChangeFilterPrice(event) {
+    setFilterPrice(event.target.value);
+  }
 
-    const filtersText = document.getElementById("filterText");
-    const filtersPrice = document.getElementById("filterPrice");
 
-    let filter = "";
 
-    if (filtersText.value !== "") {
-      filter = "name=" + filtersText.value;
-    }
 
-    if (filtersPrice.value !== "") {
-      if (filter !== "") filter += "&";
-      filter += "price=" + filtersPrice.value;
-    }
+  const buildAdvertsList2 = ({ _id }) => (
+    <div>
+      {AdvertDetail(_id)}
+    </div>
+  );
 
-    const data = await searchFiltered(filter);
-    // const { success, count, results } = data;
-    const { count, results } = data;
 
-    if (count > 0) {
-      let adverts = [];
+  const buildAdvertsList = ({
+    _id,
+    nombre,
+    foto,
+    descripcion,
+    venta,
+    precio,
+    autor,
+    fecha,
+    tags,
+    reservado,
+    vendido,
+    chat
+  }) => (
+      <div>
+        {/* <li key={_id}>
+        {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
+        {tags} -{reservado} -{vendido} -{chat}
+      </li> */}
 
-      results.map(elem => {
-        adverts.push(new Advert(elem));
-        return true;
-      });
-
-      this.setState({
-        adverts
-      });
-    } else {
-      alert("no hay datos");
-      this.setState({
-        adverts: []
-      });
-    }
-  };
-
-  //construimos el html de los anuncios
-  //ponemos en verde los que coinciden con el tag seleccionado
-  buildAdvertsList = () => {
-    return (
-      <div className="row">
-        {this.state.adverts.map(advert => (
-          <AdvertLine key={advert._id} advert={advert} />
-        ))}
+        <Card style={{ width: "18rem" }}>
+          <Card.Img variant="top" src={foto} />
+          <Card.Body>
+            <Card.Title>{nombre}</Card.Title>
+            <Card.Text>
+              {descripcion} -{venta} -{precio} -{autor} -{fecha} -
+        {tags} -{reservado} -{vendido} -{chat}
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card>
       </div>
     );
-  };
 
-  //recuperamos los tags del localStorage y los pintamos
-  buildTagList = () => {
-    const elems = this.context.tags.split(",");
+  return (
+    <div>
+      {/* <span>{JSON.stringify(anuncios)}</span> */}
+      <span>{JSON.stringify(anuncios)}</span>
+      <hr />
 
-    return (
-      <select id="filtroTags">
-        {elems.map(elem => {
-          return (
-            <option key={elem} value={elem}>
-              {elem}
-            </option>
-          );
-        })}
-      </select>
-    );
-  };
+      <hr />
+      <span>Url: {JSON.stringify(url)}</span>
+      <hr />
+      <button onClick={handleFilterData}>filterData</button>
+      <hr />
+      <button onClick={handleSubmitNew}>
+        {context.token}Crear anuncio nuevo{num}
+      </button>
+      <hr />
+      <hr />
+      <hr />
 
-  render() {
-    if (!locStorage.checkIsNull()) {
-      console.log("falta algun dato");
-      this.props.history.push("/");
-    }
-
-    this.context = locStorage.checkLocalStorage(this.context);
-
-    // const { name, surname, tag } = this.context;
-    const { tag } = this.context;
-    const filterText = this.state.filterText;
-    const filterPrice = this.state.filterPrice;
-
-    return (
       <div>
         <br />
 
-        <button onClick={this.handleSubmitNew}>Crear anuncio nuevo</button>
+        <button onClick={handleSubmitNew}>Crear anuncio nuevo</button>
 
         <br />
 
@@ -158,7 +133,7 @@ export default class AdvertsList extends Component {
           type="text"
           placeholder="filtro de texto"
           value={filterText}
-          onChange={this.onInputChangeFilterText}
+          onChange={onInputChangeFilterText}
           name="filterText"
         />
 
@@ -169,29 +144,29 @@ export default class AdvertsList extends Component {
           type="text"
           placeholder="filtro de precio"
           value={filterPrice}
-          onChange={this.onInputChangeFilterPrice}
+          onChange={onInputChangeFilterPrice}
           name="filterPrice"
         />
 
         <br />
 
-        {this.buildTagList()}
-
-        <br />
-
-        <button onClick={this.handleSubmit}>Buscar</button>
+        <button onClick={handleSubmitNew}>Buscar</button>
 
         <h1>Lista de artículos:</h1>
-        <h3>tag filtrado: {tag}</h3>
 
-        {
-          this.state.adverts.length > 0 
-          && 
-          this.buildAdvertsList()
-        }
+        <ul>{anuncios && anuncios.map(buildAdvertsList)}</ul>
+
+        <Link to="/">Back</Link>
+
+        <hr />
+
+        <ul>{anuncios && anuncios.map(buildAdvertsList2)}</ul>
+
+        {/* <h3>tag filtrado: {tag}</h3> */}
+
+        {/* {this.state.adverts.length > 0 && this.buildAdvertsList()} */}
       </div>
-    );
-  }
-}
-
-AdvertsList.contextType = MainContext;
+    </div>
+  );
+};
+export default AdvertList;

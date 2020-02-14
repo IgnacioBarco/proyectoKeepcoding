@@ -1,7 +1,55 @@
-import React, { Component } from "react";
+import React, {
+  Component,
+  useState,
+  useEffect,
+  useContext,
+  useReducer
+} from "react";
+import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
-import api from "../services/NodePopDBService";
+import api from "../services/wallaApi";
+import Anuncio from "../models/Anuncio";
+import useFetch from "./useFetch";
+import AdvertLine from "./AdvertLine";
+
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
+// const AdvertDetail = (_id) => {
+//   const [url, setUrl] = useState("http://localhost:8080/advert/" + _id);
+//   const data = useFetch(url);
+//   console.log(url)
+//   console.log(data)
+
+//   return (
+//     <div>
+//       {/* <li key={_id}>
+//         {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
+//         {tags} -{reservado} -{vendido} -{chat}
+//       </li> */JSON.stringify(data)}
+
+
+//       <Card style={{ width: "18rem" }}>
+//         <Card.Img variant="top" src={data.foto} />
+//         <Card.Body>
+//           <Card.Title>{data.nombre}</Card.Title>
+//           <Card.Text>
+//             {data.descripcion} -{data.venta} -{data.precio} -{data.autor}
+//             -{data.fecha} -{data.tags} -{data.reservado} -
+//             {data.vendido} -{data.chat}
+//             <Link to="/">Back</Link>
+//           </Card.Text>
+//           <Button variant="primary">Go somewhere</Button>
+//         </Card.Body>
+//       </Card>
+//     </div>
+
+//   );
+// };
+// export default AdvertDetail;
+
+
 import { withRouter } from "react-router-dom";
 
 const { searchAdvert } = api();
@@ -16,72 +64,78 @@ class AdvertDetail extends Component {
     };
   }
 
+
+  
+
+  loadAdvert = async () => {
+    const id = this.props.match.params.id;
+
+    // 
+    const { success, anuncios } = await searchAdvert(id)
+    
+    let advert = {};
+    
+    anuncios.map(item =>{
+      if (item._id === id) {
+        advert = item
+  
+      }  
+    })
+
+    console.log(anuncios)
+
+    this.setState({ success, result: advert });
+
+  };
+
   //cargamos los datos del anuncio
   UNSAFE_componentWillMount = () => {
     this.loadAdvert();
   };
 
-  loadAdvert = async () => {
-    const id = this.props.match.params.id;
-    const data = await searchAdvert(id);
-
-    const { success, result } = data;
-
-    this.setState({
-      success,
-      result
-    });
-  };
-
-  //construimos el html del anuncio
   buildDetailAdvert = () => {
     const advert = this.state.result;
-    const img = "http://localhost:3001/" + advert.photo;
-
-    return (
-      <div className="row">
-        <h1>{advert.name}</h1>
-        <img src={img} alt={advert.description} />
-        <h2>Precio: {advert.price}€</h2>
-        <h2>Descripción: {advert.name}</h2>
-        <h3>Estado: {advert.type === "buy" ? "se compra" : "se vende"}</h3>
-        <h3>Creado el {advert.createdAt}</h3>
-        <h3>Actualizado el {advert.updatedAt}</h3>
-      </div>
-    );
-  };
-
-  handleSubmitBack = event => {
-    event.preventDefault();
-    this.props.history.push("/adverts");
-  };
-
-  handleSubmitModify = event => {
-    event.preventDefault();
-    const id = this.props.match.params.id;
-    this.props.history.push("/modify/" + id);
-  };
-
-  render() {
-    if (!locStorage.checkIsNull()) {
-      this.props.history.push("/");
-    }
-
-    this.context = locStorage.checkLocalStorage(this.context);
+    // const img = "http://localhost:8080/" + advert.foto;
 
     return (
       <div>
-        {
-          this.state.success === true 
-          && 
-          this.buildDetailAdvert()
-        }
-
-        <button onClick={this.handleSubmitBack}>Volver</button>
-        <button onClick={this.handleSubmitModify}>Modificar</button>
+        {/* <li key={_id}>
+         {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
+         {tags} -{reservado} -{vendido} -{chat}
+       </li> */JSON.stringify(advert)}
+        <Card style={{ width: "18rem" }}>
+          <Card.Img variant="top" src={'img'} />
+          <Card.Body>
+            <Card.Title>{advert.nombre}</Card.Title>
+            <Card.Text>
+              {advert._id}
+              {advert.descripcion} -{advert.venta} -{advert.precio} -{advert.autor}
+              -{advert.fecha} -{advert.tags} -{advert.reservado} -
+             {advert.vendido} -{advert.chat}
+              <Link to="/">Back</Link>
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card>
       </div>
-    );
-  }
+    )
+  };
+
+  render() {
+    const id = this.props.match.params.id;
+    console.log(this.state);
+
+
+    return this.state.success === true ? this.buildDetailAdvert() : <div>No hay resultados</div>
+
+
+
+
+
+
+
+  };
+
 }
 
 AdvertDetail.contextType = MainContext;

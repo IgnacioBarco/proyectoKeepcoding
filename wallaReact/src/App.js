@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import AdvertDetail from "./components/AdvertDetail";
 import AdvertsList from "./components/AdvertsList";
-import AdvertsList2 from "./components/AdvertsList2";
 import CreateAndUpdate from "./components/CreateAndUpdate";
 import Register from "./components/Register";
 import Register2 from "./components/Register2";
@@ -42,7 +41,7 @@ class App extends Component {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
 
         <div className="App">
@@ -55,7 +54,6 @@ class App extends Component {
               <Router>
                 <Switch>
                   <Route path="/adverts" component={AdvertsList} />
-                  <Route path="/adverts2" component={AdvertsList2} />
                   <Route path="/advert/:id" component={AdvertDetail} />
                   <Route path="/new" component={CreateAndUpdate} />
                   <Route path="/modify/:id" component={CreateAndUpdate} />

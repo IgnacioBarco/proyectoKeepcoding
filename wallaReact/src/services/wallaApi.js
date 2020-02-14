@@ -1,11 +1,10 @@
 const API_URL = 'http://localhost:3001/apiv1';
 const ALL_ADVERTS = API_URL + '/anuncios'
-const ADVERT = API_URL + '/anuncios'
 const TAGS = API_URL + '/tags'
 
 const todo = 'http://localhost:8080/public/ads';
 const log = 'http://localhost:8080/auth/login?email=pepe@pepe.es&pass=pepexxxxx';
-const ALL_ADVERTS2 = API_URL + '/anuncios'
+const ADVERT = 'http://localhost:8080'
 const ADVERT2 = API_URL + '/anuncios'
 const TAGS2 = API_URL + '/tags'
 
@@ -58,9 +57,9 @@ const api = () => {
             }
         },
 
-        searchFiltered: async (filter) => {
+        searchFiltered: async ({filter}) => {
             try {
-                const response = await fetch(`${ADVERT}?${filter}`, data)
+                const response = await fetch(`${todo}?${filter}`, data)
 
                 if (!response.ok) {
                     throw new Error('Error fetching searchAll')
@@ -78,14 +77,15 @@ const api = () => {
 
         searchAdvert: async (id) => {
             try {
-                const response = await fetch(`${ADVERT}/${id}`, data)
+                const response = await fetch(todo, data)
 
                 if (!response.ok) {
                     throw new Error('Error fetching searchAdvert')
                 }
 
-                const dataDetails = response.json();
+                const dataDetails = await response.json();
 
+                console.log(dataDetails)
                 return dataDetails;
 
             } catch (err) {
