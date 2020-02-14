@@ -6,27 +6,7 @@ const jwtAuth = require('../../lib/jwtAuth')
 
 const Anuncio = require("../../models/Anuncio");
 
-/**
- * devuelve los anuncios
- * si no lleva params devuelve todos
- * si lleva, los devuelve filtrados
- */
-router.get("/:id", jwtAuth(), async (req, res, next) => {
-  try {
-    const _id = req.params.id;
-    const advert = await Anuncio.adsById(_id);
 
-    //si el no hay anuncio
-    if (Object.keys(advert).length === 0) {
-      res.json({ success: false, advert: 'no hay anuncio con ese id' });
-      return;
-    }
-
-    res.json({ success: true, advert: advert });
-  } catch (err) {
-    next(err);
-  }
-});
 
 
 /**

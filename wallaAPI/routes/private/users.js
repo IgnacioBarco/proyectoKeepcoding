@@ -74,6 +74,18 @@ router.get("/", jwtAuth(), async (req, res, next) => {
   }
 });
 
+router.get("/:name", jwtAuth(), async (req, res, next) => {
+  try {
+    const _name = req.params.name;
+    const usuario = await Usuario.userDetails(_name);
+    res.json(usuario);
+
+
+  } catch (err) {
+    next(err);
+  }
+});
+
 /**
  * devuelve los ususarios online
  */

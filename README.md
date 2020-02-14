@@ -12,17 +12,34 @@ npm run dev
 
 
 POST:
-http://localhost:3000/auth/login
-http://localhost:3000/auth/register
+http://localhost:8080/auth/login
+http://localhost:8080/auth/register
+
+http://localhost:8080/private/ad/new
+http://localhost:8080/private/user/new
 
 
-http://localhost:3000/public/ads
+PUT:
+http://localhost:8080/private/ad/:id/modify
+http://localhost:8080/private/user/:name/modify
 
 
-http://localhost:3000/private/ads
+DELETE:
+http://localhost:8080/private/ad/:id/delete
+http://localhost:8080/private/user/:name/delete
 
-http://localhost:3000/private/user/:name
-    http://localhost:3000/private/user?nombre=pepe
 
-http://localhost:3000/private/users
-http://localhost:3000/private/users/online
+GET:
+http://localhost:8080/public/ads
+http://localhost:8080/public/ads/tags
+http://localhost:8080/public/ads/:id
+
+
+http://localhost:8080/private/ads
+
+http://localhost:8080/private/user/:name
+    http://localhost:8080/private/user?nombre=pepe
+
+http://localhost:8080/private/users
+http://localhost:8080/private/users/:name
+http://localhost:8080/private/users/online

@@ -121,19 +121,5 @@ router.get("/", jwtAuth(), async (req, res, next) => {
   }
 });
 
-/**
- * devuelve los tags
- */
-router.get("/tags", jwtAuth(), async (req, res, next) => {
-  try {
-    const anuncios = await Anuncio.tags();
-    // res.json({ success: true, anuncios: anuncios });
-    res.json(anuncios);
-    res.send("ok");
-
-  } catch (err) {
-    next(err);
-  }
-});
 
 module.exports = router;
