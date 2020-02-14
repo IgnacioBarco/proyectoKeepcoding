@@ -1,22 +1,14 @@
-import React, {
-  Component,
-  useState,
-  useEffect,
-  useContext,
-  useReducer
-} from "react";
-import MainContext from "../services/MainContext";
-import locStorage from "../services/LocalStorage";
-import api from "../services/wallaApi";
+import React, { useEffect, useReducer } from "react";
 import Anuncio from "../models/Anuncio";
-import AdvertLine from "./AdvertLine";
+// import MainContext from "../services/MainContext";
+// import locStorage from "../services/LocalStorage";
+// import api from "../services/wallaApi";
+// import Anuncio from "../models/Anuncio";
+// import AdvertLine from "./AdvertLine";
 
 const initialState = {
   isFetching: false,
-  data: {
-    success: '',
-    anuncios: ''
-  },
+  data: [],
   error: null
 };
 
@@ -44,24 +36,30 @@ function reducer(state, action) {
 }
 
 function useFetch(url) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [value, dispatch] = useReducer(reducer, initialState);
+
+  let aaa;
 
   useEffect(() => {
-    dispatch({ type: "FETCH_REQUEST" },dataGet);
+    dispatch({ type: "FETCH_REQUEST" }, dataGet);
     fetch(url)
       .then(response => response.json())
       .then(results => {
         const {success,anuncios} = results;
-        let adverts = [];
-        anuncios.map(advert => adverts.push(new Anuncio(advert)))
-        if (success === true)
-          dispatch({ type: "FETCH_SUCCESS", data: adverts })
-        // dispatch({ type: "FETCH_SUCCESS", data: results })
+        // let adverts = [];
+        // anuncios.map(advert => adverts.push(new Anuncio(advert)))
+        // if (success === true)
+        //   dispatch({ type: "FETCH_SUCCESS", data: adverts })
+        
+
+        dispatch({ type: "FETCH_SUCCESS", data: anuncios });
+        // dispatch({ type: "FETCH_SUCCESS", data: results.anuncios });
       })
       .catch(error => dispatch({ type: "FETCH_FAILURE", error }));
   }, [url]);
 
-  return state.data;
+  
+  return value.data;
 }
 
 export default useFetch;

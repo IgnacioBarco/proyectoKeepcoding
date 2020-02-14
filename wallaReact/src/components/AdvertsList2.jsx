@@ -5,6 +5,7 @@ import React, {
   useContext,
   useReducer
 } from "react";
+import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
 import api from "../services/wallaApi";
@@ -24,9 +25,13 @@ const AdvertList2 = () => {
 
   const context = useContext(MainContext);
 
-  const state = useFetch(url);
-
-  const adverts = [];
+  const anuncios = useFetch(url);
+  // const data = useFetch(url);
+  // console.log('data '+success)
+  // console.log('data '+anuncios)
+  // console.log(anuncios)
+  // console.log(error)
+  // const state = useFetch(url);
 
   function handleFilterData(event) {
     event.preventDefault();
@@ -49,28 +54,41 @@ const AdvertList2 = () => {
     setFilterPrice(event.target.value);
   }
 
-
-
-
-  function buildAdvertsList() {
-    let aaa = [];
-    aaa= state;
-      console.log('aaa'+aaa)
-    //  aaa.map(item => console.log(item.nombre))
-    return (
-      <div className="row">
-        dasfadsasd
-      </div>
-    );
-    
-    
-    
-    // return <div>adverts</div>;
-  }
+    const buildAdvertsList = ({
+    _id,
+    nombre,
+    foto,
+    descripcion,
+    venta,
+    precio,
+    autor,
+    fecha,
+    tags,
+    reservado,
+    vendido,
+    chat
+  }) => 
+    <li key={_id}>
+      {nombre} -
+      {foto} -
+      {descripcion} -
+      {venta} -
+      {precio} -
+      {autor} -
+      {fecha} -
+      {tags} -
+      {reservado} -
+      {vendido} -
+      {chat}
+    </li>;
+  
 
   return (
     <div>
-      <span>{JSON.stringify(state)}</span>
+      {/* <span>{JSON.stringify(anuncios)}</span> */}
+      <span>{JSON.stringify(anuncios)}</span>
+      <hr />
+
       <hr />
       <span>Url: {JSON.stringify(url)}</span>
       <hr />
@@ -118,7 +136,9 @@ const AdvertList2 = () => {
 
         <h1>Lista de artículos:</h1>
 
-        {buildAdvertsList()}
+        <ul>{anuncios && anuncios.map(buildAdvertsList)}</ul>
+
+        <Link to="/">Back</Link>
         {/* <h3>tag filtrado: {tag}</h3> */}
 
         {/* {this.state.adverts.length > 0 && this.buildAdvertsList()} */}
