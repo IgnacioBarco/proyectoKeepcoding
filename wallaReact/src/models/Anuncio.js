@@ -1,28 +1,28 @@
 "use strict";
 
-export default class Anuncio {
-  nombre;
-  foto;
-  descripcion;
-  venta;
-  precio;
-  autor;
-  fecha;
+export default class Advert {
+  name;
+  photo;
+  description;
+  sell;
+  price;
+  author;
+  date;
   tags = [];
-  reservado;
-  vendido;
+  reserved;
+  sold;
   chat = [];
 
   constructor(value) {
-    this.nombre = value.nombre;
-    this.foto = value.foto;
-    this.descripcion = value.descripcion;
-    this.venta = value.venta;
-    this.precio = value.precio;
-    this.autor = value.autor;
-    this.fecha = value.fecha;
-    this.reservado = value.reservado;
-    this.vendido = value.vendido;
+    this.name = value.name;
+    this.photo = value.photo;
+    this.description = value.description;
+    this.sell = value.sell;
+    this.price = value.price;
+    this.author = value.author;
+    this.date = value.date;
+    this.reserved = value.reserved;
+    this.sold = value.sold;
     this.chat = value.chat;
   }
 }

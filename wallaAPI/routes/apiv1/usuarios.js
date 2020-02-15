@@ -49,7 +49,7 @@ router.post('/', async (req, res, next) => {
  */
 router.get("/", async (req, res, next) => {
   try {
-    const nombre = req.query.nombre;
+    const name = req.query.name;
     const email = req.query.email;
     const pass = req.query.pass;
 
@@ -68,8 +68,8 @@ router.get("/", async (req, res, next) => {
     /**
      * filtro de exp regulares
      */
-    if (nombre) {
-      filter.nombre = new RegExp(req.query.nombre, "i");
+    if (name) {
+      filter.name = new RegExp(req.query.name, "i");
     }
 
     if (email) {

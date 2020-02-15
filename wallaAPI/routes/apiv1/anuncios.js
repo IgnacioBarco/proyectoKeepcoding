@@ -12,7 +12,7 @@ const Anuncio = require("../../models/Advert");
  */
 router.get("/", async (req, res, next) => {
   try {
-    const nombre = req.query.nombre;
+    const name = req.query.name;
     const descripcion = req.query.descripcion;
     const autor = req.query.autor;
     const fecha = req.query.fecha;
@@ -36,8 +36,8 @@ router.get("/", async (req, res, next) => {
     /**
      * filtro de exp regulares
      */
-    if (nombre) {
-      filter.nombre = new RegExp(req.query.nombre, "i");
+    if (name) {
+      filter.name = new RegExp(req.query.name, "i");
     }
 
     if (descripcion) {

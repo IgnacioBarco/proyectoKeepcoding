@@ -9,7 +9,7 @@ const Anuncio = require("../models/Advert");
  */
 router.get("/", async function(req, res, next) {
   try {
-    const nombre = req.query.nombre;
+    const name = req.query.name;
     const venta = req.query.venta;
     const tag = req.query.tag;
     const precio = req.query.precio;
@@ -21,8 +21,8 @@ router.get("/", async function(req, res, next) {
 
     const filter = {};
 
-    if (nombre) {
-      filter.nombre = new RegExp(req.query.nombre, "i");
+    if (name) {
+      filter.name = new RegExp(req.query.name, "i");
     }
 
     if (venta) {

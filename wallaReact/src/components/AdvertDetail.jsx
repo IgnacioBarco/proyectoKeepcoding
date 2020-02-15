@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import locStorage from "../services/LocalStorage";
 import api from "../services/wallaApi";
-import Anuncio from "../models/Anuncio";
+import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import AdvertLine from "./AdvertLine";
 
@@ -25,19 +25,19 @@ import Button from 'react-bootstrap/Button';
 //   return (
 //     <div>
 //       {/* <li key={_id}>
-//         {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
-//         {tags} -{reservado} -{vendido} -{chat}
+//         {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
+//         {tags} -{reserved} -{sold} -{chat}
 //       </li> */JSON.stringify(data)}
 
 
 //       <Card style={{ width: "18rem" }}>
-//         <Card.Img variant="top" src={data.foto} />
+//         <Card.Img variant="top" src={data.photo} />
 //         <Card.Body>
-//           <Card.Title>{data.nombre}</Card.Title>
+//           <Card.Title>{data.name}</Card.Title>
 //           <Card.Text>
-//             {data.descripcion} -{data.venta} -{data.precio} -{data.autor}
-//             -{data.fecha} -{data.tags} -{data.reservado} -
-//             {data.vendido} -{data.chat}
+//             {data.description} -{data.sell} -{data.price} -{data.author}
+//             -{data.date} -{data.tags} -{data.reserved} -
+//             {data.sold} -{data.chat}
 //             <Link to="/">Back</Link>
 //           </Card.Text>
 //           <Button variant="primary">Go somewhere</Button>
@@ -57,61 +57,60 @@ const { searchAdvert } = api();
 class AdvertDetail extends Component {
   constructor(props) {
     super(props);
+    
 
     this.state = {
+      id:'',
       success: false,
-      result: {}
+      regsNumber:0,
+      result: []
     };
   }
 
 
   
 
-  loadAdvert = async () => {
-    const id = this.props.match.params.id;
-
-    // 
-    const { success, anuncios } = await searchAdvert(id)
+  loadAdvert = async (id) => {
+     this.id = this.props.match.params.id;
+    // const id = this.props.match.params.id;
+    // id = this.props.match.params.id;
     
-    let advert = {};
+
+    console.log('id '+ this.id)
+     
+    const { success, regsNumber, result } = await searchAdvert(this.id)
     
-    anuncios.map(item =>{
-      if (item._id === id) {
-        advert = item
-  
-      }  
-    })
+    
+    console.log('result '+result)
 
-    console.log(anuncios)
-
-    this.setState({ success, result: advert });
+    this.setState({ success, regsNumber, result });
 
   };
 
   //cargamos los datos del anuncio
-  UNSAFE_componentWillMount = () => {
-    this.loadAdvert();
+  UNSAFE_componentWillMount = (id) => {
+    this.loadAdvert(id);
   };
 
   buildDetailAdvert = () => {
     const advert = this.state.result;
-    // const img = "http://localhost:8080/" + advert.foto;
+    // const img = "http://localhost:8080/" + advert.photo;
 
     return (
       <div>
         {/* <li key={_id}>
-         {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
-         {tags} -{reservado} -{vendido} -{chat}
+         {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
+         {tags} -{reserved} -{sold} -{chat}
        </li> */JSON.stringify(advert)}
         <Card style={{ width: "18rem" }}>
           <Card.Img variant="top" src={'img'} />
           <Card.Body>
-            <Card.Title>{advert.nombre}</Card.Title>
+            <Card.Title>{advert.name}</Card.Title>
             <Card.Text>
               {advert._id}
-              {advert.descripcion} -{advert.venta} -{advert.precio} -{advert.autor}
-              -{advert.fecha} -{advert.tags} -{advert.reservado} -
-             {advert.vendido} -{advert.chat}
+              {advert.description} -{advert.sell} -{advert.price} -{advert.author}
+              -{advert.date} -{advert.tags} -{advert.reserved} -
+             {advert.sold} -{advert.chat}
               <Link to="/">Back</Link>
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
@@ -122,7 +121,7 @@ class AdvertDetail extends Component {
   };
 
   render() {
-    const id = this.props.match.params.id;
+    // const id = this.props.match.params.id;
     console.log(this.state);
 
 

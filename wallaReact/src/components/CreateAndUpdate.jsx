@@ -55,13 +55,13 @@ export default class CreateAndUpdate extends Component {
 
   handleSubmitModify = event => {
     event.preventDefault();
-    alert("Anuncio modificado!!!");
+    alert("Advert modificado!!!");
     this.props.history.push("/adverts");
   };
 
   handleSubmitNew = event => {
     event.preventDefault();
-    alert("Anuncio nuevo creado!!!");
+    alert("Advert nuevo creado!!!");
     this.props.history.push("/adverts");
   };
 

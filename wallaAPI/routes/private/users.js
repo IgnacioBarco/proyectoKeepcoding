@@ -14,7 +14,7 @@ const User = require("../../models/User");
  */
 router.get("/", jwtAuth(), async (req, res, next) => {
   try {
-    const nombre = req.query.nombre;
+    const name = req.query.name;
     const email = req.query.email;
     const pass = req.query.pass;
 
@@ -32,8 +32,8 @@ router.get("/", jwtAuth(), async (req, res, next) => {
     /**
      * filtro de exp regulares
      */
-    if (nombre) {
-      filter.nombre = new RegExp(req.query.nombre, "i");
+    if (name) {
+      filter.name = new RegExp(req.query.name, "i");
     }
 
     if (email) {
@@ -107,12 +107,12 @@ router.get("/:name", jwtAuth(), async (req, res, next) => {
     const _name = req.params.name;
     const user = await User.userDetails(_name);
 
-    //si no hay ningun User con ese nombre
+    //si no hay ningun User con ese name
     if (Object.keys(user).length === 0) {
       res.json({
         success: true,
         regsNumber: 0,
-        result: "No hay ningun User con ese nombre"
+        result: "No hay ningun User con ese name"
       });
       return;
     }

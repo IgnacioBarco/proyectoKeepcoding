@@ -1,117 +1,122 @@
-const API_URL = 'http://localhost:3001/apiv1';
-const ALL_ADVERTS = API_URL + '/anuncios'
-const TAGS = API_URL + '/tags'
+const API_URL = "http://localhost:3001/apiv1";
+const ALL_ADVERTS = API_URL + "/anuncios";
+const TAGS = API_URL + "/tags";
 
-const todo = 'http://localhost:8080/public/ads';
-const log = 'http://localhost:8080/auth/login?email=pepe@pepe.es&pass=pepexxxxx';
-const ADVERT = 'http://localhost:8080'
-const ADVERT2 = API_URL + '/anuncios'
-const TAGS2 = API_URL + '/tags'
-
-
-
-
+const todo = "http://localhost:8080/public/ads";
+const log =
+  "http://localhost:8080/auth/login?email=pepe@pepe.es&pass=pepexxxxx";
+const ADVERT = "http://localhost:8080";
+const ADVERT2 = API_URL + "/anuncios";
+const TAGS2 = API_URL + "/tags";
 
 const data = {
-    method: "GET",
-    headers: {
-        Accept: "application/json, text/plain, */*"
-    }
-}
+  method: "GET",
+  headers: {
+    Accept: "application/json, text/plain, */*"
+  }
+};
 
 const api = () => {
-    return {
-        searchAll: async () => {
-            try {
-                const response = await fetch(todo, data)
+  return {
+    searchAll: async () => {
+      try {
+        const response = await fetch(todo, data);
 
-                if (!response.ok) {
-                    throw new Error('Error fetching searchAll')
-                }
+        if (!response.ok) {
+          throw new Error("Error fetching searchAll");
+        }
 
-                const dataDetails = response.json();
+        const dataDetails = response.json();
 
-                return dataDetails;
+        return dataDetails;
+      } catch (err) {
+        console.log("error searchAll: " + err);
+        throw err;
+      }
+    },
 
-            } catch (err) {
-                console.log('error searchAll: ' + err);
-                throw err;
-            }
-        },
+    login: async (email, pass) => {
+      try {
+        const response = await fetch(log, data);
 
-        login: async (email, pass) => {
-            try {
-                const response = await fetch(log, data)
+        if (!response.ok) {
+          throw new Error("Error fetching searchAll");
+        }
 
-                if (!response.ok) {
-                    throw new Error('Error fetching searchAll')
-                }
+        const dataDetails = response.json();
 
-                const dataDetails = response.json();
+        return dataDetails;
+      } catch (err) {
+        console.log("error searchAll: " + err);
+        throw err;
+      }
+    },
 
-                return dataDetails;
+    searchFiltered: async ({ filter }) => {
+      try {
+        const response = await fetch(`${todo}?${filter}`, data);
 
-            } catch (err) {
-                console.log('error searchAll: ' + err);
-                throw err;
-            }
-        },
+        if (!response.ok) {
+          throw new Error("Error fetching searchAll");
+        }
 
-        searchFiltered: async ({filter}) => {
-            try {
-                const response = await fetch(`${todo}?${filter}`, data)
+        const dataDetails = response.json();
 
-                if (!response.ok) {
-                    throw new Error('Error fetching searchAll')
-                }
+        return dataDetails;
+      } catch (err) {
+        console.log("error searchFiltered: " + err);
+        throw err;
+      }
+    },
 
-                const dataDetails = response.json();
+    searchAdvert: async id => {
+      try {
+        // const response = await fetch(`${todo}/${id}`, data)
+        const response = await fetch(
+          `http://localhost:8080/public/ads/${id}`,
+          data
+        );
 
-                return dataDetails;
+        // const dataDetails=null;
 
-            } catch (err) {
-                console.log('error searchFiltered: ' + err);
-                throw err;
-            }
-        },
+        // fetch(`${todo}/${id}`, data)
+        //   .then(response => response.json())
+        //   .then(results => dataDetails = results)
+        //   .catch(error =>  error );
 
-        searchAdvert: async (id) => {
-            try {
-                const response = await fetch(todo, data)
+        console.log(`${todo}/${id}`);
 
-                if (!response.ok) {
-                    throw new Error('Error fetching searchAdvert')
-                }
+        if (!response.ok) {
+          throw new Error("Error fetching searchAdvert");
+        }
 
-                const dataDetails = await response.json();
+        const dataDetails = response.json();
 
-                console.log(dataDetails)
-                return dataDetails;
+        console.log(dataDetails);
+        return dataDetails;
+      } catch (err) {
+        console.log("error searchAdvert: " + err);
+        throw err;
+      }
+    },
 
-            } catch (err) {
-                console.log('error searchAdvert: ' + err);
-                throw err;
-            }
-        },
+    searchTags: async () => {
+      try {
+        const response = await fetch(TAGS, data);
 
-        searchTags: async () => {
-            try {
-                const response = await fetch(TAGS, data)
+        if (!response.ok) {
+          throw new Error("Error fetching searchTags");
+        }
 
-                if (!response.ok) {
-                    throw new Error('Error fetching searchTags')
-                }
+        const dataDetails = response.json();
 
-                const dataDetails = response.json();
-
-                return dataDetails;
-
-            } catch (err) {
-                console.log('error searchTags: ' + err);
-                throw err;
-            }
-        },
+        return dataDetails;
+      } catch (err) {
+        console.log("error searchTags: " + err);
+        throw err;
+      }
     }
-}
+  };
+};
 
 export default api;

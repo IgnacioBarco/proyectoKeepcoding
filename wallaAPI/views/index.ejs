@@ -19,10 +19,10 @@
                       text-center
                       <%= result[i].venta ? 'border-primary' : 'border-success' %>">
           <a href="/<%= result[i]._id %>">
-            <img src="<%= result[i].foto %>" class="card-img-top " alt="<%= result[i].nombre %>" />
+            <img src="<%= result[i].foto %>" class="card-img-top " alt="<%= result[i].name %>" />
           </a>
           <div class="card-body">
-            <h4 class="card-title"><%= result[i].nombre %></h4>
+            <h4 class="card-title"><%= result[i].name %></h4>
             <p class="card-text">
                
                 <strong>Precio: </strong><%= result[i].precio %>€ 

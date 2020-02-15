@@ -1,51 +1,56 @@
 import React, {
-  Component,
+  // Component,
   useState,
-  useEffect,
+  // useEffect,
   useContext,
-  useReducer
+  // useReducer
 } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
-import locStorage from "../services/LocalStorage";
-import api from "../services/wallaApi";
-import Anuncio from "../models/Anuncio";
+// import locStorage from "../services/LocalStorage";
+// import api from "../services/wallaApi";
+// import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import AdvertDetail from "./AdvertDetail";
 
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
-const { getAllAds, getAdsFiltered } = api();
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 const AdvertList = () => {
   const [url, setUrl] = useState("http://localhost:8080/public/ads");
-  // const [data, setData] = useState({});
-  const [num, setNum] = useState(1);
 
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
 
   const context = useContext(MainContext);
 
-  const anuncios = useFetch(url);
+  // const {success,regsNumber,result} = useFetch(url);
+  const result = useFetch(url);
+  
+  // const{isFetching,data} = data2
+  // const {success,regsNumber,result} = data;
+  // const{isFetching,data:[success,regsNumber,result]}= data
+  // console.log('response'+result);
+  // console.log('response'+success);
+  // console.log('response'+regsNumber);
+  // const { ...result } = response;
+  // const { result } = response;
   // const data = useFetch(url);
   // console.log('data '+success)
-  // console.log('data '+anuncios)
-  // console.log(anuncios)
+  // console.log('data '+result)
+  // console.log(result)
   // console.log(error)
   // const state = useFetch(url);
 
   function handleFilterData(event) {
     event.preventDefault();
-    setUrl("http://localhost:8080/public/ads?autor=pepe");
+    setUrl("http://localhost:8080/public/ads?author=pepe");
   }
 
   function handleSubmitNew(event) {
     event.preventDefault();
     setUrl("http://localhost:8080/public/ads");
 
-    setNum(num + 1);
     context.token = "new";
   }
 
@@ -57,54 +62,46 @@ const AdvertList = () => {
     setFilterPrice(event.target.value);
   }
 
-
-
-
-  const buildAdvertsList2 = ({ _id }) => (
-    <div>
-      {AdvertDetail(_id)}
-    </div>
-  );
-
+  const buildAdvertsList2 = ({ _id }) => <div>{AdvertDetail}</div>;
 
   const buildAdvertsList = ({
     _id,
-    nombre,
-    foto,
-    descripcion,
-    venta,
-    precio,
-    autor,
-    fecha,
+    name,
+    photo,
+    description,
+    sell,
+    price,
+    author,
+    date,
     tags,
-    reservado,
-    vendido,
+    reserved,
+    sold,
     chat
   }) => (
-      <div>
-        {/* <li key={_id}>
-        {nombre} -{foto} -{descripcion} -{venta} -{precio} -{autor} -{fecha} -
-        {tags} -{reservado} -{vendido} -{chat}
+    <div>
+      {/* <li key={_id}>
+        {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
+        {tags} -{reserved} -{sold} -{chat}
       </li> */}
 
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={foto} />
-          <Card.Body>
-            <Card.Title>{nombre}</Card.Title>
-            <Card.Text>
-              {descripcion} -{venta} -{precio} -{autor} -{fecha} -
-        {tags} -{reservado} -{vendido} -{chat}
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-      </div>
-    );
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={photo} />
+        <Card.Body>
+          <Card.Title>{name}</Card.Title>
+          <Card.Text>
+            {description} -{sell} -{price} -{author} -{date} -{tags} -{reserved}{" "}
+            -{sold} -{chat}
+          </Card.Text>
+          <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      </Card>
+    </div>
+  );
 
   return (
     <div>
-      {/* <span>{JSON.stringify(anuncios)}</span> */}
-      <span>{JSON.stringify(anuncios)}</span>
+      {/* <span>{JSON.stringify(result)}</span> */}
+      <span>{JSON.stringify(result)}</span>
       <hr />
 
       <hr />
@@ -113,7 +110,7 @@ const AdvertList = () => {
       <button onClick={handleFilterData}>filterData</button>
       <hr />
       <button onClick={handleSubmitNew}>
-        {context.token}Crear anuncio nuevo{num}
+        {context.token}Crear anuncio nuevo
       </button>
       <hr />
       <hr />
@@ -142,7 +139,7 @@ const AdvertList = () => {
         <input
           id="filterPrice"
           type="text"
-          placeholder="filtro de precio"
+          placeholder="filtro de price"
           value={filterPrice}
           onChange={onInputChangeFilterPrice}
           name="filterPrice"
@@ -154,13 +151,13 @@ const AdvertList = () => {
 
         <h1>Lista de artículos:</h1>
 
-        <ul>{anuncios && anuncios.map(buildAdvertsList)}</ul>
+        <ul>{result && result.map(buildAdvertsList)}</ul>
 
         <Link to="/">Back</Link>
 
         <hr />
 
-        <ul>{anuncios && anuncios.map(buildAdvertsList2)}</ul>
+        <ul>{result && result.map(buildAdvertsList2)}</ul>
 
         {/* <h3>tag filtrado: {tag}</h3> */}
 
