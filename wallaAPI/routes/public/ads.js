@@ -107,6 +107,16 @@ router.get("/", async (req, res, next) => {
       sort
     });
 
+    //si no hay anuncio
+    if (Object.keys(adverts).length === 0) {
+      res.json({
+        success: true,
+        regsNumber: 0,
+        result: "No hay ningun anuncio con esos filtros"
+      });
+      return;
+    }
+
     res.json({
       success: true,
       regsNumber: adverts.length,

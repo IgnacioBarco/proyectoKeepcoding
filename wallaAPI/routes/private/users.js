@@ -1,9 +1,9 @@
 "use strict";
 
 const express = require("express");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const router = express.Router();
-const jwtAuth = require('../../lib/jwtAuth')
+const jwtAuth = require("../../lib/jwtAuth");
 
 const Usuario = require("../../models/Usuario");
 
@@ -26,7 +26,6 @@ router.get("/", jwtAuth(), async (req, res, next) => {
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
     const sort = req.query.sort;
-
 
     const filter = {};
 
@@ -59,7 +58,7 @@ router.get("/", jwtAuth(), async (req, res, next) => {
       filter.logado = logado;
     }
 
-    const usuarios = await Usuario.list({
+    const users = await Usuario.list({
       filter: filter,
       start,
       limit,
@@ -67,8 +66,21 @@ router.get("/", jwtAuth(), async (req, res, next) => {
       sort
     });
 
-    res.json({ success: true, usuarios: usuarios });
+    //si no hay ningun usuario con esos filtros
+    if (Object.keys(users).length === 0) {
+      res.json({
+        success: true,
+        regsNumber: 0,
+        result: "No hay ningun usuario con esos filtros de busqueda"
+      });
+      return;
+    }
 
+    res.json({
+      success: true,
+      regsNumber: users.length,
+      result: users
+    });
   } catch (err) {
     next(err);
   }
@@ -77,10 +89,23 @@ router.get("/", jwtAuth(), async (req, res, next) => {
 router.get("/:name", jwtAuth(), async (req, res, next) => {
   try {
     const _name = req.params.name;
-    const usuario = await Usuario.userDetails(_name);
-    res.json(usuario);
+    const user = await Usuario.userDetails(_name);
 
+    //si no hay ningun usuario con ese nombre
+    if (Object.keys(user).length === 0) {
+      res.json({
+        success: true,
+        regsNumber: 0,
+        result: "No hay ningun usuario con ese nombre"
+      });
+      return;
+    }
 
+    res.json({
+      success: true,
+      regsNumber: 1,
+      result: user
+    });
   } catch (err) {
     next(err);
   }
@@ -91,15 +116,15 @@ router.get("/:name", jwtAuth(), async (req, res, next) => {
  */
 router.get("/onLine", jwtAuth(), async (req, res, next) => {
   try {
-    const usuarios = await Usuario.usersOnLine();
-    // res.json({ success: true, anuncios: anuncios });
-    res.json(usuarios);
-
-
+    const users = await Usuario.usersOnLine();
+    res.json({
+      success: true,
+      regsNumber: users.length,
+      result: users
+    });
   } catch (err) {
     next(err);
   }
 });
-
 
 module.exports = router;
