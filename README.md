@@ -29,10 +29,6 @@ http://localhost:8080/private/user/:name/delete
 
 GET:
 * http://localhost:8080/public/user/pepe
-
-http://localhost:8080/private/user/modify/:name
-http://localhost:8080/private/user/delete/:name
-
 * http://localhost:8080/private/users
 * http://localhost:8080/private/users/:name
 * http://localhost:8080/private/users/online

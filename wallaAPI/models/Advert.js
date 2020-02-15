@@ -41,8 +41,8 @@ advertsSchema.statics.adsById = function(id) {
   return query.exec();
 };
 
-advertsSchema.statics.adsByUser = function(autor) {
-  const query = Advert.find({ autor: autor });
+advertsSchema.statics.adsByUser = function(author) {
+  const query = Advert.find({ author: author });
   return query.exec();
 };
 

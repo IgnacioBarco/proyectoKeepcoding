@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Anuncio = require("../../models/Advert");
+const Advert = require("../../models/Advert");
 
 /**
  * devuelve los anuncios
@@ -99,7 +99,7 @@ router.get("/", async (req, res, next) => {
       }
     }
 
-    const adverts = await Anuncio.list({
+    const adverts = await Advert.list({
       filter: filter,
       start,
       limit,
@@ -128,13 +128,29 @@ router.get("/", async (req, res, next) => {
 });
 
 /**
+ * devuelve los tags
+ */
+router.get("/tags", (req, res, next) => {
+  try {
+    const tags = Advert.tags();
+    res.json({
+      success: true,
+      regsNumber: tags.length,
+      result: tags
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
  * devuelve el anuncio con ese id
  *
  */
 router.get("/:id", async (req, res, next) => {
   try {
     const _id = req.params.id;
-    const advert = await Anuncio.adsById(_id);
+    const advert = await Advert.adsById(_id);
 
     //si no hay anuncio
     if (Object.keys(advert).length === 0) {
@@ -151,19 +167,6 @@ router.get("/:id", async (req, res, next) => {
       regsNumber: 1,
       result: advert
     });
-  } catch (err) {
-    next(err);
-  }
-});
-
-/**
- * devuelve los tags
- */
-router.get("/tags", (req, res, next) => {
-  try {
-    const tags = Anuncio.tags();
-    res.json(tags);
-    // res.send("ok");
   } catch (err) {
     next(err);
   }

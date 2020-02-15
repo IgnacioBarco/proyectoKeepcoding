@@ -13,7 +13,7 @@ const usersSchema = mongoose.Schema({
 });
 
 usersSchema.statics.list = function({ filter, start, limit, fields, sort }) {
-  const query = Usuario.find(filter);
+  const query = User.find(filter);
   query.skip(start);
   query.limit(limit);
   query.select(fields);
@@ -22,12 +22,12 @@ usersSchema.statics.list = function({ filter, start, limit, fields, sort }) {
 };
 
 usersSchema.statics.usersOnLine = function() {
-  const query = Usuario.find({ logado: true });
+  const query = User.find({ logged: true });
   return query.exec();
 };
 
 usersSchema.statics.userDetails = function(name) {
-  const query = Usuario.find({ nombre: name });
+  const query = User.find({ name: name });
   return query.exec();
 };
 

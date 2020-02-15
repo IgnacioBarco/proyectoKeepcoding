@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const jwtAuth = require("../../lib/jwtAuth");
 
-const Usuario = require("../../models/User");
+const User = require("../../models/User");
 
 /**
  * devuelve los usuarios
@@ -58,7 +58,7 @@ router.get("/", jwtAuth(), async (req, res, next) => {
       filter.logado = logado;
     }
 
-    const users = await Usuario.list({
+    const users = await User.list({
       filter: filter,
       start,
       limit,
@@ -66,16 +66,32 @@ router.get("/", jwtAuth(), async (req, res, next) => {
       sort
     });
 
-    //si no hay ningun usuario con esos filtros
+    //si no hay ningun User con esos filtros
     if (Object.keys(users).length === 0) {
       res.json({
         success: true,
         regsNumber: 0,
-        result: "No hay ningun usuario con esos filtros de busqueda"
+        result: "No hay ningun User con esos filtros de busqueda"
       });
       return;
     }
 
+    res.json({
+      success: true,
+      regsNumber: users.length,
+      result: users
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * devuelve los ususarios online
+ */
+router.get("/onLine", jwtAuth(), async (req, res, next) => {
+  try {
+    const users = await User.usersOnLine();
     res.json({
       success: true,
       regsNumber: users.length,
@@ -89,14 +105,14 @@ router.get("/", jwtAuth(), async (req, res, next) => {
 router.get("/:name", jwtAuth(), async (req, res, next) => {
   try {
     const _name = req.params.name;
-    const user = await Usuario.userDetails(_name);
+    const user = await User.userDetails(_name);
 
-    //si no hay ningun usuario con ese nombre
+    //si no hay ningun User con ese nombre
     if (Object.keys(user).length === 0) {
       res.json({
         success: true,
         regsNumber: 0,
-        result: "No hay ningun usuario con ese nombre"
+        result: "No hay ningun User con ese nombre"
       });
       return;
     }
@@ -105,22 +121,6 @@ router.get("/:name", jwtAuth(), async (req, res, next) => {
       success: true,
       regsNumber: 1,
       result: user
-    });
-  } catch (err) {
-    next(err);
-  }
-});
-
-/**
- * devuelve los ususarios online
- */
-router.get("/onLine", jwtAuth(), async (req, res, next) => {
-  try {
-    const users = await Usuario.usersOnLine();
-    res.json({
-      success: true,
-      regsNumber: users.length,
-      result: users
     });
   } catch (err) {
     next(err);

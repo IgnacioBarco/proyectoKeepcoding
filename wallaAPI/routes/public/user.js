@@ -1,18 +1,17 @@
 "use strict";
 
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const router = express.Router();
-const Anuncio = require("../../models/Advert");
+const Advert = require("../../models/Advert");
 
-const Usuario = require("../../models/User");
+const User = require("../../models/User");
 
 router.get("/:name", async (req, res, next) => {
   try {
     const _name = req.params.name;
-    const user = await Usuario.userDetails(_name);
+    const user = await User.userDetails(_name);
 
-    //si el usuario no existe
+    //si el User no existe
     if (Object.keys(user).length === 0) {
       res.json({
         success: true,
@@ -22,14 +21,14 @@ router.get("/:name", async (req, res, next) => {
       return;
     }
 
-    const adverts = await Anuncio.adsByUser(_name);
+    const adverts = await Advert.adsByUser(_name);
 
-    //si el usuario no tiene anuncos
+    //si el User no tiene anuncos
     if (Object.keys(adverts).length === 0) {
       res.json({
         success: true,
         regsNumber: adverts.length,
-        result: "El usuario no tiene anuncios actualmente"
+        result: "El User no tiene anuncios actualmente"
       });
       return;
     }
