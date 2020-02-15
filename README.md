@@ -30,9 +30,10 @@ http://localhost:8080/private/user/:name/delete
 
 
 GET:
-http://localhost:8080/public/ads
-http://localhost:8080/public/ads/tags
-http://localhost:8080/public/ads/:id
+* http://localhost:8080/public/ads
+* http://localhost:8080/public/ads/tags
+* http://localhost:8080/public/ads/:id
+* http://localhost:8080/public/user/pepe
 
 
 http://localhost:8080/private/ads

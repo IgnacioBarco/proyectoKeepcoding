@@ -99,7 +99,7 @@ router.get("/", async (req, res, next) => {
       }
     }
 
-    const anuncios = await Anuncio.list({
+    const adverts = await Anuncio.list({
       filter: filter,
       start,
       limit,
@@ -109,8 +109,8 @@ router.get("/", async (req, res, next) => {
 
     res.json({
       success: true,
-      regsNumber: anuncios.length,
-      result: anuncios
+      regsNumber: adverts.length,
+      result: adverts
     });
   } catch (err) {
     next(err);
@@ -151,8 +151,8 @@ router.get("/:id", async (req, res, next) => {
  */
 router.get("/tags", (req, res, next) => {
   try {
-    const anuncios = Anuncio.tags();
-    res.json(anuncios);
+    const tags = Anuncio.tags();
+    res.json(tags);
     // res.send("ok");
   } catch (err) {
     next(err);
