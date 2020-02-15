@@ -12,46 +12,44 @@ const Anuncio = require("../../models/Anuncio");
  */
 router.get("/", async (req, res, next) => {
   try {
-    const nombre = req.query.nombre;
-    const descripcion = req.query.descripcion;
-    const autor = req.query.autor;
-    const fecha = req.query.fecha;
+    const name = req.query.name;
+    const description = req.query.description;
+    const author = req.query.author;
+    const date = req.query.date;
 
     const tag = req.query.tag;
     const chat = req.query.chat;
-    
-    const venta = req.query.venta;
-    const reservado = req.query.reservado
-    const vendido = req.query.vendido
-    
-    const precio = req.query.precio;
+
+    const sell = req.query.sell;
+    const reserved = req.query.reserved;
+    const sold = req.query.sold;
+
+    const price = req.query.price;
     const start = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
     const fields = req.query.fields;
     const sort = req.query.sort;
-
 
     const filter = {};
 
     /**
      * filtro de exp regulares
      */
-    if (nombre) {
-      filter.nombre = new RegExp(req.query.nombre, "i");
+    if (name) {
+      filter.name = new RegExp(req.query.name, "i");
     }
 
-    if (descripcion) {
-      filter.descripcion = new RegExp(req.query.descripcion, "i");
+    if (description) {
+      filter.description = new RegExp(req.query.description, "i");
     }
 
-    if (autor) {
-      filter.autor = new RegExp(req.query.autor, "i");
+    if (author) {
+      filter.author = new RegExp(req.query.author, "i");
     }
 
-    if (fecha) {
-      filter.fecha = new RegExp(req.query.fecha, "i");
+    if (date) {
+      filter.date = new RegExp(req.query.date, "i");
     }
-    
 
     /**
      * filtro de arrays
@@ -59,7 +57,7 @@ router.get("/", async (req, res, next) => {
     if (typeof tag !== "undefined") {
       filter.tags = tag;
     }
-    
+
     if (typeof chat !== "undefined") {
       filter.chat = chat;
     }
@@ -67,42 +65,37 @@ router.get("/", async (req, res, next) => {
     /**
      * filtro de booleanos
      */
-    if (venta) {
-      filter.venta = venta;
+    if (sell) {
+      filter.sell = sell;
     }
-    if (reservado) {
-      filter.reservado = reservado;
+    if (reserved) {
+      filter.reserved = reserved;
     }
-    if (vendido) {
-      filter.vendido = vendido;
+    if (sold) {
+      filter.sold = sold;
     }
-    
-       
+
     /**
-     * Filtramos el precio
-     * 
+     * Filtramos el price
+     *
      * -x menos de x
      * x- mas de x
      * x-y entre x e y
-     * x ese valor 
+     * x ese valor
      */
-    if (typeof precio !== "undefined") {
-      filter.precio = {};
-      let importes = precio.split("-");
+    if (typeof price !== "undefined") {
+      filter.price = {};
+      let importes = price.split("-");
 
-      if (precio.startsWith("-")) {
-        filter.precio.$lt = importes[1];
-
-      } else if (precio.endsWith("-")) {
-        filter.precio.$gt = importes[0];
-
-      } else if (precio.includes("-")) {
-        filter.precio.$gt = importes[0];
-        filter.precio.$lt = importes[1];
-
+      if (price.startsWith("-")) {
+        filter.price.$lt = importes[1];
+      } else if (price.endsWith("-")) {
+        filter.price.$gt = importes[0];
+      } else if (price.includes("-")) {
+        filter.price.$gt = importes[0];
+        filter.price.$lt = importes[1];
       } else {
-        filter.precio = precio;
-
+        filter.price = price;
       }
     }
 
@@ -114,29 +107,40 @@ router.get("/", async (req, res, next) => {
       sort
     });
 
-    res.json({ success: true, anuncios: anuncios });
+    res.json({
+      success: true,
+      regsNumber: anuncios.length,
+      result: anuncios
+    });
   } catch (err) {
     next(err);
   }
 });
 
 /**
- * devuelve los anuncios
- * si no lleva params devuelve todos
- * si lleva, los devuelve filtrados
+ * devuelve el anuncio con ese id
+ *
  */
 router.get("/:id", async (req, res, next) => {
   try {
     const _id = req.params.id;
     const advert = await Anuncio.adsById(_id);
 
-    //si el no hay anuncio
+    //si no hay anuncio
     if (Object.keys(advert).length === 0) {
-      res.json({ success: false, advert: 'no hay anuncio con ese id' });
+      res.json({
+        success: true,
+        regsNumber: 0,
+        result: "No hay ningun anuncio con ese id"
+      });
       return;
     }
 
-    res.json({ success: true, advert: advert });
+    res.json({
+      success: true,
+      regsNumber: 1,
+      result: advert
+    });
   } catch (err) {
     next(err);
   }
@@ -148,14 +152,11 @@ router.get("/:id", async (req, res, next) => {
 router.get("/tags", (req, res, next) => {
   try {
     const anuncios = Anuncio.tags();
-    // res.json({ success: true, anuncios: anuncios });
     res.json(anuncios);
-    res.send("ok");
-
+    // res.send("ok");
   } catch (err) {
     next(err);
   }
 });
-
 
 module.exports = router;
