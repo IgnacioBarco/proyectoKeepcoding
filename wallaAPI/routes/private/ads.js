@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const jwtAuth = require("../../lib/jwtAuth");
 
-const Anuncio = require("../../models/Anuncio");
+const Anuncio = require("../../models/Advert");
 
 /**
  * crea un nuevo anuncio

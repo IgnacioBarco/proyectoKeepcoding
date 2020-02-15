@@ -17,8 +17,8 @@ app.set("view engine", "ejs");
  * Conexión con la base de datos
  */
 require("./lib/connectMongoose");
-require("./models/Anuncio");
-require("./models/Usuario");
+require("./models/Advert");
+require("./models/User");
 
 if (process.env.LOG_FORMAT !== "nolog") {
   app.use(logger(process.env.LOG_FORMAT || "dev"));

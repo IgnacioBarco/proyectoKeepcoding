@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Anuncio = require("../../models/Anuncio");
+const Anuncio = require("../../models/Advert");
 
 /**
  * devuelve los anuncios

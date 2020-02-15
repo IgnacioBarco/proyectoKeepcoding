@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "name": "pepe",
+      "email": "pepe@pepe.es",
+      "pass": "pepexxxxx",
+      "logged": true,
+      "favouritesAds": ["moto", "coche"]
+    },
+    {
+      "name": "antonio",
+      "email": "antonio@pepe.es",
+      "pass": "antonioxxxxx",
+      "logged": false,
+      "favouritesAds": ["movil"]
+    },
+    {
+      "name": "maria",
+      "email": "maria@pepe.es",
+      "pass": "mariaxxxxx",
+      "logged": false,
+      "favouritesAds": ["ordenador"]
+    },
+    {
+      "name": "jose",
+      "email": "jose@pepe.es",
+      "pass": "josexxxxx",
+      "logged": true,
+      "favouritesAds": []
+    },
+    {
+      "name": "andres",
+      "email": "andres@pepe.es",
+      "pass": "andresxxxxx",
+      "logged": false,
+      "favouritesAds": ["portatil"]
+    },
+    {
+      "name": "sonia",
+      "email": "sonia@pepe.es",
+      "pass": "soniaxxxxx",
+      "logged": true,
+      "favouritesAds": ["balon"]
+    }
+  ]
+}

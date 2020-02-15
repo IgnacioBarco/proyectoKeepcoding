@@ -3,9 +3,9 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const Anuncio = require("../../models/Anuncio");
+const Anuncio = require("../../models/Advert");
 
-const Usuario = require("../../models/Usuario");
+const Usuario = require("../../models/User");
 
 router.get("/:name", async (req, res, next) => {
   try {

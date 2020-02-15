@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const Anuncio = require("../models/Anuncio");
+const Anuncio = require("../models/Advert");
 
 /**
  * devuelve los anuncios
