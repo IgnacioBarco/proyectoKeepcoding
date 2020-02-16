@@ -6,6 +6,7 @@ const MainContext = React.createContext({
   tag: '',
   tags: [],
   token:'',
+  url:'http://localhost:8080/public/ads'
 
 });
 

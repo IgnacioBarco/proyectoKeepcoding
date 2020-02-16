@@ -54,11 +54,12 @@ class App extends Component {
               <Router>
                 <Switch>
                   <Route path="/advert/:id" component={AdvertDetail} />
+                  <Route path="/advert/:seoName/:id" component={AdvertDetail} />
                   <Route path="/adverts" component={AdvertsList} />
                   <Route path="/new" component={CreateAndUpdate} />
                   <Route path="/modify/:id" component={CreateAndUpdate} />
                   <Route path="/register" component={Register2} />
-                  <Route component={Register} />
+                  <Route component={AdvertsList} />
                 </Switch>
               </Router>
             </main>
