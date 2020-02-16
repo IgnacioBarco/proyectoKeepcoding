@@ -53,8 +53,8 @@ class App extends Component {
             <MainContext.Provider value={value}>
               <Router>
                 <Switch>
-                  <Route path="/adverts" component={AdvertsList} />
                   <Route path="/advert/:id" component={AdvertDetail} />
+                  <Route path="/adverts" component={AdvertsList} />
                   <Route path="/new" component={CreateAndUpdate} />
                   <Route path="/modify/:id" component={CreateAndUpdate} />
                   <Route path="/register" component={Register2} />

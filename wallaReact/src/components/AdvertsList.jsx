@@ -2,7 +2,7 @@ import React, {
   // Component,
   useState,
   // useEffect,
-  useContext,
+  useContext
   // useReducer
 } from "react";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ const AdvertList = () => {
 
   // const {success,regsNumber,result} = useFetch(url);
   const result = useFetch(url);
-  
+
   // const{isFetching,data} = data2
   // const {success,regsNumber,result} = data;
   // const{isFetching,data:[success,regsNumber,result]}= data
@@ -62,8 +62,6 @@ const AdvertList = () => {
     setFilterPrice(event.target.value);
   }
 
-  const buildAdvertsList2 = ({ _id }) => <div>{AdvertDetail}</div>;
-
   const buildAdvertsList = ({
     _id,
     name,
@@ -78,12 +76,7 @@ const AdvertList = () => {
     sold,
     chat
   }) => (
-    <div>
-      {/* <li key={_id}>
-        {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
-        {tags} -{reserved} -{sold} -{chat}
-      </li> */}
-
+    <div key={_id}>
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={photo} />
         <Card.Body>
@@ -92,7 +85,9 @@ const AdvertList = () => {
             {description} -{sell} -{price} -{author} -{date} -{tags} -{reserved}{" "}
             -{sold} -{chat}
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Link to={`/advert/${_id}`}>
+            <Button variant="primary">Comprar</Button>
+          </Link>
         </Card.Body>
       </Card>
     </div>
@@ -100,8 +95,6 @@ const AdvertList = () => {
 
   return (
     <div>
-      {/* <span>{JSON.stringify(result)}</span> */}
-      <span>{JSON.stringify(result)}</span>
       <hr />
 
       <hr />
@@ -118,13 +111,9 @@ const AdvertList = () => {
 
       <div>
         <br />
-
         <button onClick={handleSubmitNew}>Crear anuncio nuevo</button>
-
         <br />
-
         <h1>Lista de filtros:</h1>
-
         <input
           id="filterText"
           type="text"
@@ -133,9 +122,7 @@ const AdvertList = () => {
           onChange={onInputChangeFilterText}
           name="filterText"
         />
-
         <br />
-
         <input
           id="filterPrice"
           type="text"
@@ -144,24 +131,14 @@ const AdvertList = () => {
           onChange={onInputChangeFilterPrice}
           name="filterPrice"
         />
-
         <br />
-
         <button onClick={handleSubmitNew}>Buscar</button>
-
         <h1>Lista de artículos:</h1>
 
         <ul>{result && result.map(buildAdvertsList)}</ul>
 
         <Link to="/">Back</Link>
-
         <hr />
-
-        <ul>{result && result.map(buildAdvertsList2)}</ul>
-
-        {/* <h3>tag filtrado: {tag}</h3> */}
-
-        {/* {this.state.adverts.length > 0 && this.buildAdvertsList()} */}
       </div>
     </div>
   );

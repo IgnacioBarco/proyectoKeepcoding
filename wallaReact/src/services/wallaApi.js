@@ -90,7 +90,7 @@ const api = () => {
           throw new Error("Error fetching searchAdvert");
         }
 
-        const dataDetails = response.json();
+        const dataDetails = await response.json();
 
         console.log(dataDetails);
         return dataDetails;

@@ -13,8 +13,8 @@ import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import AdvertLine from "./AdvertLine";
 
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 // const AdvertDetail = (_id) => {
 //   const [url, setUrl] = useState("http://localhost:8080/advert/" + _id);
@@ -28,7 +28,6 @@ import Button from 'react-bootstrap/Button';
 //         {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
 //         {tags} -{reserved} -{sold} -{chat}
 //       </li> */JSON.stringify(data)}
-
 
 //       <Card style={{ width: "18rem" }}>
 //         <Card.Img variant="top" src={data.photo} />
@@ -49,7 +48,6 @@ import Button from 'react-bootstrap/Button';
 // };
 // export default AdvertDetail;
 
-
 import { withRouter } from "react-router-dom";
 
 const { searchAdvert } = api();
@@ -57,39 +55,31 @@ const { searchAdvert } = api();
 class AdvertDetail extends Component {
   constructor(props) {
     super(props);
-    
 
     this.state = {
-      id:'',
       success: false,
-      regsNumber:0,
-      result: []
+      regsNumber: 0,
+      result: null
     };
   }
 
+  loadAdvert = async () => {
+    const id = this.props.match.params.id;
 
-  
+    const res = await searchAdvert(id);
+    const { success, regsNumber, result } = res;
+    const advert = res.result;
 
-  loadAdvert = async (id) => {
-     this.id = this.props.match.params.id;
-    // const id = this.props.match.params.id;
-    // id = this.props.match.params.id;
-    
-
-    console.log('id '+ this.id)
-     
-    const { success, regsNumber, result } = await searchAdvert(this.id)
-    
-    
-    console.log('result '+result)
-
-    this.setState({ success, regsNumber, result });
-
+    this.setState({
+      success,
+      regsNumber,
+      result: advert[0]
+    });
   };
 
   //cargamos los datos del anuncio
-  UNSAFE_componentWillMount = (id) => {
-    this.loadAdvert(id);
+  UNSAFE_componentWillMount = () => {
+    this.loadAdvert();
   };
 
   buildDetailAdvert = () => {
@@ -98,43 +88,35 @@ class AdvertDetail extends Component {
 
     return (
       <div>
-        {/* <li key={_id}>
-         {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
-         {tags} -{reserved} -{sold} -{chat}
-       </li> */JSON.stringify(advert)}
         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={'img'} />
+          <Card.Img variant="top" src={"img"} />
           <Card.Body>
             <Card.Title>{advert.name}</Card.Title>
             <Card.Text>
               {advert._id}
-              {advert.description} -{advert.sell} -{advert.price} -{advert.author}
-              -{advert.date} -{advert.tags} -{advert.reserved} -
-             {advert.sold} -{advert.chat}
+              {advert.description} -{advert.sell} -{advert.price} -
+              {advert.author}-{advert.date} -{advert.tags} -{advert.reserved} -
+              {advert.sold} -{advert.chat}
               <Link to="/">Back</Link>
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Link to="/adverts">
+              <Button variant="primary">volver</Button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
-    )
+    );
   };
 
   render() {
-    // const id = this.props.match.params.id;
     console.log(this.state);
 
-
-    return this.state.success === true ? this.buildDetailAdvert() : <div>No hay resultados</div>
-
-
-
-
-
-
-
-  };
-
+    return this.state.success === true ? (
+      this.buildDetailAdvert()
+    ) : (
+      <div>No hay resultados</div>
+    );
+  }
 }
 
 AdvertDetail.contextType = MainContext;
