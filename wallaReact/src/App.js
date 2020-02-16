@@ -8,6 +8,7 @@ import AdvertsList from "./components/AdvertsList";
 import CreateAndUpdate from "./components/CreateAndUpdate";
 import Register from "./components/Register";
 import Register2 from "./components/Register2";
+import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 import MainContext from "./services/MainContext";
@@ -45,12 +46,12 @@ class App extends Component {
         />
 
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-          </header>
+          <MainContext.Provider value={value}>
+            <header>
+              <Header />
+            </header>
 
-          <main>
-            <MainContext.Provider value={value}>
+            <main>
               <Router>
                 <Switch>
                   <Route path="/advert/:id" component={AdvertDetail} />
@@ -61,8 +62,8 @@ class App extends Component {
                   <Route component={Register} />
                 </Switch>
               </Router>
-            </MainContext.Provider>
-          </main>
+            </main>
+          </MainContext.Provider>
         </div>
       </ErrorBoundary>
     );

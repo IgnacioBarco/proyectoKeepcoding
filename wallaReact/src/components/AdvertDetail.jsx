@@ -88,8 +88,8 @@ class AdvertDetail extends Component {
 
     return (
       <div>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={"img"} />
+        <Card style={{ width: "40rem" }}>
+          <Card.Img variant="top" src={`http://localhost:8080${advert.photo}`} />
           <Card.Body>
             <Card.Title>{advert.name}</Card.Title>
             <Card.Text>

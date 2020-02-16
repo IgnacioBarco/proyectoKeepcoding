@@ -11,10 +11,15 @@ import MainContext from "../services/MainContext";
 // import api from "../services/wallaApi";
 // import Advert from "../models/Advert";
 import useFetch from "./useFetch";
-import AdvertDetail from "./AdvertDetail";
 
 import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
+import Pagination from "react-bootstrap/Pagination";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 
 const AdvertList = () => {
   const [url, setUrl] = useState("http://localhost:8080/public/ads");
@@ -26,21 +31,6 @@ const AdvertList = () => {
 
   // const {success,regsNumber,result} = useFetch(url);
   const result = useFetch(url);
-
-  // const{isFetching,data} = data2
-  // const {success,regsNumber,result} = data;
-  // const{isFetching,data:[success,regsNumber,result]}= data
-  // console.log('response'+result);
-  // console.log('response'+success);
-  // console.log('response'+regsNumber);
-  // const { ...result } = response;
-  // const { result } = response;
-  // const data = useFetch(url);
-  // console.log('data '+success)
-  // console.log('data '+result)
-  // console.log(result)
-  // console.log(error)
-  // const state = useFetch(url);
 
   function handleFilterData(event) {
     event.preventDefault();
@@ -77,13 +67,13 @@ const AdvertList = () => {
     chat
   }) => (
     <div key={_id}>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={photo} />
+      <Card style={{ width: "25rem" }}>
+        <Card.Img variant="top" src={`http://localhost:8080${photo}`} />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>
-            {description} -{sell} -{price} -{author} -{date} -{tags} -{reserved}{" "}
-            -{sold} -{chat}
+            {description} -{sell} -{price}€ -{author} -{date} -{tags} -
+            {reserved} -{sold} -{chat}
           </Card.Text>
           <Link to={`/advert/${_id}`}>
             <Button variant="primary">Comprar</Button>
@@ -95,9 +85,6 @@ const AdvertList = () => {
 
   return (
     <div>
-      <hr />
-
-      <hr />
       <span>Url: {JSON.stringify(url)}</span>
       <hr />
       <button onClick={handleFilterData}>filterData</button>
@@ -135,7 +122,15 @@ const AdvertList = () => {
         <button onClick={handleSubmitNew}>Buscar</button>
         <h1>Lista de artículos:</h1>
 
-        <ul>{result && result.map(buildAdvertsList)}</ul>
+        <CardGroup>{result && result.map(buildAdvertsList)}</CardGroup>
+
+        <Pagination size="lg">
+          <Pagination.First />
+          <Pagination.Prev />
+          <Pagination.Item>{1}</Pagination.Item>
+          <Pagination.Next />
+          <Pagination.Last />
+        </Pagination>
 
         <Link to="/">Back</Link>
         <hr />
