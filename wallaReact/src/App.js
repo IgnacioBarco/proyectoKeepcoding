@@ -13,7 +13,6 @@ import ErrorBoundary from "./components/ErrorBoundary";
 
 import MainContext from "./services/MainContext";
 
-import logo from "./img/logo.svg";
 import "./css/App.css";
 
 class App extends Component {

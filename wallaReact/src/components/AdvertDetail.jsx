@@ -1,52 +1,10 @@
-import React, {
-  Component,
-  useState,
-  useEffect,
-  useContext,
-  useReducer
-} from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
-import locStorage from "../services/LocalStorage";
 import api from "../services/wallaApi";
-import Advert from "../models/Advert";
-import useFetch from "./useFetch";
-import AdvertLine from "./AdvertLine";
 
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-
-// const AdvertDetail = (_id) => {
-//   const [url, setUrl] = useState("http://localhost:8080/advert/" + _id);
-//   const data = useFetch(url);
-//   console.log(url)
-//   console.log(data)
-
-//   return (
-//     <div>
-//       {/* <li key={_id}>
-//         {name} -{photo} -{description} -{sell} -{price} -{author} -{date} -
-//         {tags} -{reserved} -{sold} -{chat}
-//       </li> */JSON.stringify(data)}
-
-//       <Card style={{ width: "18rem" }}>
-//         <Card.Img variant="top" src={data.photo} />
-//         <Card.Body>
-//           <Card.Title>{data.name}</Card.Title>
-//           <Card.Text>
-//             {data.description} -{data.sell} -{data.price} -{data.author}
-//             -{data.date} -{data.tags} -{data.reserved} -
-//             {data.sold} -{data.chat}
-//             <Link to="/">Back</Link>
-//           </Card.Text>
-//           <Button variant="primary">Go somewhere</Button>
-//         </Card.Body>
-//       </Card>
-//     </div>
-
-//   );
-// };
-// export default AdvertDetail;
 
 import { withRouter } from "react-router-dom";
 
@@ -68,6 +26,7 @@ class AdvertDetail extends Component {
 
     const res = await searchAdvert(id);
     const { success, regsNumber, result } = res;
+    console.log(result);
     const advert = res.result;
 
     this.setState({
@@ -89,7 +48,10 @@ class AdvertDetail extends Component {
     return (
       <div>
         <Card style={{ width: "40rem" }}>
-          <Card.Img variant="top" src={`http://localhost:8080${advert.photo}`} />
+          <Card.Img
+            variant="top"
+            src={`http://localhost:8080${advert.photo}`}
+          />
           <Card.Body>
             <Card.Title>{advert.name}</Card.Title>
             <Card.Text>

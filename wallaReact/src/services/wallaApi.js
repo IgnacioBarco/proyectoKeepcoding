@@ -1,13 +1,13 @@
 const API_URL = "http://localhost:3001/apiv1";
-const ALL_ADVERTS = API_URL + "/anuncios";
+// const ALL_ADVERTS = API_URL + "/anuncios";
 const TAGS = API_URL + "/tags";
 
 const todo = "http://localhost:8080/public/ads";
 const log =
   "http://localhost:8080/auth/login?email=pepe@pepe.es&pass=pepexxxxx";
-const ADVERT = "http://localhost:8080";
-const ADVERT2 = API_URL + "/anuncios";
-const TAGS2 = API_URL + "/tags";
+// const ADVERT = "http://localhost:8080";
+// const ADVERT2 = API_URL + "/anuncios";
+// const TAGS2 = API_URL + "/tags";
 
 const data = {
   method: "GET",

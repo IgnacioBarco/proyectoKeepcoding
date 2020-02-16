@@ -48,6 +48,8 @@ function useFetch(url) {
       .then(response => response.json())
       .then(results => {
         const { success, regsNumber, result } = results;
+        console.log(success)
+        console.log(regsNumber)
         dispatch({ type: "FETCH_SUCCESS", data: result });
       })
       .catch(error => dispatch({ type: "FETCH_FAILURE", error }));

@@ -16,10 +16,6 @@ import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
 import Pagination from "react-bootstrap/Pagination";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 
 const AdvertList = () => {
   const [url, setUrl] = useState("http://localhost:8080/public/ads");
