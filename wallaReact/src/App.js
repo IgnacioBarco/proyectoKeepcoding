@@ -29,10 +29,9 @@ class App extends Component {
 
   render() {
     const value = {
-      name: this.state.name,
-      surname: this.state.surname,
-      tag: this.state.tag,
-      tags: this.state.tags
+      email: this.state.email,
+      token: this.state.token,
+      url: this.state.url
     };
 
     return (

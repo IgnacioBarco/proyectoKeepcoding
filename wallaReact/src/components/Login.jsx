@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import MainContext from "../services/MainContext";
 import api from "../services/wallaApi";
 import { Link } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
+// import Form from "react-bootstrap/Form";
+// import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
 const { login } = api();
@@ -27,11 +27,12 @@ export default class Login extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+
     if (!this.state.email || !this.state.pass) {
       alert("Faltan campos por rellenar");
     } else {
       const { email, pass } = this.state;
-
+      
       const result = await login(email, pass);
       if (result === "Invalid credentials") {
         alert("Usuario y contraseña invalida");
@@ -43,6 +44,11 @@ export default class Login extends Component {
         this.setState({
           token: result
         });
+
+        this.context.token = result;
+        this.context.email = email;
+
+        console.log(this.context)
 
         this.props.history.push("/adverts");
       }
@@ -63,7 +69,7 @@ export default class Login extends Component {
 
   render() {
     const { email, pass } = this.state;
-
+    
     return (
       <div>
         <form>

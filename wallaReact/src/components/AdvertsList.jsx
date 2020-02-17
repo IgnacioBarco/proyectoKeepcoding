@@ -77,7 +77,7 @@ const AdvertList = () => {
     setFilterPrice2(valuetext);
     // console.log('new slider '+ this.props.valuetext)
 
-    context.token = "new";
+    
   }
 
   const buildAdvertsList = ({
