@@ -12,7 +12,6 @@ import MainContext from "../services/MainContext";
 // import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
-import FilterList from "./FilterList";
 
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
@@ -20,34 +19,55 @@ import Button from "react-bootstrap/Button";
 // import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = () => {
-  const [url, setUrl] = useState("http://localhost:8080/public/ads");
+  const URL = "http://localhost:8080/public/ads";
+
+  const [url, setUrl] = useState(URL);
 
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
+  const [filterTag, setFilterTag] = useState("");
 
   const context = useContext(MainContext);
 
-  // const {success,regsNumber,result} = useFetch(url);
+  // const result = useFetch(context.url);
   const result = useFetch(url);
 
   function handleFilterData(event) {
     event.preventDefault();
-    setUrl("http://localhost:8080/public/ads?author=pepe");
+    let urlAux = "";
+    let aux = false;
+
+    if (filterText || filterPrice || filterTag) {
+      urlAux = "?";
+
+      if (filterText) {
+        urlAux += "name=" + filterText;
+        aux = true;
+      }
+      if (filterPrice) {
+        if (aux) urlAux += "&price=" + filterPrice;
+        else {
+          urlAux += "price=" + filterPrice;
+          aux = true;
+        }
+      }
+
+      if (filterTag) {
+        if (aux) urlAux += "&tag=" + filterTag;
+        else urlAux += "tag=" + filterTag;
+      }
+    }
+
+    setUrl(URL + urlAux);
+
+    console.log("url modificada " + url);
   }
 
   function handleSubmitNew(event) {
     event.preventDefault();
-    setUrl("http://localhost:8080/public/ads");
+    setUrl(URL);
 
     context.token = "new";
-  }
-
-  function onInputChangeFilterText(event) {
-    setFilterText(event.target.value);
-  }
-
-  function onInputChangeFilterPrice(event) {
-    setFilterPrice(event.target.value);
   }
 
   const buildAdvertsList = ({
@@ -85,18 +105,17 @@ const AdvertList = () => {
 
   return (
     <div>
-
-      <div>{context.url}</div>
-
-      <FilterList />
+      <div>{url}</div>
 
       <h1>Lista de filtros:</h1>
       <input
         id="filterText"
         type="text"
-        placeholder="filtro de texto"
+        placeholder="nombre del árticulo"
         value={filterText}
-        onChange={onInputChangeFilterText}
+        onChange={event => {
+          setFilterText(event.target.value);
+        }}
         name="filterText"
       />
       <br />
@@ -105,8 +124,21 @@ const AdvertList = () => {
         type="text"
         placeholder="filtro de price"
         value={filterPrice}
-        onChange={onInputChangeFilterPrice}
+        onChange={event => {
+          setFilterPrice(event.target.value);
+        }}
         name="filterPrice"
+      />
+      <br />
+      <input
+        id="filterTag"
+        type="text"
+        placeholder="filtro de tag"
+        value={filterTag}
+        onChange={event => {
+          setFilterTag(event.target.value);
+        }}
+        name="filterTag"
       />
       <br />
       <button onClick={handleFilterData}>Buscar</button>
@@ -117,7 +149,9 @@ const AdvertList = () => {
 
       <hr />
 
-      <CardGroup>{result && result.map(buildAdvertsList)}</CardGroup>
+      {(result && result === "No hay ningun anuncio con esos filtros" && (
+        <div>no hay resultados</div>
+      )) || <CardGroup>{result && result.map(buildAdvertsList)}</CardGroup>}
 
       <Paginator />
 

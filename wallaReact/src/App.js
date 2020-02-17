@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AdvertDetail from "./components/AdvertDetail";
 import AdvertsList from "./components/AdvertsList";
 import CreateAndUpdate from "./components/CreateAndUpdate";
-import Register from "./components/Register";
+// import Register from "./components/Register";
 import Register2 from "./components/Register2";
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";

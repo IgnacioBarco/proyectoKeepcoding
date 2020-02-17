@@ -2,9 +2,9 @@ import {
   // React,
   useEffect,
   useReducer,
-  useContext
+  // useContext
 } from "react";
-import MainContext from "../services/MainContext";
+// import MainContext from "../services/MainContext";
 
 // import Advert from "../models/Advert";
 // import MainContext from "../services/MainContext";
@@ -44,9 +44,8 @@ function reducer(state, action) {
 
 function useFetch(url) {
   const [value, dispatch] = useReducer(reducer, initialState);
-  const context = useContext(MainContext);
-  const url2 = context.url;
-
+  // const context = useContext(MainContext);
+  // const url2 = context.url;
 
   useEffect(() => {
     dispatch({ type: "FETCH_REQUEST" });
@@ -59,10 +58,10 @@ function useFetch(url) {
         dispatch({ type: "FETCH_SUCCESS", data: result });
       })
       .catch(error => dispatch({ type: "FETCH_FAILURE", error }));
-    }, [url2]);
-  // }, [context.url]);
-  // }, [url]);
+  }, [url]);
 
+  // console.log("value " + JSON.stringify(value.data));
+  console.log(url);
   console.log("value " + JSON.stringify(value.data));
   return value.data;
 }
