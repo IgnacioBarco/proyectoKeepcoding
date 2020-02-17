@@ -13,9 +13,14 @@ import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
 
+// material-ui
+import RangeSlider from "./RangeSlider";
+
+// react-bootstrap
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 // import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = () => {
@@ -25,6 +30,7 @@ const AdvertList = () => {
 
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
+  const [filterPrice2, setFilterPrice2] = useState("");
   const [filterTag, setFilterTag] = useState("");
 
   const context = useContext(MainContext);
@@ -67,6 +73,10 @@ const AdvertList = () => {
     event.preventDefault();
     setUrl(URL);
 
+    const valuetext = "";
+    setFilterPrice2(valuetext);
+    // console.log('new slider '+ this.props.valuetext)
+
     context.token = "new";
   }
 
@@ -85,7 +95,7 @@ const AdvertList = () => {
     chat
   }) => (
     <div key={_id}>
-      <Card style={{ width: "22rem" }}>
+      <Card style={{ width: "20rem" }}>
         <Card.Img variant="top" src={`http://localhost:8080${photo}`} />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
@@ -118,7 +128,6 @@ const AdvertList = () => {
         }}
         name="filterText"
       />
-      <br />
       <input
         id="filterPrice"
         type="text"
@@ -129,7 +138,6 @@ const AdvertList = () => {
         }}
         name="filterPrice"
       />
-      <br />
       <input
         id="filterTag"
         type="text"
@@ -140,6 +148,14 @@ const AdvertList = () => {
         }}
         name="filterTag"
       />
+
+      <br />
+      <br />
+
+      <Row className="justify-content-md-center">
+        <RangeSlider />
+      </Row>
+
       <br />
       <button onClick={handleFilterData}>Buscar</button>
 
@@ -150,12 +166,18 @@ const AdvertList = () => {
       <hr />
 
       {(result && result === "No hay ningun anuncio con esos filtros" && (
-        <div>no hay resultados</div>
-      )) || <CardGroup>{result && result.map(buildAdvertsList)}</CardGroup>}
+        <div>No hay resultados con esos filtros.</div>
+      )) || (
+        <div>
+          <CardGroup>{result && result.map(buildAdvertsList)}</CardGroup>
+          <br />
+          <Row className="justify-content-md-center">
+            <Paginator />
+          </Row>
+        </div>
+      )}
 
-      <Paginator />
-
-      <Link to="/">Back</Link>
+      {/* <Link to="/">Back</Link> */}
       <hr />
     </div>
   );
