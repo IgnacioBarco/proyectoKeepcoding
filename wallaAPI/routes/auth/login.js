@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const jwtAuth = require("../../lib/jwtAuth");
 
-const Usuario = require("../../models/User");
+const User = require("../../models/User");
 
 // autenticamos por email y pass y devolvemos token si es correcto
 router.post("/", async (req, res, next) => {
@@ -13,10 +13,11 @@ router.post("/", async (req, res, next) => {
     const email = req.body.email;
     const pass = req.body.pass;
 
+    
     // hacemos un hash de la password
-    const hashedPassword = Usuario.hashPassword(pass);
+    const hashedPassword = User.hashPassword(pass);
 
-    const user = await Usuario.findOne({ email: email, pass: hashedPassword });
+    const user = await User.findOne({ email: email, pass: hashedPassword });
 
     if (!user) {
       // Respondemos que no son validas las credenciales
@@ -28,7 +29,7 @@ router.post("/", async (req, res, next) => {
       return;
     }
 
-    // el usuario está y coincide la password
+    // el User está y coincide la password
     // creamos el token
     jwt.sign(
       { _id: user._id },

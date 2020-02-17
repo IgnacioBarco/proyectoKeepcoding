@@ -6,8 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AdvertDetail from "./components/AdvertDetail";
 import AdvertsList from "./components/AdvertsList";
 import CreateAndUpdate from "./components/CreateAndUpdate";
-import Register from "./components/Login";
-import Register2 from "./components/Register";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -61,8 +61,8 @@ class App extends Component {
                   <Route path="/advert/:id" component={AdvertDetail} />
                   <Route path="/advert/:seoName/:id" component={AdvertDetail} />
                   <Route path="/adverts" component={AdvertsList} />
-                  <Route path="/new" component={CreateAndUpdate} />
-                  <Route path="/modify/:id" component={CreateAndUpdate} />
+                  {/* <Route path="/new" component={CreateAndUpdate} />
+                  <Route path="/modify/:id" component={CreateAndUpdate} /> */}
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route component={AdvertsList} />

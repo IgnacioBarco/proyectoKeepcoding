@@ -37,15 +37,52 @@ const api = () => {
 
     login: async (email, pass) => {
       try {
-        const response = await fetch(log, data);
+        const loginUrl = "http://localhost:8080/auth/login";
+        // const email = "pepe@pepe.es";
+        // const pass = "pepexxxxx";
+
+        // const dataPostLogin = {
+        //   method: "POST",
+        //   headers: {
+        //     Accept: "application/json, text/plain, */*"
+        //   },
+        //   body: {
+        //     email: "pepe@pepe.es",
+        //     pass: "pepexxxxx"
+        //   }
+        // };
+
+        // console.log(dataPostLogin);
+
+        
+
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        let urlencoded = new URLSearchParams();
+        urlencoded.append("email", email);
+        urlencoded.append("pass", pass);
+
+        let requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow"
+        };
+
+        const response = await fetch(loginUrl, requestOptions);
 
         if (!response.ok) {
           throw new Error("Error fetching searchAll");
         }
 
-        const dataDetails = response.json();
+        const { success, regsNumber, result } = await response.json();
+        // const dataDetails = await response.json();
 
-        return dataDetails;
+        console.log("datadetail= " + success);
+        console.log("datadetail= " + regsNumber);
+        console.log("datadetail= " + result);
+        return result;
       } catch (err) {
         console.log("error searchAll: " + err);
         throw err;
