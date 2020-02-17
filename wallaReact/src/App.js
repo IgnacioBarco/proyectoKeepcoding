@@ -6,8 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AdvertDetail from "./components/AdvertDetail";
 import AdvertsList from "./components/AdvertsList";
 import CreateAndUpdate from "./components/CreateAndUpdate";
-// import Register from "./components/Register";
-import Register2 from "./components/Register2";
+import Register from "./components/Login";
+import Register2 from "./components/Register";
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -44,6 +44,11 @@ class App extends Component {
           crossOrigin="anonymous"
         />
 
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+
         <div className="App">
           <MainContext.Provider value={value}>
             <header>
@@ -58,7 +63,8 @@ class App extends Component {
                   <Route path="/adverts" component={AdvertsList} />
                   <Route path="/new" component={CreateAndUpdate} />
                   <Route path="/modify/:id" component={CreateAndUpdate} />
-                  <Route path="/register" component={Register2} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/register" component={Register} />
                   <Route component={AdvertsList} />
                 </Switch>
               </Router>
