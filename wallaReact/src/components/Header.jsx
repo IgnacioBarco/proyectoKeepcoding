@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import MainContext from "../services/MainContext";
 
 import Button from "react-bootstrap/Button";
@@ -9,18 +9,21 @@ import Form from "react-bootstrap/Form";
 
 const Header = () => {
   const context = useContext(MainContext);
-
-  console.log("context" + context.token);
-
+  const [email, setEmail] = useState("pepe");
+  
+  
+  console.log("contexto header" + context.token);
+  
   useEffect(()=>{
-    console.log('emaillllllllllllllllll')
-  },[context.email])
+    setEmail(context.email)
+    console.log("contexto header useEfect" + context.token)
+  },[])
   
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">WallaKeep</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="/">Perfil</Nav.Link>
+        <Nav.Link href="/">{email}</Nav.Link>
         <Nav.Link href="#features">{context.email}</Nav.Link>
         <Nav.Link href="/register">Registrate</Nav.Link>
       </Nav>
@@ -35,3 +38,4 @@ const Header = () => {
   );
 };
 export default Header;
+  
