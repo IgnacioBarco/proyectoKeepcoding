@@ -12,6 +12,7 @@ import MainContext from "../services/MainContext";
 // import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
+import HeaderLogged from "./HeaderLogged";
 
 // material-ui
 import RangeSlider from "./RangeSlider";
@@ -76,8 +77,6 @@ const AdvertList = () => {
     const valuetext = "";
     setFilterPrice2(valuetext);
     // console.log('new slider '+ this.props.valuetext)
-
-    
   }
 
   const buildAdvertsList = ({
@@ -115,6 +114,8 @@ const AdvertList = () => {
 
   return (
     <div>
+      <HeaderLogged />
+
       <div>{url}</div>
 
       <h1>Lista de filtros:</h1>

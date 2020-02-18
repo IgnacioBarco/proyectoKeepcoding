@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 // import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
+import HeaderPublic from "./HeaderPublic";
+
+
 const { login } = api();
 
 export default class Login extends Component {
@@ -32,7 +35,7 @@ export default class Login extends Component {
       alert("Faltan campos por rellenar");
     } else {
       const { email, pass } = this.state;
-      
+
       const result = await login(email, pass);
       if (result === "Invalid credentials") {
         alert("Usuario y contraseña invalida");
@@ -45,13 +48,12 @@ export default class Login extends Component {
           token: result
         });
 
-        this.context.token = result;
-        this.context.email = email;
-
-        console.log(this.context)
-
         this.props.history.push("/adverts");
       }
+      this.context.token = result;
+      this.context.email = email;
+
+      console.log(this.context);
     }
   };
 
@@ -69,9 +71,10 @@ export default class Login extends Component {
 
   render() {
     const { email, pass } = this.state;
-    
+
     return (
       <div>
+        <HeaderPublic email={email}/>
         <form>
           <br />
 

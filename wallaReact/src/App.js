@@ -8,7 +8,7 @@ import AdvertsList from "./components/AdvertsList";
 import CreateAndUpdate from "./components/CreateAndUpdate";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Header from "./components/Header";
+import Header from "./components/HeaderLogged";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 import MainContext from "./services/MainContext";
@@ -50,9 +50,9 @@ class App extends Component {
 
         <div className="App">
           <MainContext.Provider value={value}>
-            <header>
+            {/* <header>
               <Header />
-            </header>
+            </header> */}
 
             <main>
               <Router>

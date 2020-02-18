@@ -7,18 +7,17 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 // import { Link } from "react-router-dom";
 
-const Header = () => {
+const HeaderLogged = props => {
   const context = useContext(MainContext);
   const [email, setEmail] = useState("pepe");
-  
-  
+
   console.log("contexto header" + context.token);
-  
-  useEffect(()=>{
-    setEmail(context.email)
-    console.log("contexto header useEfect" + context.token)
-  },[])
-  
+
+  useEffect(() => {
+    // if(this.props.email) setEmail(this.props.email)
+    console.log("contexto header useEfect" + context.token);
+  }, [email]);
+
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">WallaKeep</Navbar.Brand>
@@ -30,12 +29,10 @@ const Header = () => {
       <Form inline>
         {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
         <Button variant="outline-info">
-          {context.token ? "Cerrar Sesión" : "Iniciar sesión"}
+          <Nav.Link href="/login">Cerrar Sesión</Nav.Link>
         </Button>
-
       </Form>
     </Navbar>
   );
 };
-export default Header;
-  
+export default HeaderLogged;
