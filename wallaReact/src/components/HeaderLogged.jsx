@@ -22,9 +22,9 @@ const HeaderLogged = props => {
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">WallaKeep</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="/">{email}</Nav.Link>
-        <Nav.Link href="#features">{context.email}</Nav.Link>
-        <Nav.Link href="/register">Registrate</Nav.Link>
+        <Nav.Link href="/">Mis anuncios</Nav.Link>
+        <Nav.Link href="#features">Mis ofertas</Nav.Link>
+        <Nav.Link href="/register">Mis chats</Nav.Link>
       </Nav>
       <Form inline>
         {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
