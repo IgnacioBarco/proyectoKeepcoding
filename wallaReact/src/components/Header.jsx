@@ -24,7 +24,7 @@ const Header = props => {
           <Form inline>
             <Nav.Link href="/register"> {context.email}</Nav.Link>
             <Button variant="outline-info" onClick={() => context.setToken("")}>
-              <Nav.Link to="/login">LogOut</Nav.Link>
+              <Nav.Link href="/login">LogOut</Nav.Link>
             </Button>
           </Form>
         </Navbar>
