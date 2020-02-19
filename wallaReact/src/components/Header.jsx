@@ -28,9 +28,11 @@ const Header = () => {
       {hasToken ? (
         <Navbar bg="dark" variant="dark" >
           <Navbar.Brand href="">WallaKeep</Navbar.Brand>
-          <Nav.Link href="/">Mis anuncios</Nav.Link>
-          <Nav.Link href="#features">Mis ofertas</Nav.Link>
-          <Nav.Link href="/register">Mis chats</Nav.Link>
+          <Nav className="mr-auto">
+            <Nav.Link href="/">Mis anuncios</Nav.Link>
+            <Nav.Link href="#features">Mis ofertas</Nav.Link>
+            <Nav.Link href="/register">Mis chats</Nav.Link>
+          </Nav>
           <Form inline>
             <Button variant="outline-info">
               <Nav.Link href="/login">LogOut</Nav.Link>
@@ -39,6 +41,7 @@ const Header = () => {
         </Navbar >
 
       ) : (
+        
           <Navbar bg="dark" variant="dark" >
             <Navbar.Brand href="">WallaKeep</Navbar.Brand>
           </Navbar >
