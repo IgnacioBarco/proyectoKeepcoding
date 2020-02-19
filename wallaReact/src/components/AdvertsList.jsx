@@ -114,7 +114,7 @@ const AdvertList = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
 
       <div>{url}</div>
 

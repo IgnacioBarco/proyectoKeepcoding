@@ -1,127 +1,92 @@
-import React, { Component } from "react";
+import React, { useState, useContext } from "react";
 import MainContext from "../services/MainContext";
-import locStorage from "../services/LocalStorage";
 import api from "../services/wallaApi";
+import locStorage from "../services/LocalStorage";
 
 import { Link } from "react-router-dom";
 // import Form from "react-bootstrap/Form";
 // import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
-import Header from "./Header";
-
+// import Header from "./Header";
 
 const { login } = api();
 
-export default class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      pass: "",
-      token: ""
-    };
-  }
+const Login = props => {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [token, setToken] = useState(locStorage.getItem("token"));
+  const context = useContext(MainContext);
 
-  UNSAFE_componentWillMount = () => {
-    this.setState({
-      email: "",
-      pass: ""
-    });
-  };
-
-  handleSubmit = async event => {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    if (!this.state.email || !this.state.pass) {
+    if (!email || !pass) {
       alert("Faltan campos por rellenar");
     } else {
-      const { email, pass } = this.state;
-
       const result = await login(email, pass);
       if (result === "Invalid credentials") {
         alert("Usuario y contraseña invalida");
-        this.setState({
-          email: "",
-          pass: ""
-        });
-      } else {
-        this.setState({
-          token: result,
-          email: email
-        });
-        
-        
-        this.props.history.push("/adverts");
-      }
+        setEmail("");
+        setPass("");
+        return;
+      } 
+      // else {
+        context.setToken(result);
 
-      //añadimos a localstorage los datos
-      locStorage.setItem("email", this.state.email);
-      locStorage.setItem("token", this.state.token);
-      locStorage.setItem("name", "name");
-      locStorage.setItem("url", "url");
+        setToken(result);
+        setEmail(email);
 
-      //actualizamos contexto
-      this.context.token = result;
-      this.context.email = email;
-
-      console.log(this.context);
+        props.history.push("/adverts");
+      // }
     }
-  };
+  }
 
-  onInputChangeEmail = event => {
-    this.setState({
-      email: event.target.value
-    });
-  };
+  function onInputChangeEmail(event) {
+    setEmail(event.target.value);
+  }
 
-  onInputChangePass = event => {
-    this.setState({
-      pass: event.target.value
-    });
-  };
+  function onInputChangePass(event) {
+    setPass(event.target.value);
+  }
 
-  render() {
-    const { email, pass } = this.state;
+  return (
+    <div>
+      {/* <Header /> */}
+      <form>
+        <br />
 
-    return (
-      <div>
-        <Header />
-        <form>
-          <br />
-
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={this.onInputChangeEmail}
-            email="email"
-          />
-
-          <br />
-
-          <input
-            type="text"
-            placeholder="pass"
-            value={pass}
-            onChange={this.onInputChangePass}
-            email="pass"
-          />
-
-          <br />
-          <br />
-
-          <Button variant="outline-info" onClick={this.handleSubmit}>
-            Login
-          </Button>
-        </form>
+        <input
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={onInputChangeEmail}
+          email="email"
+        />
 
         <br />
 
-        <Link to={`/register`}>Recover password</Link>
-      </div>
-    );
-  }
-}
+        <input
+          type="text"
+          placeholder="pass"
+          value={pass}
+          onChange={onInputChangePass}
+          email="pass"
+        />
 
-Login.contextType = MainContext;
+        <br />
+        <br />
+
+        <Button variant="outline-info" onClick={handleSubmit}>
+          Login
+        </Button>
+      </form>
+
+      <br />
+
+      <Link to={`/register`}>Recover password</Link>
+    </div>
+  );
+};
+
+export default Login;

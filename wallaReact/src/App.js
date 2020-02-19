@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 import MainContext from "./services/MainContext";
+import locStorage from "./services/LocalStorage";
 
 import "./css/App.css";
 
@@ -20,18 +21,22 @@ class App extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      surname: "",
-      tag: "",
-      tags: []
+      token: locStorage.getItem("token"),
+      email: "",
+      url: ""
     };
   }
 
+  setToken = token =>
+    this.setState({ token }, localStorage.setItem("token", token));
+
+  clearToken = () => this.setToken(null);
+
   render() {
     const value = {
-      email: this.state.email,
       token: this.state.token,
-      url: this.state.url
+      setToken: this.setToken,
+      clearToken: this.clearToken
     };
 
     return (
@@ -50,9 +55,9 @@ class App extends Component {
 
         <div className="App">
           <MainContext.Provider value={value}>
-            {/* <header>
+            <header>
               <Header />
-            </header> */}
+            </header>
 
             <main>
               <Router>
