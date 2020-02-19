@@ -1,5 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import MainContext from "../services/MainContext";
+import locStorage from "../services/LocalStorage";
+
+
 
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
@@ -17,7 +20,8 @@ const Header = () => {
   useEffect(() => {
     // if(this.props.email) setEmail(this.props.email)
     console.log("contexto header useEfect" + context.token);
-    setEmail(context.email)
+    setEmail(locStorage.getItem("token"))
+    // setEmail(context.email)
     setToken(context.token)
   }, [email]);
 
@@ -34,14 +38,16 @@ const Header = () => {
             <Nav.Link href="/register">Mis chats</Nav.Link>
           </Nav>
           <Form inline>
-            <Button variant="outline-info">
+            <Button
+              variant="outline-info"
+              onClick={() => locStorage.setItem("token", "")}>
               <Nav.Link href="/login">LogOut</Nav.Link>
             </Button>
           </Form>
         </Navbar >
 
       ) : (
-        
+
           <Navbar bg="dark" variant="dark" >
             <Navbar.Brand href="">WallaKeep</Navbar.Brand>
           </Navbar >

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MainContext from "../services/MainContext";
+import locStorage from "../services/LocalStorage";
 import api from "../services/wallaApi";
+
 import { Link } from "react-router-dom";
 // import Form from "react-bootstrap/Form";
 // import FormControl from "react-bootstrap/FormControl";
@@ -46,11 +48,20 @@ export default class Login extends Component {
       } else {
         this.setState({
           token: result,
-          email:email
+          email: email
         });
-
+        
+        
         this.props.history.push("/adverts");
       }
+
+      //añadimos a localstorage los datos
+      locStorage.setItem("email", this.state.email);
+      locStorage.setItem("token", this.state.token);
+      locStorage.setItem("name", "name");
+      locStorage.setItem("tags", "url");
+
+      //actualizamos contexto
       this.context.token = result;
       this.context.email = email;
 

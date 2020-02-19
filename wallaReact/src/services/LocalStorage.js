@@ -18,16 +18,16 @@ const locStorage = {
             ctx.name = locStorage.getItem('name');
         }
 
-        if (locStorage.isItem('surname')) {
-            ctx.surname = locStorage.getItem('surname');
+        if (locStorage.isItem('email')) {
+            ctx.surname = locStorage.getItem('email');
         }
 
-        if (locStorage.isItem('tag')) {
-            ctx.tag = locStorage.getItem('tag');
+        if (locStorage.isItem('token')) {
+            ctx.tag = locStorage.getItem('token');
         }
 
-        if (locStorage.isItem('tags')) {
-            ctx.tags = locStorage.getItem('tags');
+        if (locStorage.isItem('url')) {
+            ctx.tags = locStorage.getItem('url');
         }
 
         return ctx;
@@ -36,10 +36,9 @@ const locStorage = {
 
     checkIsNull: () => {
         if (!locStorage.isItem('name')
-            || !locStorage.isItem('surname')
-            || !locStorage.isItem('tag')
-            || !locStorage.isItem('tags')
-            || locStorage.getItem('tags').length === 0
+            || !locStorage.isItem('email')
+            || !locStorage.isItem('token')
+            || !locStorage.isItem('url')
         ) {
             alert('Faltan datos en localStorage, volvemos al registro!!!')
             return false
