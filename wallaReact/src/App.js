@@ -8,7 +8,7 @@ import AdvertsList from "./components/AdvertsList";
 import CreateAndUpdate from "./components/CreateAndUpdate";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Header from "./components/HeaderLogged";
+import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 import MainContext from "./services/MainContext";

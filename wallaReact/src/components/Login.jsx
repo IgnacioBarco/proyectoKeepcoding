@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
-import HeaderPublic from "./HeaderPublic";
+import Header from "./Header";
 
 
 const { login } = api();
@@ -75,7 +75,7 @@ export default class Login extends Component {
 
     return (
       <div>
-        <HeaderPublic email={email} />
+        <Header />
         <form>
           <br />
 

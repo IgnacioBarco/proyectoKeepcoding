@@ -12,7 +12,7 @@ import MainContext from "../services/MainContext";
 // import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
-import HeaderLogged from "./HeaderLogged";
+import Header from "./Header";
 
 // material-ui
 import RangeSlider from "./RangeSlider";
@@ -114,7 +114,7 @@ const AdvertList = () => {
 
   return (
     <div>
-      <HeaderLogged />
+      <Header />
 
       <div>{url}</div>
 
