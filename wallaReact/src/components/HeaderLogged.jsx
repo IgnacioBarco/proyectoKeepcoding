@@ -16,7 +16,8 @@ const HeaderLogged = props => {
   useEffect(() => {
     // if(this.props.email) setEmail(this.props.email)
     console.log("contexto header useEfect" + context.token);
-  }, [email]);
+    setEmail(context.email)
+  }, [context.email]);
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -24,6 +25,8 @@ const HeaderLogged = props => {
       <Nav className="mr-auto">
         <Nav.Link href="/">Mis anuncios</Nav.Link>
         <Nav.Link href="#features">Mis ofertas</Nav.Link>
+        <Nav.Link href="/register">Mis chats</Nav.Link>
+        <Nav.Link href="/register">{email}</Nav.Link>
         <Nav.Link href="/register">Mis chats</Nav.Link>
       </Nav>
       <Form inline>

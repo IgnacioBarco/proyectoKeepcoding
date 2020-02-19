@@ -45,7 +45,8 @@ export default class Login extends Component {
         });
       } else {
         this.setState({
-          token: result
+          token: result,
+          email:email
         });
 
         this.props.history.push("/adverts");
@@ -74,7 +75,7 @@ export default class Login extends Component {
 
     return (
       <div>
-        <HeaderPublic email={email}/>
+        <HeaderPublic email={email} />
         <form>
           <br />
 

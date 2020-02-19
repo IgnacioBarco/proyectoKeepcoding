@@ -39,6 +39,7 @@ router.post("/", async (req, res, next) => {
       },
       (err, token) => {
         if (err) {
+          console.log(err)
           return next(err);
         }
         // respondemos con un JWT

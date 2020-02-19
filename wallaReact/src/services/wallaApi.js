@@ -57,7 +57,8 @@ const api = () => {
         
 
         let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        myHeaders.append("Accept", "application/json, text/plain, */*");
 
         let urlencoded = new URLSearchParams();
         urlencoded.append("email", email);
@@ -71,6 +72,8 @@ const api = () => {
         };
 
         const response = await fetch(loginUrl, requestOptions);
+
+        console.log(response)
 
         if (!response.ok) {
           throw new Error("Error fetching searchAll");
