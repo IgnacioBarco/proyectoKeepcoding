@@ -59,7 +59,7 @@ export default class Login extends Component {
       locStorage.setItem("email", this.state.email);
       locStorage.setItem("token", this.state.token);
       locStorage.setItem("name", "name");
-      locStorage.setItem("tags", "url");
+      locStorage.setItem("url", "url");
 
       //actualizamos contexto
       this.context.token = result;

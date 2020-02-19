@@ -20,12 +20,14 @@ const Header = () => {
   useEffect(() => {
     // if(this.props.email) setEmail(this.props.email)
     console.log("contexto header useEfect" + context.token);
-    setEmail(locStorage.getItem("token"))
+    setEmail(locStorage.getItem("email"))
+    // setEmail(locStorage.getItem("token"))
     // setEmail(context.email)
-    setToken(context.token)
-  }, [email]);
+    // setToken(context.token)
+    setToken(locStorage.getItem("token"))
+  }, [token]);
 
-  const hasToken = email
+  const hasToken = token
 
   return (
     <div>
@@ -38,6 +40,7 @@ const Header = () => {
             <Nav.Link href="/register">Mis chats</Nav.Link>
           </Nav>
           <Form inline>
+            <Nav.Link href="/register"> {email}</Nav.Link>
             <Button
               variant="outline-info"
               onClick={() => locStorage.setItem("token", "")}>
