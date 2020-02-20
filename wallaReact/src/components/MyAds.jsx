@@ -1,0 +1,50 @@
+import React, {
+  // Component,
+  useParams,
+  // useEffect,
+  useContext
+  // useReducer
+} from "react";
+import { Link } from "react-router-dom";
+import MainContext from "../services/MainContext";
+import useFetch from "./useFetch";
+import Paginator from "./Paginator";
+import buildAdvertsList from "./BuildAdvertsList";
+
+// react-bootstrap
+import CardGroup from "react-bootstrap/CardGroup";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+
+const MyAds = props => {
+  const URL = "http://localhost:8080/public/user/pepe" ;
+
+  const context = useContext(MainContext);
+
+  const result = useFetch(URL);
+
+  return (
+    <div>
+      <div>{URL}</div>
+      <div>{context.token}</div>
+
+      {(result && result === "No hay ningun anuncio con esos filtros" && (
+        <div>No hay resultados con esos filtros.</div>
+      )) || (
+        <div>
+          <CardGroup className="justify-content-md-center">
+            {result && result.map(buildAdvertsList)}
+          </CardGroup>
+          <br />
+          <Row className="justify-content-md-center">
+            <Paginator />
+          </Row>
+        </div>
+      )}
+
+      {/* <Link to="/">Back</Link> */}
+      <hr />
+    </div>
+  );
+};
+export default MyAds;

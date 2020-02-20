@@ -38,26 +38,8 @@ const api = () => {
     login: async (email, pass) => {
       try {
         const loginUrl = "http://localhost:8080/auth/login";
-        // const email = "pepe@pepe.es";
-        // const pass = "pepexxxxx";
-
-        // const dataPostLogin = {
-        //   method: "POST",
-        //   headers: {
-        //     Accept: "application/json, text/plain, */*"
-        //   },
-        //   body: {
-        //     email: "pepe@pepe.es",
-        //     pass: "pepexxxxx"
-        //   }
-        // };
-
-        // console.log(dataPostLogin);
-
         
-
         let myHeaders = new Headers();
-        // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
         myHeaders.append("Accept", "application/json, text/plain, */*");
 
         let urlencoded = new URLSearchParams();
@@ -83,9 +65,9 @@ const api = () => {
         // const dataDetails = await response.json();
 
         console.log("datadetail= " + success);
-        console.log("datadetail= " + regsNumber);
+        // console.log("datadetail= " + regsNumber);
         console.log("datadetail= " + result);
-        return result;
+        return {regsNumber,result};
       } catch (err) {
         console.log("error searchAll: " + err);
         throw err;

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 // definimos un esquema
 const advertsSchema = mongoose.Schema({
-  name: { type: String, unique: true, required: true, index: true },
+  name: { type: String, required: true, index: true },
   photo: { type: String, unique: true, required: true },
   description: { type: String, unique: true, required: true },
   sell: { type: Boolean, required: true },

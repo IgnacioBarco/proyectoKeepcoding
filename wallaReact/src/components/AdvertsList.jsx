@@ -18,9 +18,7 @@ import Row from "react-bootstrap/Row";
 
 const AdvertList = () => {
   const URL = "http://localhost:8080/public/ads?limit=10&sold=false";
-
   const [url, setUrl] = useState(URL);
-
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
   const [filterTag, setFilterTag] = useState("");
@@ -39,8 +37,6 @@ const AdvertList = () => {
 
     context.setUrl(URL + urlAux);
     setUrl(URL + urlAux);
-
-    console.log("url modificada " + url);
   }
 
   return (
@@ -97,7 +93,7 @@ const AdvertList = () => {
           </CardGroup>
           <br />
           <Row className="justify-content-md-center">
-            <Paginator />
+            <Paginator value={url} />
           </Row>
         </div>
       )}

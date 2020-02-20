@@ -13,10 +13,12 @@ import Button from "react-bootstrap/Button";
 const { login } = api();
 
 const Login = props => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [token, setToken] = useState(locStorage.getItem("token"));
   const context = useContext(MainContext);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [pass, setPass] = useState("");
+  const [token, setToken] = useState("");
+  // const [token, setToken] = useState(locStorage.getItem("token"));
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -24,16 +26,22 @@ const Login = props => {
     if (!email || !pass) {
       alert("Faltan campos por rellenar");
     } else {
-      const result = await login(email, pass);
+      const aaaa = await login(email, pass);
+      const { regsNumber, result }= aaaa
       if (result === "Invalid credentials") {
         alert("Usuario y contraseña invalida");
         setEmail("");
         setPass("");
         return;
       }
+
+      console.log("result "+result)
+
       context.setToken(result);
+      context.setName(regsNumber);
 
       setToken(result);
+      setName(regsNumber);
       setEmail(email);
 
       props.history.push("/adverts");

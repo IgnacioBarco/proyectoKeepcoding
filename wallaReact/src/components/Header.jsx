@@ -10,28 +10,20 @@ import Form from "react-bootstrap/Form";
 const Header = props => {
   const context = useContext(MainContext);
   const hasToken = context.token;
+  const name = context.name
 
   return (
     <div>
       {props.token || hasToken ? (
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="">WallaKeep</Navbar.Brand>
+          <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="/">Mis anuncios</Nav.Link>
+            <Nav.Link href="/myads/pepe">Mis anuncios</Nav.Link>
             <Nav.Link href="#features">Mis ofertas</Nav.Link>
             <Nav.Link href="/register">Mis chats</Nav.Link>
-            
-            
-            {/* <Nav.Link href="/register">
-            <Button variant="outline-info"
-              onClick={(context.setUrl("http://localhost:8080/public/ads?name=i"))}></Button>
-            
-            </Nav.Link> */}
-
-
-          </Nav>
+           </Nav>
           <Form inline>
-            <Nav.Link href="/register"> {context.email}</Nav.Link>
+            <Nav.Link href=""> {name}</Nav.Link>
             <Button variant="outline-info" onClick={() => context.setToken("")}>
               <Nav.Link href="/login">LogOut</Nav.Link>
             </Button>
@@ -39,13 +31,13 @@ const Header = props => {
         </Navbar>
       ) : (
           <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="">WallaKeep</Navbar.Brand>
+            <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
             <Nav className="mr-auto"></Nav>
             <Form inline>
-              <Button variant="outline-info" disabled>
+              <Button variant="outline-info" >
                 <Nav.Link href="/login">LogIn</Nav.Link>
               </Button>
-            </Form>)
+            </Form>
           </Navbar>
         )
       }

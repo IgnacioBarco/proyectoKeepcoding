@@ -45,7 +45,7 @@ router.post("/", async (req, res, next) => {
         // respondemos con un JWT
         res.json({
           success: true,
-          regsNumber: 1,
+          regsNumber: user.name,
           result: token
         });
       }
