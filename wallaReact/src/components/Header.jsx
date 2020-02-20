@@ -20,6 +20,15 @@ const Header = props => {
             <Nav.Link href="/">Mis anuncios</Nav.Link>
             <Nav.Link href="#features">Mis ofertas</Nav.Link>
             <Nav.Link href="/register">Mis chats</Nav.Link>
+            
+            
+            {/* <Nav.Link href="/register">
+            <Button variant="outline-info"
+              onClick={(context.setUrl("http://localhost:8080/public/ads?name=i"))}></Button>
+            
+            </Nav.Link> */}
+
+
           </Nav>
           <Form inline>
             <Nav.Link href="/register"> {context.email}</Nav.Link>

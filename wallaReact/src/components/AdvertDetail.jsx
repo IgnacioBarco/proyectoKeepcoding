@@ -40,7 +40,7 @@ class AdvertDetail extends Component {
     this.loadAdvert();
   };
 
-  builButtons = (advert) => {
+  builButtons = () => {
     let comprar = "";
 
     if (this.context.token) {
@@ -92,7 +92,8 @@ class AdvertDetail extends Component {
               Chat: {advert.chat}
               <br />
             </Card.Text>
-            {this.builButtons(advert)}
+
+            {this.builButtons()}
 
           </Card.Body>
         </Card>

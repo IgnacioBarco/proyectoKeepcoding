@@ -33,6 +33,10 @@ const AdvertList = () => {
     event.preventDefault();
     let urlAux = "";
     let aux = false;
+    if (filterPrice === NaN) {
+      alert('Debes introducir un número!!!');
+      return;
+    }
 
     if (filterText || filterPrice || filterTag) {
       urlAux = "?";
@@ -64,39 +68,42 @@ const AdvertList = () => {
   return (
     <div>
       <div>{url}</div>
+      <div>
+        {context.token}
+      </div>
 
-      <h1>Lista de filtros:</h1>
       <input
         id="filterText"
         type="text"
         placeholder="nombre del árticulo"
         value={filterText}
+        name="filterText"
         onChange={event => {
           setFilterText(event.target.value);
         }}
-        name="filterText"
       />
       <input
         id="filterPrice"
         type="text"
         placeholder="filtro de price"
         value={filterPrice}
+        name="filterPrice"
         onChange={event => {
           setFilterPrice(event.target.value);
         }}
-        name="filterPrice"
       />
       <input
         id="filterTag"
         type="text"
         placeholder="filtro de tag"
         value={filterTag}
+        name="filterTag"
         onChange={event => {
           setFilterTag(event.target.value);
         }}
-        name="filterTag"
       />
 
+      <br />
       <br />
 
       <Button variant="outline-info"
@@ -104,9 +111,6 @@ const AdvertList = () => {
         Buscar
       </Button>
 
-      <div>
-        {context.token}
-      </div>
       <hr />
 
       {
