@@ -26,7 +26,6 @@ class AdvertDetail extends Component {
 
     const res = await searchAdvert(id);
     const { success, regsNumber, result } = res;
-    console.log(result);
     const advert = res.result;
 
     this.setState({
@@ -41,29 +40,60 @@ class AdvertDetail extends Component {
     this.loadAdvert();
   };
 
-  buildDetailAdvert = () => {
-    const advert = this.state.result;
-    // const img = "http://localhost:8080/" + advert.photo;
+  builButtons = (advert) => {
+    let comprar = "";
+
+    if (this.context.token) {
+      comprar = (
+        <Link to="/comprar" >
+          <Button variant="primary">Ofertar</Button>
+        </Link >
+      )
+    }
 
     return (
       <div>
-        <Card style={{ width: "40rem" }}>
-          <Card.Img
-            variant="top"
-            src={`http://localhost:8080${advert.photo}`}
-          />
+        {comprar}
+        <Link to="/adverts">
+          <Button variant="primary">Volver</Button>
+        </Link>
+      </div>
+    )
+
+  }
+
+  buildDetailAdvert = () => {
+    const advert = this.state.result;
+    const img = "http://localhost:8080/" + advert.photo;
+
+    return (
+      <div>
+        <Card style={{ width: "40rem" }} >
+          <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{advert.name}</Card.Title>
             <Card.Text>
-              {advert._id}
-              {advert.description} -{advert.sell} -{advert.price} -
-              {advert.author}-{advert.date} -{advert.tags} -{advert.reserved} -
-              {advert.sold} -{advert.chat}
-              <Link to="/">Back</Link>
+              Descripción: {advert.description}
+              <br />
+              Se vende: {advert.sell.toString()}
+              <br />
+              Precio: {advert.price}€
+              <br />
+              Autor: {advert.author}
+              <br />
+              Fecha: {advert.date}
+              <br />
+              tags: {advert.tags}
+              <br />
+              reservado: {advert.reserved.toString()}
+              <br />
+              Vendido: {advert.sold.toString()}
+              <br />
+              Chat: {advert.chat}
+              <br />
             </Card.Text>
-            <Link to="/adverts">
-              <Button variant="primary">volver</Button>
-            </Link>
+            {this.builButtons(advert)}
+
           </Card.Body>
         </Card>
       </div>
@@ -76,8 +106,8 @@ class AdvertDetail extends Component {
     return this.state.success === true ? (
       this.buildDetailAdvert()
     ) : (
-      <div>No hay resultados</div>
-    );
+        <div>No hay resultados</div>
+      );
   }
 }
 

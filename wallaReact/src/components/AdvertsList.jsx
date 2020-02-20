@@ -7,20 +7,14 @@ import React, {
 } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
-// import locStorage from "../services/LocalStorage";
-// import api from "../services/wallaApi";
-// import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
 import buildAdvertsList from "./BuildAdvertsList";
-import Header from "./Header";
 
 // react-bootstrap
-import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-// import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = () => {
   const URL = "http://localhost:8080/public/ads";
