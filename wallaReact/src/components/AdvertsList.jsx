@@ -17,7 +17,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 const AdvertList = () => {
-  const URL = "http://localhost:8080/public/ads";
+  const URL = "http://localhost:8080/public/ads?limit=10&sold=false";
 
   const [url, setUrl] = useState(URL);
 
@@ -32,34 +32,12 @@ const AdvertList = () => {
   function handleFilterData(event) {
     event.preventDefault();
     let urlAux = "";
-    let aux = false;
-    if (filterPrice === NaN) {
-      alert('Debes introducir un número!!!');
-      return;
-    }
 
-    if (filterText || filterPrice || filterTag) {
-      urlAux = "?";
+    if (filterText) urlAux += "&name=" + filterText;
+    if (filterPrice) urlAux += "&price=" + filterPrice;
+    if (filterTag) urlAux += "&tag=" + filterTag;
 
-      if (filterText) {
-        urlAux += "name=" + filterText;
-        aux = true;
-      }
-      if (filterPrice) {
-        if (aux) urlAux += "&price=" + filterPrice;
-        else {
-          urlAux += "price=" + filterPrice;
-          aux = true;
-        }
-      }
-
-      if (filterTag) {
-        if (aux) urlAux += "&tag=" + filterTag;
-        else urlAux += "tag=" + filterTag;
-      }
-    }
-
-    context.setUrl(URL + urlAux)
+    context.setUrl(URL + urlAux);
     setUrl(URL + urlAux);
 
     console.log("url modificada " + url);
@@ -68,9 +46,7 @@ const AdvertList = () => {
   return (
     <div>
       <div>{url}</div>
-      <div>
-        {context.token}
-      </div>
+      <div>{context.token}</div>
 
       <input
         id="filterText"
@@ -106,18 +82,16 @@ const AdvertList = () => {
       <br />
       <br />
 
-      <Button variant="outline-info"
-        onClick={handleFilterData}>
+      <Button variant="outline-info" onClick={handleFilterData}>
         Buscar
       </Button>
 
       <hr />
 
-      {
-        (result && result === "No hay ningun anuncio con esos filtros"
-          && (<div>No hay resultados con esos filtros.</div>))
-        ||
-        (<div>
+      {(result && result === "No hay ningun anuncio con esos filtros" && (
+        <div>No hay resultados con esos filtros.</div>
+      )) || (
+        <div>
           <CardGroup className="justify-content-md-center">
             {result && result.map(buildAdvertsList)}
           </CardGroup>
@@ -125,8 +99,8 @@ const AdvertList = () => {
           <Row className="justify-content-md-center">
             <Paginator />
           </Row>
-        </div>)
-      }
+        </div>
+      )}
 
       {/* <Link to="/">Back</Link> */}
       <hr />
