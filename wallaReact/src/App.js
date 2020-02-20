@@ -32,11 +32,15 @@ class App extends Component {
 
   clearToken = () => this.setToken(null);
 
+  setUrl = url =>
+    this.setState({ url }, localStorage.setItem("url", url));
+
   render() {
     const value = {
       token: this.state.token,
       setToken: this.setToken,
-      clearToken: this.clearToken
+      clearToken: this.clearToken,
+      setUrl: this.setUrl,
     };
 
     return (
@@ -56,7 +60,7 @@ class App extends Component {
         <div className="App">
           <MainContext.Provider value={value}>
             <header>
-              <Header />
+              <Header props={this.token} />
             </header>
 
             <main>

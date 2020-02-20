@@ -12,10 +12,8 @@ import MainContext from "../services/MainContext";
 // import Advert from "../models/Advert";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
+import buildAdvertsList from "./BuildAdvertsList";
 import Header from "./Header";
-
-// material-ui
-import RangeSlider from "./RangeSlider";
 
 // react-bootstrap
 import Card from "react-bootstrap/Card";
@@ -31,12 +29,10 @@ const AdvertList = () => {
 
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
-  const [filterPrice2, setFilterPrice2] = useState("");
   const [filterTag, setFilterTag] = useState("");
 
   const context = useContext(MainContext);
 
-  // const result = useFetch(context.url);
   const result = useFetch(url);
 
   function handleFilterData(event) {
@@ -65,57 +61,14 @@ const AdvertList = () => {
       }
     }
 
+    context.setUrl(URL + urlAux)
     setUrl(URL + urlAux);
 
     console.log("url modificada " + url);
   }
 
-  function handleSubmitNew(event) {
-    event.preventDefault();
-    setUrl(URL);
-
-    const valuetext = "";
-    setFilterPrice2(valuetext);
-    // console.log('new slider '+ this.props.valuetext)
-  }
-
-  const buildAdvertsList = ({
-    _id,
-    name,
-    photo,
-    description,
-    sell,
-    price,
-    author,
-    date,
-    tags,
-    reserved,
-    sold,
-    chat
-  }) => (
-    <div key={_id}>
-      <Card style={{ width: "20rem" }}>
-        <Card.Img variant="top" src={`http://localhost:8080${photo}`} />
-        <Card.Body>
-          <Card.Title>{name}</Card.Title>
-          <Card.Text>
-            {description} -{sell} -{price}€ -{author} -{date} -{tags} -
-            {reserved} -{sold} -{chat}
-          </Card.Text>
-          <Link to={`/advert/${_id}`}>
-            <Button variant="primary">Comprar</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-    </div>
-  );
-
-  // <span>Url: {JSON.stringify(url)}</span>
-
   return (
     <div>
-      {/* <Header /> */}
-
       <div>{url}</div>
 
       <h1>Lista de filtros:</h1>
@@ -151,32 +104,31 @@ const AdvertList = () => {
       />
 
       <br />
-      <br />
 
-      <Row className="justify-content-md-center">
-        <RangeSlider />
-      </Row>
+      <Button variant="outline-info"
+        onClick={handleFilterData}>
+        Buscar
+      </Button>
 
-      <br />
-      <button onClick={handleFilterData}>Buscar</button>
-
-      <button onClick={handleSubmitNew}>
-        {context.token}Resetear busqueda
-      </button>
-
+      <div>
+        {context.token}
+      </div>
       <hr />
 
-      {(result && result === "No hay ningun anuncio con esos filtros" && (
-        <div>No hay resultados con esos filtros.</div>
-      )) || (
-        <div>
-          <CardGroup>{result && result.map(buildAdvertsList)}</CardGroup>
+      {
+        (result && result === "No hay ningun anuncio con esos filtros"
+          && (<div>No hay resultados con esos filtros.</div>))
+        ||
+        (<div>
+          <CardGroup className="justify-content-md-center">
+            {result && result.map(buildAdvertsList)}
+          </CardGroup>
           <br />
           <Row className="justify-content-md-center">
             <Paginator />
           </Row>
-        </div>
-      )}
+        </div>)
+      }
 
       {/* <Link to="/">Back</Link> */}
       <hr />

@@ -30,15 +30,13 @@ const Login = props => {
         setEmail("");
         setPass("");
         return;
-      } 
-      // else {
-        context.setToken(result);
+      }
+      context.setToken(result);
 
-        setToken(result);
-        setEmail(email);
+      setToken(result);
+      setEmail(email);
 
-        props.history.push("/adverts");
-      // }
+      props.history.push("/adverts");
     }
   }
 
