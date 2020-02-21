@@ -4,14 +4,13 @@ import api from "../services/wallaApi";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-// import Header from "./Header";
-
 const { login } = api();
 
 const Login = props => {
   const context = useContext(MainContext);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  // context.setUrl("http://localhost:3000/login");
 
   async function handleSubmit(event) {
     event.preventDefault();

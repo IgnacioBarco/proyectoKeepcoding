@@ -28,9 +28,6 @@ class App extends Component {
       email: locStorage.getItem("email"),
       name: locStorage.getItem("name"),
       url: locStorage.getItem("url")
-      // email: "",
-      // name: "",
-      // url: "http://localhost:8080/public/ads"
     };
   }
 
@@ -48,7 +45,7 @@ class App extends Component {
     this.setToken("");
     this.setEmail("");
     this.setName("");
-    this.setUrl("");
+    this.setUrl("http://localhost:3000/login");
   };
 
   render() {
@@ -85,7 +82,7 @@ class App extends Component {
         <div className="App">
           <MainContext.Provider value={value}>
             <header>
-              <Header props={this.state} />
+              <Header props={value} />
             </header>
 
             <main>
@@ -93,7 +90,7 @@ class App extends Component {
                 <Switch>
                   <Route
                     path="/advert/:id"
-                    props={this.state}
+                    props={value}
                     component={AdvertDetail}
                   />
                   <Route

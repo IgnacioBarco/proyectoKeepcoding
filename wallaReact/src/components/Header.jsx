@@ -9,7 +9,6 @@ import Form from "react-bootstrap/Form";
 const Header = props => {
   const context = useContext(MainContext);
   const hasToken = context.token;
-  context.url = "login";
 
   return (
     <div>
@@ -35,14 +34,18 @@ const Header = props => {
         </Navbar>
       ) : (
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
+          <Navbar.Brand 
+          onClick={()=>context.setUrl("http://localhost:3000/adverts")}
+          href="/adverts">WallaKeep</Navbar.Brand>
           <Nav className="mr-auto"></Nav>)
-          {context.url === "login" ? (
+          {context.url === "http://localhost:3000/login" ? (
             <div></div>
           ) : (
             <Form inline>
               <Button variant="outline-info">
-                <Nav.Link href="/login">LogIn</Nav.Link>
+                <Nav.Link 
+                onClick={()=>context.resetValues()}
+                href="/login">LogIn</Nav.Link>
               </Button>
             </Form>
           )}
