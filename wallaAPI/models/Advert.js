@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const advertsSchema = mongoose.Schema({
   name: { type: String, required: true, index: true },
   photo: { type: String, unique: true, required: true },
-  description: { type: String, unique: true, required: true },
+  description: { type: String, required: true },
   sell: { type: Boolean, required: true },
   price: { type: Number, min: 1, required: true, index: true },
   author: { type: String, required: true },
