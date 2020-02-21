@@ -60,7 +60,7 @@ const Login = props => {
         <br />
 
         <input
-          type="text"
+          type="password"
           placeholder="pass"
           value={pass}
           onChange={onInputChangePass}
@@ -78,6 +78,8 @@ const Login = props => {
       <br />
 
       <Link to={`/register`}>Recuperar contraseña</Link>
+      <br />
+      <br />
       <Link to={`/register`}>Registarse</Link>
     </div>
   );
