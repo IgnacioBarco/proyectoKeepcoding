@@ -17,21 +17,19 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 const MyAds = props => {
-  const URL = "http://localhost:8080/public/user/pepe" ;
-
   const context = useContext(MainContext);
-
+  const URL = "http://localhost:8080/public/user/"+context.name ;
   const result = useFetch(URL);
 
   return (
     <div>
-      <div>{URL}</div>
+      {/* <div>{URL}</div>
       <div>{context.token}</div>
       <div>{context.name}</div>
       <div>{context.email}</div>
-      <div>{context.url}</div>
+      <div>{context.url}</div> */}
       
-      {(result && result === "No hay ningun anuncio con esos filtros" && (
+      {/* {(result && result === "No hay ningun anuncio con esos filtros" && (
         <div>No hay resultados con esos filtros.</div>
       )) || (
         <div>
@@ -43,7 +41,9 @@ const MyAds = props => {
             <Paginator />
           </Row>
         </div>
-      )}
+      )} */}
+
+      Mis chats
 
       {/* <Link to="/">Back</Link> */}
       <hr />
