@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 const Header = props => {
   const context = useContext(MainContext);
   const hasToken = context.token;
+  context.url = "login";
 
   return (
     <div>
@@ -35,12 +36,16 @@ const Header = props => {
       ) : (
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
-          <Nav className="mr-auto"></Nav>
-          <Form inline>
-            <Button variant="outline-info">
-              <Nav.Link href="/login">LogIn</Nav.Link>
-            </Button>
-          </Form>
+          <Nav className="mr-auto"></Nav>)
+          {context.url === "login" ? (
+            <div></div>
+          ) : (
+            <Form inline>
+              <Button variant="outline-info">
+                <Nav.Link href="/login">LogIn</Nav.Link>
+              </Button>
+            </Form>
+          )}
         </Navbar>
       )}
     </div>
