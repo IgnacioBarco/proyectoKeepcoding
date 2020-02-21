@@ -11,6 +11,7 @@ import Pagination from "react-bootstrap/Pagination";
 const MyAds = props => {
   const context = useContext(MainContext);
   const URL = "http://localhost:8080/public/user/" + context.name;
+
   const [url, setUrl] = useState(URL);
   const result = useFetch(url);
 
@@ -24,28 +25,32 @@ const MyAds = props => {
 
       {(result && result === "El User no tiene anuncios actualmente" && (
         <div>No tienes anuncios publicados.</div>
-      )) || (
-        <div>
-          <CardGroup className="justify-content-md-center">
-            {result && result.map(buildAdvertsList)}
-          </CardGroup>
-
-          <br />
-          <Row className="justify-content-md-center">
-            <Pagination size="lg">
-              <Pagination.First
-                onClick={() => {
-                  context.setUrl("http://localhost:8080/public/user/pepe?limit=2");
-                  setUrl("http://localhost:8080/public/user/pepe?limit=2");
-                }}
-              />
-              <Pagination.Prev href="/adverts" />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination>
-          </Row>
-          {/* 
+      )) ||
+        (context.token === "" && (
+          <div>Para acceder a esta sección tienes que estar logado</div>
+        )) || (
+          <div>
+            <CardGroup className="justify-content-md-center">
+              {result && result.map(buildAdvertsList)}
+            </CardGroup>
+            <br />
+            <Row className="justify-content-md-center">
+              <Pagination size="lg">
+                <Pagination.First
+                  onClick={() => {
+                    context.setUrl(
+                      "http://localhost:8080/public/user/pepe?limit=2"
+                    );
+                    setUrl("http://localhost:8080/public/user/pepe?limit=2");
+                  }}
+                />
+                <Pagination.Prev href="/adverts" />
+                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Next />
+                <Pagination.Last />
+              </Pagination>
+            </Row>
+            {/* 
           thorndike
           <Row className="justify-content-md-center">
             <Pagination size="lg">
@@ -56,8 +61,8 @@ const MyAds = props => {
               <Pagination.Last />
             </Pagination>
           </Row> */}
-        </div>
-      )}
+          </div>
+        )}
 
       <hr />
     </div>
