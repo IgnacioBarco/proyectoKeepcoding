@@ -15,9 +15,9 @@ const { login } = api();
 const Login = props => {
   const context = useContext(MainContext);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [pass, setPass] = useState("");
-  const [token, setToken] = useState("");
+  // const [name, setName] = useState("");
+  // const [token, setToken] = useState("");
   // const [token, setToken] = useState(locStorage.getItem("token"));
 
   async function handleSubmit(event) {
@@ -26,8 +26,9 @@ const Login = props => {
     if (!email || !pass) {
       alert("Faltan campos por rellenar");
     } else {
-      const aaaa = await login(email, pass);
-      const { regsNumber, result }= aaaa
+      const { regsNumber, result } = await login(email, pass);
+      // const aaaa = await login(email, pass);
+      // const { regsNumber, result }= aaaa
       if (result === "Invalid credentials") {
         alert("Usuario y contraseña invalida");
         setEmail("");
@@ -38,11 +39,13 @@ const Login = props => {
       console.log("result "+result)
 
       context.setToken(result);
+      context.setEmail(email);
       context.setName(regsNumber);
+      context.setUrl("http://localhost:8080/public/ads");
 
-      setToken(result);
-      setName(regsNumber);
-      setEmail(email);
+      // setToken(result);
+      // setName(regsNumber);
+      // setEmail(email);
 
       props.history.push("/adverts");
     }

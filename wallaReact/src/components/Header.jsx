@@ -5,12 +5,14 @@ import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
-// import { Link, NavLink } from "react-router-dom";
 
 const Header = props => {
   const context = useContext(MainContext);
   const hasToken = context.token;
-  const name = context.name
+  // const urlMyAds="/myads/"+context.name;
+  // const urlMyOffers="/myoffers/"+context.name;
+  // const urlMyChats="/mychats"+ntext.name;
+  // const urlMyChats="/myProfile"+context.name;
 
   return (
     <div>
@@ -18,31 +20,36 @@ const Header = props => {
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="/myads/pepe">Mis anuncios</Nav.Link>
-            <Nav.Link href="#features">Mis ofertas</Nav.Link>
-            <Nav.Link href="/register">Mis chats</Nav.Link>
-           </Nav>
+            <Nav.Link href="/myads">Mis anuncios</Nav.Link>
+            <Nav.Link href="/myoffers">Mis ofertas</Nav.Link>
+            <Nav.Link href="/mychats">Mis chats</Nav.Link>
+          </Nav>
           <Form inline>
-            <Nav.Link href=""> {name}</Nav.Link>
-            <Button variant="outline-info" onClick={() => context.setToken("")}>
+            <Nav.Link href="/myProfile">{context.name}</Nav.Link>
+            <Button
+              variant="outline-info"
+              onClick={() => {
+                context.resetValues();
+              }}
+            >
               <Nav.Link href="/login">LogOut</Nav.Link>
             </Button>
           </Form>
         </Navbar>
       ) : (
-          <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
-            <Nav className="mr-auto"></Nav>
-            <Form inline>
-              <Button variant="outline-info" >
-                <Nav.Link href="/login">LogIn</Nav.Link>
-              </Button>
-            </Form>
-          </Navbar>
-        )
-      }
-    </div >
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
+          <Nav className="mr-auto"></Nav>
+          <Form inline>
+            <Button variant="outline-info">
+              <Nav.Link href="/login">LogIn</Nav.Link>
+            </Button>
+          </Form>
+        </Navbar>
+      )}
+    </div>
   );
 };
 
 export default Header;
+// export default Header;
