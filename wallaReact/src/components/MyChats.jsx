@@ -1,10 +1,4 @@
-import React, {
-  // Component,
-  useParams,
-  // useEffect,
-  useContext
-  // useReducer
-} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
@@ -18,7 +12,7 @@ import Row from "react-bootstrap/Row";
 
 const MyAds = props => {
   const context = useContext(MainContext);
-  const URL = "http://localhost:8080/public/user/"+context.name ;
+  const URL = "http://localhost:8080/public/user/" + context.name;
   const result = useFetch(URL);
 
   return (
@@ -28,7 +22,6 @@ const MyAds = props => {
       <div>{context.name}</div>
       <div>{context.email}</div>
       <div>{context.url}</div> */}
-      
       {/* {(result && result === "No hay ningun anuncio con esos filtros" && (
         <div>No hay resultados con esos filtros.</div>
       )) || (
@@ -42,9 +35,7 @@ const MyAds = props => {
           </Row>
         </div>
       )} */}
-
       Mis chats
-
       {/* <Link to="/">Back</Link> */}
       <hr />
     </div>

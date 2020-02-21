@@ -38,7 +38,7 @@ const api = () => {
     login: async (email, pass) => {
       try {
         const loginUrl = "http://localhost:8080/auth/login";
-        
+
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json, text/plain, */*");
 
@@ -55,7 +55,7 @@ const api = () => {
 
         const response = await fetch(loginUrl, requestOptions);
 
-        console.log(response)
+        console.log(response);
 
         if (!response.ok) {
           throw new Error("Error fetching searchAll");
@@ -67,7 +67,50 @@ const api = () => {
         console.log("datadetail= " + success);
         // console.log("datadetail= " + regsNumber);
         console.log("datadetail= " + result);
-        return {regsNumber,result};
+        return { regsNumber, result };
+      } catch (err) {
+        console.log("error searchAll: " + err);
+        throw err;
+      }
+    },
+    
+    //pendiente de hacer
+    // mas el de ofertas
+    //mas el de chats
+    // mas el de profile 
+    newUser: async (name, email, pass) => {
+      try {
+        const loginUrl = "http://localhost:8080/auth/login";
+
+        let myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json, text/plain, */*");
+
+        let urlencoded = new URLSearchParams();
+        urlencoded.append("email", email);
+        urlencoded.append("pass", pass);
+
+        let requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: "follow"
+        };
+
+        const response = await fetch(loginUrl, requestOptions);
+
+        console.log(response);
+
+        if (!response.ok) {
+          throw new Error("Error fetching searchAll");
+        }
+
+        const { success, regsNumber, result } = await response.json();
+        // const dataDetails = await response.json();
+
+        console.log("datadetail= " + success);
+        // console.log("datadetail= " + regsNumber);
+        console.log("datadetail= " + result);
+        return { regsNumber, result };
       } catch (err) {
         console.log("error searchAll: " + err);
         throw err;

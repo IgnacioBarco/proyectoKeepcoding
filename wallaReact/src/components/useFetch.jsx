@@ -1,17 +1,4 @@
-import {
-  // React,
-  useEffect,
-  useReducer
-  // useContext
-} from "react";
-// import MainContext from "../services/MainContext";
-
-// import Advert from "../models/Advert";
-// import MainContext from "../services/MainContext";
-// import locStorage from "../services/LocalStorage";
-// import api from "../services/wallaApi";
-// import Advert from "../models/Advert";
-// import AdvertLine from "./AdvertLine";
+import { useEffect, useReducer } from "react";
 
 const initialState = {
   isFetching: false,
@@ -44,8 +31,6 @@ function reducer(state, action) {
 
 function useFetch(url) {
   const [value, dispatch] = useReducer(reducer, initialState);
-  // const context = useContext(MainContext);
-  // const url2 = context.url;
 
   useEffect(() => {
     dispatch({ type: "FETCH_REQUEST" });
@@ -53,18 +38,12 @@ function useFetch(url) {
       .then(response => response.json())
       .then(results => {
         const { success, regsNumber, result } = results;
-        // console.log(success);
-        // console.log(regsNumber);
         dispatch({ type: "FETCH_SUCCESS", data: result });
       })
       .catch(error => dispatch({ type: "FETCH_FAILURE", error }));
   }, [url]);
 
-  // console.log(url);
-  // console.log("value " + JSON.stringify(value.data));
   return value.data;
 }
 
 export default useFetch;
-
-

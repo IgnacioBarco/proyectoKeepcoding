@@ -1,11 +1,4 @@
-import React, {
-  // Component,
-  useParams,
-  // useEffect,
-  useContext
-  // useReducer
-} from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
@@ -13,12 +6,11 @@ import buildAdvertsList from "./BuildAdvertsList";
 
 // react-bootstrap
 import CardGroup from "react-bootstrap/CardGroup";
-import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 const MyAds = props => {
   const context = useContext(MainContext);
-  const URL = "http://localhost:8080/public/user/"+context.name ;
+  const URL = "http://localhost:8080/public/user/" + context.name;
   const result = useFetch(URL);
 
   return (

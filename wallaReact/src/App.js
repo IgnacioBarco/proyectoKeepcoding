@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import AdvertDetail from "./components/AdvertDetail";
 import AdvertsList from "./components/AdvertsList";
-import CreateAndUpdate from "./components/CreateAndUpdate";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Header from "./components/Header";
@@ -28,7 +27,7 @@ class App extends Component {
       token: locStorage.getItem("token"),
       email: locStorage.getItem("email"),
       name: locStorage.getItem("name"),
-      url: locStorage.getItem("url"),
+      url: locStorage.getItem("url")
       // email: "",
       // name: "",
       // url: "http://localhost:8080/public/ads"
@@ -41,18 +40,16 @@ class App extends Component {
   setEmail = email =>
     this.setState({ email }, localStorage.setItem("email", email));
 
-  setName = name =>
-    this.setState({ name }, localStorage.setItem("name", name));
+  setName = name => this.setState({ name }, localStorage.setItem("name", name));
 
-  setUrl = url => 
-    this.setState({ url }, localStorage.setItem("url", url));
+  setUrl = url => this.setState({ url }, localStorage.setItem("url", url));
 
-  resetValues = () =>{
+  resetValues = () => {
     this.setToken("");
     this.setEmail("");
     this.setName("");
     this.setUrl("");
-  }  
+  };
 
   render() {
     const value = {
@@ -94,14 +91,26 @@ class App extends Component {
             <main>
               <Router>
                 <Switch>
-                  <Route path="/advert/:id" props={this.state} component={AdvertDetail} />
-                  <Route path="/adverts" value={value} component={AdvertsList} />
+                  <Route
+                    path="/advert/:id"
+                    props={this.state}
+                    component={AdvertDetail}
+                  />
+                  <Route
+                    path="/adverts"
+                    value={value}
+                    component={AdvertsList}
+                  />
                   {/* <Route path="/new" component={CreateAndUpdate} />
                   <Route path="/modify/:id" component={CreateAndUpdate} /> */}
                   <Route strict path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/myads" value={value} component={MyAds} />
-                  <Route path="/myProfile" value={value} component={MyProfile} />
+                  <Route
+                    path="/myProfile"
+                    value={value}
+                    component={MyProfile}
+                  />
                   <Route path="/myChats" value={value} component={MyChats} />
                   <Route path="/myOffers" value={value} component={MyOffers} />
                   <Route value={value} component={AdvertsList} />

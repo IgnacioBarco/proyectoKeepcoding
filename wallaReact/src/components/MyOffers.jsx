@@ -1,10 +1,4 @@
-import React, {
-  // Component,
-  useState,
-  // useEffect,
-  useContext
-  // useReducer
-} from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import usePrivateFetch from "./usePrivateFetch";

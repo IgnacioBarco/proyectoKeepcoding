@@ -45,10 +45,10 @@ class AdvertDetail extends Component {
 
     if (this.context.token) {
       comprar = (
-        <Link to="/comprar" >
+        <Link to="/comprar">
           <Button variant="primary">Ofertar</Button>
-        </Link >
-      )
+        </Link>
+      );
     }
 
     return (
@@ -58,9 +58,8 @@ class AdvertDetail extends Component {
           <Button variant="primary">Volver</Button>
         </Link>
       </div>
-    )
-
-  }
+    );
+  };
 
   buildDetailAdvert = () => {
     const advert = this.state.result;
@@ -68,7 +67,7 @@ class AdvertDetail extends Component {
 
     return (
       <div>
-        <Card style={{ width: "40rem" }} >
+        <Card style={{ width: "40rem" }}>
           <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{advert.name}</Card.Title>
@@ -94,7 +93,6 @@ class AdvertDetail extends Component {
             </Card.Text>
 
             {this.builButtons()}
-
           </Card.Body>
         </Card>
       </div>
@@ -107,8 +105,8 @@ class AdvertDetail extends Component {
     return this.state.success === true ? (
       this.buildDetailAdvert()
     ) : (
-        <div>No hay resultados</div>
-      );
+      <div>No hay resultados</div>
+    );
   }
 }
 

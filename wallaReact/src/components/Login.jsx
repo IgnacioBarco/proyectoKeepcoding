@@ -1,11 +1,7 @@
 import React, { useState, useContext } from "react";
 import MainContext from "../services/MainContext";
 import api from "../services/wallaApi";
-import locStorage from "../services/LocalStorage";
-
 import { Link } from "react-router-dom";
-// import Form from "react-bootstrap/Form";
-// import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 
 // import Header from "./Header";
@@ -16,9 +12,6 @@ const Login = props => {
   const context = useContext(MainContext);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  // const [name, setName] = useState("");
-  // const [token, setToken] = useState("");
-  // const [token, setToken] = useState(locStorage.getItem("token"));
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -27,8 +20,6 @@ const Login = props => {
       alert("Faltan campos por rellenar");
     } else {
       const { regsNumber, result } = await login(email, pass);
-      // const aaaa = await login(email, pass);
-      // const { regsNumber, result }= aaaa
       if (result === "Invalid credentials") {
         alert("Usuario y contraseña invalida");
         setEmail("");
@@ -36,16 +27,10 @@ const Login = props => {
         return;
       }
 
-      console.log("result "+result)
-
       context.setToken(result);
       context.setEmail(email);
       context.setName(regsNumber);
       context.setUrl("http://localhost:8080/public/ads");
-
-      // setToken(result);
-      // setName(regsNumber);
-      // setEmail(email);
 
       props.history.push("/adverts");
     }
@@ -61,7 +46,6 @@ const Login = props => {
 
   return (
     <div>
-      {/* <Header /> */}
       <form>
         <br />
 
@@ -93,7 +77,8 @@ const Login = props => {
 
       <br />
 
-      <Link to={`/register`}>Recover password</Link>
+      <Link to={`/register`}>Recuperar contraseña</Link>
+      <Link to={`/register`}>Registarse</Link>
     </div>
   );
 };

@@ -1,11 +1,4 @@
-import React, {
-  // Component,
-  useState,
-  // useEffect,
-  useContext
-  // useReducer
-} from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
 import Paginator from "./Paginator";
@@ -16,7 +9,7 @@ import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
-const AdvertList = (props) => {
+const AdvertList = props => {
   const URL = "http://localhost:8080/public/ads?limit=10&sold=false";
   const [url, setUrl] = useState(URL);
   const [filterText, setFilterText] = useState("");
@@ -101,7 +94,6 @@ const AdvertList = (props) => {
         </div>
       )}
 
-      {/* <Link to="/">Back</Link> */}
       <hr />
     </div>
   );

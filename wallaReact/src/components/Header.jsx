@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import MainContext from "../services/MainContext";
 
 import Button from "react-bootstrap/Button";
@@ -9,16 +9,12 @@ import Form from "react-bootstrap/Form";
 const Header = props => {
   const context = useContext(MainContext);
   const hasToken = context.token;
-  // const urlMyAds="/myads/"+context.name;
-  // const urlMyOffers="/myoffers/"+context.name;
-  // const urlMyChats="/mychats"+ntext.name;
-  // const urlMyChats="/myProfile"+context.name;
 
   return (
     <div>
       {props.token || hasToken ? (
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/adverts">WallaKeep</Navbar.Brand>
+          <Navbar.Brand href="/adverts">WallaKeepPrivate</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/myads">Mis anuncios</Nav.Link>
             <Nav.Link href="/myoffers">Mis ofertas</Nav.Link>
@@ -52,4 +48,3 @@ const Header = props => {
 };
 
 export default Header;
-// export default Header;
