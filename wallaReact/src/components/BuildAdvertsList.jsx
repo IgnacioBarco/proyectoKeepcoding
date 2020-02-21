@@ -11,13 +11,13 @@ const buildAdvertsList = ({
   photo,
   description,
   sell,
-  price
-  // author,
-  // date,
-  // tags,
-  // reserved,
-  // sold,
-  // chat
+  price,
+  author,
+  date,
+  tags,
+  reserved,
+  sold,
+  chat
 }) => (
   <div key={_id}>
     <Card style={{ width: "20rem" }}>

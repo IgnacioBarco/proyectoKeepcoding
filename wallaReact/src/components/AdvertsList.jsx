@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
-import Paginator from "./Paginator";
 import buildAdvertsList from "./BuildAdvertsList";
 
 // react-bootstrap
 import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = props => {
-  const URL = "http://localhost:8080/public/ads?limit=10&sold=false";
+  const URL = "http://localhost:8080/public/ads?limit=6&sold=false";
   const [url, setUrl] = useState(URL);
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
@@ -89,7 +89,17 @@ const AdvertList = props => {
           </CardGroup>
           <br />
           <Row className="justify-content-md-center">
-            <Paginator value={url} />
+            <Pagination size="lg">
+              <Pagination.First 
+              onClick={() => {
+                context.setUrl("http://localhost:8080/public/ads?limit=4&start=2&sold=false");
+                setUrl("http://localhost:8080/public/ads?limit=4&start=2&sold=false");
+              }}/>
+              <Pagination.Prev />
+              <Pagination.Item>{1}</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+            </Pagination>
           </Row>
         </div>
       )}

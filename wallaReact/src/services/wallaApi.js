@@ -73,7 +73,7 @@ const api = () => {
         throw err;
       }
     },
-    
+
     //pendiente de hacer
     // mas el de ofertas
     //mas el de chats
@@ -136,18 +136,10 @@ const api = () => {
 
     searchAdvert: async id => {
       try {
-        // const response = await fetch(`${todo}/${id}`, data)
         const response = await fetch(
           `http://localhost:8080/public/ads/${id}`,
           data
         );
-
-        // const dataDetails=null;
-
-        // fetch(`${todo}/${id}`, data)
-        //   .then(response => response.json())
-        //   .then(results => dataDetails = results)
-        //   .catch(error =>  error );
 
         console.log(`${todo}/${id}`);
 

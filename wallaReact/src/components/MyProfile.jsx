@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
-import Paginator from "./Paginator";
 import buildAdvertsList from "./BuildAdvertsList";
 
 // react-bootstrap
@@ -31,7 +30,13 @@ const MyAds = props => {
           </CardGroup>
           <br />
           <Row className="justify-content-md-center">
-            <Paginator />
+            <Pagination size="lg">
+              <Pagination.First />
+              <Pagination.Prev />
+              <Pagination.Item>{1}</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+            </Pagination>
           </Row>
         </div>
       )} */}
