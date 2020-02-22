@@ -10,35 +10,67 @@ import Row from "react-bootstrap/Row";
 import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = props => {
-  const URL = "http://localhost:8080/public/ads?limit=6&sold=false";
+  const context = useContext(MainContext);
+
+  // const URL =   "http://localhost:8080/public/ads?limit=4&sold=false";
+
+  let URL = "http://localhost:8080/public/ads?sold=false";
+  let urlAux = "";
+
+  const limitString = "&limit=";
+  let limit = 4;
+  const startString = "&start=";
+  URL += limitString + limit;
+
   const [url, setUrl] = useState(URL);
   const [filterText, setFilterText] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
   const [filterTag, setFilterTag] = useState("");
 
-  const context = useContext(MainContext);
-
   const result = useFetch(url);
 
   function handleFilterData(event) {
     event.preventDefault();
-    let urlAux = "";
+    urlAux = "";
 
     if (filterText) urlAux += "&name=" + filterText;
     if (filterPrice) urlAux += "&price=" + filterPrice;
     if (filterTag) urlAux += "&tag=" + filterTag;
 
-    context.setUrl(URL + urlAux);
-    setUrl(URL + urlAux);
+    URL = URL + urlAux;
+    context.setAdStart(parseInt(0));
+    context.setUrl(URL);
+    setUrl(URL);
+  }
+
+  function handlerPageNumber(number) {
+    const pag = parseInt(context.adStart) + number;
+    context.setAdStart(parseInt(pag));
+    const _url = context.url + startString + pag;
+    setUrl(_url);
+  }
+
+  function handlePaginatorNext(event) {
+    event.preventDefault();
+    if (result.length >= 4) handlerPageNumber(parseInt(4));
+    // if (result.length > 2) handlerPageNumber(parseInt(2));
+  }
+
+  function handlePaginatorPrev(event) {
+    event.preventDefault();
+    if (context.adStart >= 4) handlerPageNumber(parseInt(-4));
+    // if (context.adStart >= 2) handlerPageNumber(parseInt(-2));
   }
 
   return (
     <div>
-      <div>{url}</div>
+      <div>URL: {URL}</div>
+      <div>url: {url}</div>
+      <div>context.url: {context.url}</div>
       <div>{context.token}</div>
       <div>{context.name}</div>
       <div>{context.email}</div>
-      <div>{context.url}</div>
+      <div>start {context.adStart}</div>
 
       <input
         id="filterText"
@@ -90,20 +122,11 @@ const AdvertList = props => {
           <br />
           <Row className="justify-content-md-center">
             <Pagination size="lg">
-              <Pagination.First
-                onClick={() => {
-                  context.setUrl(
-                    "http://localhost:8080/public/ads?limit=4&start=2&sold=false"
-                  );
-                  setUrl(
-                    "http://localhost:8080/public/ads?limit=4&start=2&sold=false"
-                  );
-                }}
-              />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
+              {/* <Pagination.First /> */}
+              <Pagination.Prev onClick={handlePaginatorPrev} />
+              {/* <Pagination.Item>{1}</Pagination.Item> */}
+              <Pagination.Next onClick={handlePaginatorNext} />
+              {/* <Pagination.Last /> */}
             </Pagination>
           </Row>
         </div>
