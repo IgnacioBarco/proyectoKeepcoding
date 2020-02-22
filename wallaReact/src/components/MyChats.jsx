@@ -16,33 +16,14 @@ const MyAds = props => {
 
   return (
     <div>
-      {/* <div>{URL}</div>
-      <div>{context.token}</div>
-      <div>{context.name}</div>
-      <div>{context.email}</div>
-      <div>{context.url}</div> */}
-      {/* {(result && result === "No hay ningun anuncio con esos filtros" && (
-        <div>No hay resultados con esos filtros.</div>
-      )) || (
+      {((context.token === "" || context.name === "") && (
         <div>
-          <CardGroup className="justify-content-md-center">
-            {result && result.map(buildAdvertsList)}
-          </CardGroup>
+          Para acceder a esta sección tienes que estar logado
           <br />
-          <Row className="justify-content-md-center">
-            <Pagination size="lg">
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination>
-          </Row>
+          <Link to="/login">Login</Link>
         </div>
-      )} */}
-      Mis chats
-      {/* <Link to="/">Back</Link> */}
-      <hr />
+      )) ||
+        "Mis chats"}
     </div>
   );
 };

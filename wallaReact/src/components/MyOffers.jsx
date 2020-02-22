@@ -39,33 +39,14 @@ const MyOffers = props => {
 
   return (
     <div>
-      {/* <div>{URL}</div>
-      <div>{context.token}</div>
-      <div>{context.name}</div>
-      <div>{context.email}</div>
-      <div>{context.url}</div> */}
-      {/* //   {(result && result === "No hay ningun anuncio con esos filtros" && (
-    //     <div>No hay resultados con esos filtros.</div>
-    //   )) || (
-    //     <div>
-    //       <CardGroup className="justify-content-md-center">
-    //         {result && result.map(buildAdvertsList)}
-    //       </CardGroup>
-    //       <br />
-    //       <Row className="justify-content-md-center">
-    //         <Pagination size="lg">
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination>
-    //       </Row>
-    //     </div>
-    //   )} */}
-      {/* <Link to="/">Back</Link> */}
-      Mis ofertas
-      <hr />
+      {((context.token === "" || context.name === "") && (
+        <div>
+          Para acceder a esta sección tienes que estar logado
+          <br />
+          <Link to="/login">Login</Link>
+        </div>
+      )) ||
+        "Mis ofertas"}
     </div>
   );
 };

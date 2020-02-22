@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
 import buildAdvertsList from "./BuildAdvertsList";
+import { Link } from "react-router-dom";
 
 // react-bootstrap
 import CardGroup from "react-bootstrap/CardGroup";
@@ -17,17 +18,15 @@ const MyAds = props => {
 
   return (
     <div>
-      <div>{URL}</div>
-      <div>{context.token}</div>
-      <div>{context.name}</div>
-      <div>{context.email}</div>
-      <div>{context.url}</div>
-
       {(result && result === "El User no tiene anuncios actualmente" && (
         <div>No tienes anuncios publicados.</div>
       )) ||
-        (context.token === "" && (
-          <div>Para acceder a esta sección tienes que estar logado</div>
+        ((context.token === "" || context.name === "") && (
+          <div>
+            Para acceder a esta sección tienes que estar logado
+            <br />
+            <Link to="/login">Login</Link>
+          </div>
         )) || (
           <div>
             <CardGroup className="justify-content-md-center">
@@ -50,17 +49,6 @@ const MyAds = props => {
                 <Pagination.Last />
               </Pagination>
             </Row>
-            {/* 
-          thorndike
-          <Row className="justify-content-md-center">
-            <Pagination size="lg">
-              <Pagination.First onSelect={() => console.log("adsdas")} />
-              <Pagination.Prev href="/adverts" />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination>
-          </Row> */}
           </div>
         )}
 
