@@ -29,7 +29,7 @@ class App extends Component {
       name: locStorage.getItem("name"),
       url: locStorage.getItem("url"),
       adStart: locStorage.getItem("adStart"),
-     
+
     };
   }
 
@@ -42,7 +42,7 @@ class App extends Component {
   setName = name => this.setState({ name }, localStorage.setItem("name", name));
 
   setUrl = url => this.setState({ url }, localStorage.setItem("url", url));
-  
+
   setAdStart = adStart => this.setState({ adStart }, localStorage.setItem("adStart", adStart));
 
   resetValues = () => {
@@ -66,9 +66,9 @@ class App extends Component {
 
       url: this.state.url,
       setUrl: this.setUrl,
-      
+
       resetValues: this.resetValues,
-      
+
       adStart: this.state.adStart,
       setAdStart: this.setAdStart,
     };
@@ -106,16 +106,10 @@ class App extends Component {
                     value={value}
                     component={AdvertsList}
                   />
-                  {/* <Route path="/new" component={CreateAndUpdate} />
-                  <Route path="/modify/:id" component={CreateAndUpdate} /> */}
                   <Route strict path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/myads" value={value} component={MyAds} />
-                  <Route
-                    path="/myProfile"
-                    value={value}
-                    component={MyProfile}
-                  />
+                  <Route path="/myProfile" value={value} component={MyProfile} />
                   <Route path="/myChats" value={value} component={MyChats} />
                   <Route path="/myOffers" value={value} component={MyOffers} />
                   <Route value={value} component={AdvertsList} />

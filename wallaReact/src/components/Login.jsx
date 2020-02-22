@@ -10,7 +10,6 @@ const Login = props => {
   const context = useContext(MainContext);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  // context.setUrl("http://localhost:3000/login");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -29,7 +28,7 @@ const Login = props => {
       context.setToken(result);
       context.setEmail(email);
       context.setName(regsNumber);
-      context.setUrl("http://localhost:8080/public/ads");
+      context.setUrl("http://localhost:8080/public/ads?sold=false&limit=4");
       context.setAdStart(0);
 
       props.history.push("/adverts");

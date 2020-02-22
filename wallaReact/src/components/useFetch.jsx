@@ -38,7 +38,7 @@ function useFetch(url) {
       .then(response => response.json())
       .then(results => {
         const { success, regsNumber, result } = results;
-        dispatch({ type: "FETCH_SUCCESS", data: result });
+        dispatch({ type: "FETCH_SUCCESS", data: result, success, regsNumber });
       })
       .catch(error => dispatch({ type: "FETCH_FAILURE", error }));
   }, [url]);

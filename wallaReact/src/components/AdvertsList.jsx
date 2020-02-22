@@ -11,9 +11,6 @@ import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = props => {
   const context = useContext(MainContext);
-
-  // const URL =   "http://localhost:8080/public/ads?limit=4&sold=false";
-
   let URL = "http://localhost:8080/public/ads?sold=false";
   let urlAux = "";
 
@@ -53,25 +50,17 @@ const AdvertList = props => {
   function handlePaginatorNext(event) {
     event.preventDefault();
     if (result.length >= 4) handlerPageNumber(parseInt(4));
-    // if (result.length > 2) handlerPageNumber(parseInt(2));
   }
 
   function handlePaginatorPrev(event) {
     event.preventDefault();
     if (context.adStart >= 4) handlerPageNumber(parseInt(-4));
-    // if (context.adStart >= 2) handlerPageNumber(parseInt(-2));
   }
 
   return (
     <div>
-      <div>URL: {URL}</div>
-      <div>url: {url}</div>
-      <div>context.url: {context.url}</div>
-      <div>{context.token}</div>
-      <div>{context.name}</div>
-      <div>{context.email}</div>
-      <div>start {context.adStart}</div>
-
+      <br />
+      <br />
       <input
         id="filterText"
         type="text"
@@ -131,8 +120,6 @@ const AdvertList = props => {
           </Row>
         </div>
       )}
-
-      <hr />
     </div>
   );
 };

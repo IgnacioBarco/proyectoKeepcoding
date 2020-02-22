@@ -26,7 +26,8 @@ class AdvertDetail extends Component {
 
     const res = await searchAdvert(id);
     const { success, regsNumber, result } = res;
-    const advert = res.result;
+    // const advert = res.result;
+    const advert = result;
 
     this.setState({
       success,

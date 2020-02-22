@@ -19,6 +19,7 @@ const Header = props => {
               context.setUrl(
                 "http://localhost:8080/public/ads?sold=false&limit=4"
               );
+              context.setAdStart(parseInt(0));
             }}
             href="/adverts"
           >
@@ -44,13 +45,17 @@ const Header = props => {
       ) : (
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand
-            onClick={() => context.setUrl("http://localhost:8080/public/ads?sold=false&limit=4")}
+            onClick={() =>
+              context.setUrl(
+                "http://localhost:8080/public/ads?sold=false&limit=4"
+              )
+            }
             href="/adverts"
           >
             WallaKeep
           </Navbar.Brand>
-          <Nav className="mr-auto"></Nav>)
-          {context.url === "http://localhost:3000/login" || context == "" ? (
+          <Nav className="mr-auto"></Nav>
+          {context.url === "http://localhost:3000/login" || context === "" ? (
             <div></div>
           ) : (
             <Form inline>

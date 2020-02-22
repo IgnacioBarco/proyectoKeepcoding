@@ -1,41 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../services/MainContext";
-import usePrivateFetch from "./usePrivateFetch";
-import buildAdvertsList from "./BuildAdvertsList";
-
-// react-bootstrap
-import CardGroup from "react-bootstrap/CardGroup";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
 
 const MyOffers = props => {
-  const [result, setResult] = useState("");
-
   const context = useContext(MainContext);
 
-  const URL = "http://localhost:8080/private/users/" + context.name;
+  // const URL = "http://localhost:8080/private/users/" + context.name;
 
-  let myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  // const [result, setResult] = useState("");
+  // let myHeaders = new Headers();
+  // myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-  let urlencoded = new URLSearchParams();
-  urlencoded.append("token", context.token);
+  // let urlencoded = new URLSearchParams();
+  // urlencoded.append("token", context.token);
 
-  let requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    body: urlencoded,
-    redirect: "follow"
-  };
+  // let requestOptions = {
+  //   method: "GET",
+  //   headers: myHeaders,
+  //   body: urlencoded,
+  //   redirect: "follow"
+  // };
 
-  fetch(URL, requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log("error", error));
+  // fetch(URL, requestOptions)
+  //   .then(response => response.text())
+  //   .then(result => console.log(result))
+  //   .catch(error => console.log("error", error));
 
-  // const result = usePrivateFetch(URL, requestOptions);
-  console.log("res " + result);
+  // console.log("res " + result);
 
   return (
     <div>

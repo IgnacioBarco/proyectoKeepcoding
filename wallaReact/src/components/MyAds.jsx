@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import MainContext from "../services/MainContext";
 import useFetch from "./useFetch";
 import buildAdvertsList from "./BuildAdvertsList";
@@ -12,9 +12,7 @@ import Pagination from "react-bootstrap/Pagination";
 const MyAds = props => {
   const context = useContext(MainContext);
   const URL = "http://localhost:8080/public/user/" + context.name;
-
-  const [url, setUrl] = useState(URL);
-  const result = useFetch(url);
+  const result = useFetch(URL);
 
   return (
     <div>
@@ -35,15 +33,8 @@ const MyAds = props => {
             <br />
             <Row className="justify-content-md-center">
               <Pagination size="lg">
-                <Pagination.First
-                  onClick={() => {
-                    context.setUrl(
-                      "http://localhost:8080/public/user/pepe?limit=2"
-                    );
-                    setUrl("http://localhost:8080/public/user/pepe?limit=2");
-                  }}
-                />
-                <Pagination.Prev href="/adverts" />
+                <Pagination.First />
+                <Pagination.Prev />
                 <Pagination.Item>{1}</Pagination.Item>
                 <Pagination.Next />
                 <Pagination.Last />
