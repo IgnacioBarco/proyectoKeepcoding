@@ -30,6 +30,7 @@ const Login = props => {
       context.setEmail(email);
       context.setName(regsNumber);
       context.setUrl("http://localhost:8080/public/ads");
+      context.setAdStart(0);
 
       props.history.push("/adverts");
     }

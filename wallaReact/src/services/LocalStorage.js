@@ -29,6 +29,10 @@ const locStorage = {
         if (locStorage.isItem('url')) {
             ctx.tags = locStorage.getItem('url');
         }
+        
+        if (locStorage.isItem('adStart')) {
+            ctx.tags = locStorage.getItem('adStart');
+        }
 
         return ctx;
 

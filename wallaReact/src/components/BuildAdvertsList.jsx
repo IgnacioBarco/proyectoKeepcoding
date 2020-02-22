@@ -20,14 +20,15 @@ const buildAdvertsList = ({
   chat
 }) => (
   <div key={_id}>
-    <Card style={{ width: "20rem" }}>
+    <Card  style={{ width: "20rem" }}>
       <Card.Img variant="top" src={`http://localhost:8080${photo}`} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>
           Descripción: {description}
           <br />
-          {(sell && <div>Se vende</div>) || <div>Se busca</div>}
+          {(sell && "Se vende") || "Se busca"}
+          <br />
           Precio: {price}€
           <br />
         </Card.Text>

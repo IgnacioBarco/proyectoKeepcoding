@@ -27,7 +27,9 @@ class App extends Component {
       token: locStorage.getItem("token"),
       email: locStorage.getItem("email"),
       name: locStorage.getItem("name"),
-      url: locStorage.getItem("url")
+      url: locStorage.getItem("url"),
+      adStart: locStorage.getItem("adStart"),
+     
     };
   }
 
@@ -40,12 +42,15 @@ class App extends Component {
   setName = name => this.setState({ name }, localStorage.setItem("name", name));
 
   setUrl = url => this.setState({ url }, localStorage.setItem("url", url));
+  
+  setAdStart = adStart => this.setState({ adStart }, localStorage.setItem("adStart", adStart));
 
   resetValues = () => {
     this.setToken("");
     this.setEmail("");
     this.setName("");
     this.setUrl("http://localhost:3000/login");
+    this.setAdStart(parseInt(0));
   };
 
   render() {
@@ -61,8 +66,11 @@ class App extends Component {
 
       url: this.state.url,
       setUrl: this.setUrl,
-
-      resetValues: this.resetValues
+      
+      resetValues: this.resetValues,
+      
+      adStart: this.state.adStart,
+      setAdStart: this.setAdStart,
     };
 
     return (

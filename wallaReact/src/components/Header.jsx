@@ -14,7 +14,16 @@ const Header = props => {
     <div>
       {props.token || hasToken ? (
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/adverts">WallaKeepPrivate</Navbar.Brand>
+          <Navbar.Brand
+            onClick={() => {
+              context.setUrl(
+                "http://localhost:8080/public/ads?sold=false&limit=4"
+              );
+            }}
+            href="/adverts"
+          >
+            WallaKeepPrivate
+          </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/myads">Mis anuncios</Nav.Link>
             <Nav.Link href="/myoffers">Mis ofertas</Nav.Link>
@@ -34,18 +43,21 @@ const Header = props => {
         </Navbar>
       ) : (
         <Navbar bg="dark" variant="dark">
-          <Navbar.Brand 
-          onClick={()=>context.setUrl("http://localhost:3000/adverts")}
-          href="/adverts">WallaKeep</Navbar.Brand>
+          <Navbar.Brand
+            onClick={() => context.setUrl("http://localhost:8080/public/ads?sold=false&limit=4")}
+            href="/adverts"
+          >
+            WallaKeep
+          </Navbar.Brand>
           <Nav className="mr-auto"></Nav>)
-          {context.url === "http://localhost:3000/login" ? (
+          {context.url === "http://localhost:3000/login" || context == "" ? (
             <div></div>
           ) : (
             <Form inline>
               <Button variant="outline-info">
-                <Nav.Link 
-                onClick={()=>context.resetValues()}
-                href="/login">LogIn</Nav.Link>
+                <Nav.Link onClick={() => context.resetValues()} href="/login">
+                  LogIn
+                </Nav.Link>
               </Button>
             </Form>
           )}
