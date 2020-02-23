@@ -11,7 +11,7 @@ import Pagination from "react-bootstrap/Pagination";
 
 const MyAds = props => {
   const context = useContext(MainContext);
-  const URL = "http://localhost:8080/public/user/" + context.name;
+  const URL = "http://18.222.10.183:8080/public/user/" + context.name;
   const result = useFetch(URL);
 
   return (

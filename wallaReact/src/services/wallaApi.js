@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:8080";
+const API_URL = "http://18.222.10.183:8080";
 const TAGS = API_URL + "/tags";
 
-const todo = "http://localhost:8080/public/ads";
+const todo = "http://18.222.10.183:8080/public/ads";
 
 const data = {
   method: "GET",
@@ -31,7 +31,7 @@ const api = () => {
 
     login: async (email, pass) => {
       try {
-        const loginUrl = "http://localhost:8080/auth/login";
+        const loginUrl = "http://18.222.10.183:8080/auth/login";
 
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json, text/plain, */*");
@@ -63,7 +63,7 @@ const api = () => {
 
     newUser: async (name, email, pass) => {
       try {
-        const loginUrl = "http://localhost:8080/auth/login";
+        const loginUrl = "http://18.222.10.183:8080/auth/login";
 
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json, text/plain, */*");
@@ -120,7 +120,7 @@ const api = () => {
     searchAdvert: async id => {
       try {
         const response = await fetch(
-          `http://localhost:8080/public/ads/${id}`,
+          `http://18.222.10.183:8080/public/ads/${id}`,
           data
         );
 

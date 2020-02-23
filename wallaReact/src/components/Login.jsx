@@ -28,7 +28,7 @@ const Login = props => {
       context.setToken(result);
       context.setEmail(email);
       context.setName(regsNumber);
-      context.setUrl("http://localhost:8080/public/ads?sold=false&limit=4");
+      context.setUrl("http://18.222.10.183:8080/public/ads?sold=false&limit=4");
       context.setAdStart(0);
 
       props.history.push("/adverts");

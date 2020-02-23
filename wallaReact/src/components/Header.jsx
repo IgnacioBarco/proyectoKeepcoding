@@ -17,7 +17,7 @@ const Header = props => {
           <Navbar.Brand
             onClick={() => {
               context.setUrl(
-                "http://localhost:8080/public/ads?sold=false&limit=4"
+                "http://18.222.10.183:8080/public/ads?sold=false&limit=4"
               );
               context.setAdStart(parseInt(0));
             }}
@@ -47,7 +47,7 @@ const Header = props => {
           <Navbar.Brand
             onClick={() =>
               context.setUrl(
-                "http://localhost:8080/public/ads?sold=false&limit=4"
+                "http://18.222.10.183:8080/public/ads?sold=false&limit=4"
               )
             }
             href="/adverts"
@@ -55,7 +55,7 @@ const Header = props => {
             WallaKeep
           </Navbar.Brand>
           <Nav className="mr-auto"></Nav>
-          {context.url === "http://localhost:3000/login" || context === "" ? (
+          {context.url === "http://18.222.10.183:3000/login" || context === "" ? (
             <div></div>
           ) : (
             <Form inline>

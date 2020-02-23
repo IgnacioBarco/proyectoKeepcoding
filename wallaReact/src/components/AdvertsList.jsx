@@ -11,7 +11,7 @@ import Pagination from "react-bootstrap/Pagination";
 
 const AdvertList = props => {
   const context = useContext(MainContext);
-  let URL = "http://localhost:8080/public/ads?sold=false";
+  let URL = "http://18.222.10.183:8080/public/ads?sold=false";
   let urlAux = "";
 
   const limitString = "&limit=";

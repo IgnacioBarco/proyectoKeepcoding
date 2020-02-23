@@ -64,7 +64,7 @@ class AdvertDetail extends Component {
 
   buildDetailAdvert = () => {
     const advert = this.state.result;
-    const img = "http://localhost:8080/" + advert.photo;
+    const img = "http://18.222.10.183:8080/" + advert.photo;
 
     return (
       <div>

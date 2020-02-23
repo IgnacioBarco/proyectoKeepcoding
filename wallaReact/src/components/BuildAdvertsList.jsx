@@ -21,7 +21,7 @@ const buildAdvertsList = ({
 }) => (
   <div key={_id}>
     <Card  style={{ width: "20rem" }}>
-      <Card.Img variant="top" src={`http://localhost:8080${photo}`} />
+      <Card.Img variant="top" src={`http://18.222.10.183:8080${photo}`} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>
