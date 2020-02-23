@@ -27,6 +27,19 @@
       "chat": ["hola"]
     },
     {
+      "name": "xiaomi Mi A3",
+      "sell": true,
+      "price": 210,
+      "photo": "/images/mia3.jpg",
+      "tags": ["mobile"],
+      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "author": "andres",
+      "date": "20/07/2019",
+      "reserved": true,
+      "sold": false,
+      "chat": ["hola"]
+    },
+    {
       "name": "elephone s8",
       "sell": true,
       "price": 150,
@@ -40,15 +53,15 @@
       "chat": ["hola"]
     },
     {
-      "name": "xiaomi Mi A3",
-      "sell": true,
-      "price": 210,
+      "name": "xiaomi Mi A1",
+      "sell": false,
+      "price": 120,
       "photo": "/images/mia3.jpg",
       "tags": ["mobile"],
       "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-      "author": "andres",
+      "author": "pepe",
       "date": "20/07/2019",
-      "reserved": true,
+      "reserved": false,
       "sold": false,
       "chat": ["hola"]
     },
@@ -369,34 +382,6 @@
       "chat": [
         "in est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo."
       ]
-    },
-    {
-      "name": "toyota",
-      "sell": true,
-      "price": 10363,
-      "photo": "/images/ferrari.jpg",
-      "tags": ["baby"],
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-      "author": "pedro",
-      "date": "28/11/2019",
-      "reserved": true,
-      "sold": true,
-      "chat": [
-        "in sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti."
-      ]
-    },
-    {
-      "name": "volvo",
-      "sell": false,
-      "price": 12291,
-      "photo": "/images/ferrari.jpg",
-      "tags": ["kids"],
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-      "author": "kristoffer",
-      "date": "23/03/2019",
-      "reserved": true,
-      "sold": false,
-      "chat": ["nulla suscipit ligula in lacus."]
     },
     {
       "name": "ford",
