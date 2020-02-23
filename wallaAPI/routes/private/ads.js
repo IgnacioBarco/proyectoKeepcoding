@@ -28,7 +28,7 @@ router.post("/new", jwtAuth(), async (req, res, next) => {
 /**
  * para modificar un anuncio
  */
-router.put("/:id/modify", jwtAuth(), async (req, res, next) => {
+router.put("/modify/:id", jwtAuth(), async (req, res, next) => {
   try {
     const _id = req.params.id;
     const data = req.body;
@@ -49,7 +49,7 @@ router.put("/:id/modify", jwtAuth(), async (req, res, next) => {
 /**
  * Para borrar un anuncio
  */
-router.delete("/:id/delete", jwtAuth(), async (req, res, next) => {
+router.delete("/delete/:id", jwtAuth(), async (req, res, next) => {
   try {
     const _id = req.params.id;
     await Anuncio.deleteById(_id).exec();
