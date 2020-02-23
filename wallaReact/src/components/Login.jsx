@@ -76,10 +76,10 @@ const Login = props => {
 
       <br />
 
-      <Link to={`/register`}>Recuperar contraseña</Link>
+      <Link to={`/login`}>Recuperar contraseña</Link>
       <br />
       <br />
-      <Link to={`/register`}>Registarse</Link>
+      <Link to={`/login`}>Registarse</Link>
     </div>
   );
 };
